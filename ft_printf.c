@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/04/29 12:58:48 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:10:38 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,24 @@ void ft_printf(char *format, ...)
                 }
                 ft_putstr(ft_converter(i, 10));
                 break;
-                
-            case 'o' :
-            case 's' :
-            case 'x' :
+            case 'o' : i = va_arg(arg, unsigned int); // fetching octal argument which is base 8
+                ft_putstr(ft_converter(i, 8));
+                break;
+            case 's' : str = va_arg(arg, char *); // fetching string argument
+                ft_putstr(str);
+                break;
+            case 'x' : i = va_arg(arg, unsigned int); // fetching hexadecimal representation
+                ft_putstr(ft_converter(i, 16));
+                break;
         }
     }
+    //Module 3: Closing the argument list to necessary clean-up
+    va_end(arg); }
+
+char    *ft_converter(unsigned int  nbr, int base)
+{
+    char    *ret;
+    // returns the string value of the number, might need itoa_base for this. 
 }
 
 int main(void)
