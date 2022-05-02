@@ -1,1 +1,1 @@
-gcc ft_printf.c -L. -lft
+gcc -D TEST ft_printf.c -L. -lft
