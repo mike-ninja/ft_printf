@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/04/30 17:05:53 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:09:23 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,61 +58,6 @@
 //     //Module 3: Closing the argument list to necessary clean-up
 //     va_end(arg); }
 
-char    ft_hexter(unsigned int nbr, int base)
-{
-    char    ret;
-    //int     tmp;
-    char    str[16] = "0123456789abcdef";
-    
-    switch (base)
-    {
-        case 10:
-            ret = (nbr % 10) + '0';
-            break;
-        case 4:
-            ret = (nbr % base) + '0';
-            break;
-        case 16:
-            //tmp = nbr % base;
-            // if (tmp >= 0 && tmp <= 9)
-            //     ret = tmp + '0';
-            // if (tmp >= 10 && tmp <= 16)
-            //     ret = (tmp - 10) + 'a';
-            ret = str[nbr % base];
-            break;
-    }
-    return (ret);
-}
-
-char    *ft_converter(int value, int base)
-{
-    int             digits;
-    char            *ret;
-    unsigned int    nbr;
-    
-    nbr = (value < 0 && base == 10) ? value*-1 : (unsigned int)value;
-    digits = ((value < 0 && base == 10) || value == 0) ? 1 : 0;
-    while (nbr != 0)
-    {
-        digits++;
-        nbr /= 10;
-    }
-    ret = (char *)malloc(digits + 1);
-    if (ret)
-    {
-        ret[digits] = '\0';
-        if (value < 0 && base == 10) ret[0] = '-';
-        nbr = (value < 0 && base == 10) ? value*-1 : (unsigned int)value;
-        while (nbr != 0)
-        {
-            ret[--digits] = ft_hexter(nbr, base);
-            nbr /= 10;
-        }
-        return (ret);
-    }
-    return (NULL);
-}
-
 #ifdef TEST             // To enable this block of code, compile with `-D TEST`
 #include <stdio.h>
 #include <limits.h>
@@ -121,6 +66,7 @@ int     main(void)
         int base;
         int test;
 
+        printf("Base 10\n");
         base = 10;
         test = INT_MIN;
         printf("%s\n%d\n", ft_converter(test, base), test);
@@ -132,24 +78,27 @@ int     main(void)
         printf("%s\n%d\n", ft_converter(test, base), test);
         test = INT_MAX;
         printf("%s\n%d\n\n", ft_converter(test, base), test);
-        
-        // base = 8;
-        // test = 28;
-        // printf("%s\n%o\n\n", ft_converter(test, base), test);
-        // test = INT_MAX;
-        // printf("%s\n%o\n\n", ft_converter(test, base), test);
 
-        // base = 16;
-        // test = 0xABCDEF9;
-        // printf("%s\n%x\n\n", ft_converter(test, base), test);
-        // test = INT_MAX;
-        // printf("%s\n%x\n\n", ft_converter(test, base), test);
-        // test = INT_MIN;
-        // printf("%s\n%x\n\n", ft_converter(test, base), test);
+        printf("Base 8\n\n");        
+        base = 8;
+        test = 28;
+        printf("ret %s\ncor %o\n", ft_converter(test, base), test);
+        test = INT_MAX;
+        printf("ret %s\ncor %o\n", ft_converter(test, base), test);
 
-        // base = 9;
-        // test = -86872362;
-        // printf("%s\n\n", ft_converter(test, base));
+
+        printf("Base 16\n");
+        base = 16;
+        test = 0xABCDEF9;
+        printf("%s\n%x\n\n", ft_converter(test, base), test);
+        test = INT_MAX;
+        printf("%s\n%x\n\n", ft_converter(test, base), test);
+        test = INT_MIN;
+        printf("%s\n%x\n\n", ft_converter(test, base), test);
+
+        base = 9;
+        test = -86872362;
+        printf("%s\n\n", ft_converter(test, base));
         return (0);
 }
 #endif
