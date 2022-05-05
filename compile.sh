@@ -1,2 +1,2 @@
-gcc -D TEST ft_printf.c ft_converter.c -L. -lft
+gcc -D TEST main.c ft_printf.c ft_hex.c -L. -lft
 ./a.out

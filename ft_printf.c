@@ -6,99 +6,103 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/02 10:09:23 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/05 13:00:32 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "ft_printf.h"
 
-// void ft_printf(char *format, ...)
-// {
-//     unsigned int    i; //this will contain the argument depending on the type; numbers like arguments and/or char
-//     char            *str; //same use as i, but for strings
-//     char            *traverse;
-//     va_list         arg; //va_list is a data type included from stdarg.h
-
-//     //Module 1: We need to initialise printf's arguments, with the help of stdarg, we can have an unlimited amount of variables.
-//     va_start(arg, format);
-//     traverse = format;
-//     while(traverse[0] != '\0')
-//     {
-//         while (traverse[0] != '%')
-//         {
-//             ft_putchar(traverse[0]);
-//             traverse++;
-//         }
-//         traverse++;
-//         //Module 2: Fetching and executing arguments
-//         switch(traverse[0])
-//         {
-//             case 'c' : i = va_arg(arg, int); // fetching char argument
-//                 ft_putchar(i);
-//                 break;
-//             case 'd' : i = va_arg(arg, int); // fetching decimal/integer argument
-//                 if (i < 0)
-//                 {
-//                     i = -i;
-//                     ft_putchar('-');
-//                 }
-//                 ft_putstr(ft_converter(i, 10));
-//                 break;
-//             case 'o' : i = va_arg(arg, unsigned int); // fetching octal argument which is base 8
-//                 ft_putstr(ft_converter(i, 8));
-//                 break;
-//             case 's' : str = va_arg(arg, char *); // fetching string argument
-//                 ft_putstr(str);
-//                 break;
-//             case 'x' : i = va_arg(arg, unsigned int); // fetching hexadecimal representation
-//                 ft_putstr(ft_converter(i, 16));
-//                 break;
-//         }
-//     }
-//     //Module 3: Closing the argument list to necessary clean-up
-//     va_end(arg); }
-
-#ifdef TEST             // To enable this block of code, compile with `-D TEST`
-#include <stdio.h>
-#include <limits.h>
-int     main(void)
+char    *char_array(char *str, t_struct *node)
 {
-        int base;
-        int test;
+    char    *ret;
+    int     str_len;
+    int     tot_len;
 
-        printf("Base 10\n");
-        base = 10;
-        test = INT_MIN;
-        printf("%s\n%d\n", ft_converter(test, base), test);
-        test = -1;
-        printf("%s\n%d\n", ft_converter(test, base), test);
-        test = 0;
-        printf("%s\n%d\n", ft_converter(test, base), test);
-        test = 1;
-        printf("%s\n%d\n", ft_converter(test, base), test);
-        test = INT_MAX;
-        printf("%s\n%d\n\n", ft_converter(test, base), test);
-
-        printf("Base 8\n\n");        
-        base = 8;
-        test = 28;
-        printf("ret %s\ncor %o\n", ft_converter(test, base), test);
-        test = INT_MAX;
-        printf("ret %s\ncor %o\n", ft_converter(test, base), test);
-
-
-        printf("Base 16\n");
-        base = 16;
-        test = 0xABCDEF9;
-        printf("%s\n%x\n\n", ft_converter(test, base), test);
-        test = INT_MAX;
-        printf("%s\n%x\n\n", ft_converter(test, base), test);
-        test = INT_MIN;
-        printf("%s\n%x\n\n", ft_converter(test, base), test);
-
-        base = 9;
-        test = -86872362;
-        printf("%s\n\n", ft_converter(test, base));
-        return (0);
+    str_len = ft_strlen(str);
+    if (str_len < node->min_len)
+    {
+        tot_len = str_len + node->min_len;
+        ret = (char *)malloc(sizeof(char) * tot_len + 1);
+        if (!ret)
+            return (NULL);
+       ret[tot_len] = '\0';
+        while (tot_len >= 0)
+            ret[--tot_len] = str_len >= 0 ? str[--str_len] : ' '; // This space varies depending on the 0 flag.
+    }
+    else
+    {
+        ret = (char *)malloc(sizeof(char) * (str_len + 1));
+        if (!ret)
+            return (NULL);
+        ret[str_len] = '\0';
+        while (--str_len >= 0)
+            ret[str_len] = str_len >= 0 ? str[str_len] : ' '; // This space varies depending on the 0 flag.
+    }
+    printf("This happens %s\n", ret);
+    return (ret);
+    // Think about how to memory allocate here since there is no return value
 }
-#endif
+
+void    ft_arg_conversion(va_list arg, t_struct *node)
+{
+    unsigned int    i;
+    char            *str;
+    
+    // switch (node.arg)
+    // {
+    //     case 's' : str = va_arg(arg, char *);
+    //         printf("This happens\n");
+    //         node.str = char_array(str, node);
+    //         ft_putstr(node.str);
+    //         free(node.str);
+    //         break;
+    // }
+    if (node->arg == 's')
+    {
+        str = va_arg(arg, char *);
+        node->str = char_array(str, node);
+        ft_putstr(node->str);
+        free(node->str);
+    }
+}
+
+void    ft_flags_check(char *format, t_struct *node)
+{
+    /*
+    Check for flags:
+    - Check for an integer for minimum field width
+    */
+    node->pos++;
+    node->min_len = 0;
+    while (format[node->pos] >= '0' && format[node->pos] <= '9')
+    {
+        node->min_len = node->min_len * 10 + (format[node->pos] - '0');
+        node->pos++;
+    }
+    // What to do with min_len now? Should allocation of memory already happen? or check the len of the argument first, whichever is highest will be the memory size.
+    // We make a collection of what kind of flags are here.
+    node->arg = format[node->pos];
+}
+
+void    ft_printf(char *format, ...)
+{
+    va_list     arg;
+    t_struct    node[1];
+
+    node->pos = 0;
+    va_start(arg, format);
+    while(format[node->pos] != '\0')
+    {
+        if (format[node->pos] != '%')
+            ft_putchar(format[node->pos]);
+        else
+        {
+            ft_flags_check(format, node);
+            ft_arg_conversion(arg, node);
+            //ft_putstr(node.str);
+            //free(node.str);
+        }
+        node->pos++;
+    }
+    va_end(arg);
+}
