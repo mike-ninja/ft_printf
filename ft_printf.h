@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/05 14:14:18 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/05 22:37:45 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_struct
 	int		width;
 	int		space;
 	int		percent;
+	int		precision;
 	char	specifier;
 }				t_struct;
 

@@ -6,8 +6,17 @@ int     main(void)
 
     // No Argument Check
     //ft_printf("There are no arguments in this text\n");
-    ft_printf("ft %10s\n", NULL);
-    printf("pr %10s\n", NULL);
+    // ft_printf("ft %016s\n", "Some string");
+    // ft_printf("ft %#16i\n");
+    // ft_printf("ft %-16x\n");
+    // ft_printf("ft %+16o\n");
+    // ft_printf("ft %%16X\n");
+    // ft_printf("ft %%16.2X\n");
+    //printf("pr %016i\n", 15);
+    ft_printf("%20s\n", "Some string");
+    printf("%20s\n\n", "Some string");
+    ft_printf("%20.4s\n", "Some string");
+    printf("%20.4s\n\n", "Some string");
        
     // Flags checks
     // ft_printf("Flags check: %#\n");
