@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/05 12:08:32 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:14:18 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@
 typedef struct s_struct
 {
 	int		pos;
-	char	arg;
 	char	*str;
-	int		min_len;
+	int		hash;
+	int		zero;
+	int		plus;
+	int		minus;
+	int		width;
+	int		space;
+	int		percent;
+	char	specifier;
 }				t_struct;
 
 void	ft_printf(char *format, ...);
