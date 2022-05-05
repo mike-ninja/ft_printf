@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/05 23:03:49 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/05 23:06:55 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ char    *str_char_specifier(char *str, t_struct *node)
 
     if (str)
     {
-        str_len = node->precision > 0 ? ft_strlen(str) : node->precision;
-        printf("%i\n", str_len);
+        str_len = node->precision > 0 ? node->precision : ft_strlen(str);
         tot_len = str_len < node->width ? node->width : str_len;
         ret = (char *)malloc(sizeof(char) * tot_len + 1);
         if (ret)
