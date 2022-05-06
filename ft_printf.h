@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/05 22:37:45 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/06 11:12:06 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ typedef struct s_struct
 	char	specifier;
 }				t_struct;
 
+void	ft_str_clean(char *str);
 void	ft_printf(char *format, ...);
 char    *ft_hex(unsigned long long value);
+char    *nbr_specifier(signed int value, int base);
+char    *str_char_specifier(char *str, t_struct *node);
 
 #endif

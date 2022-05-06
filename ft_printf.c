@@ -6,37 +6,15 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/05 23:06:55 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/06 11:57:01 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char    *str_char_specifier(char *str, t_struct *node)
-{
-    char    *ret;
-    int     str_len;
-    int     tot_len;
-
-    if (str)
-    {
-        str_len = node->precision > 0 ? node->precision : ft_strlen(str);
-        tot_len = str_len < node->width ? node->width : str_len;
-        ret = (char *)malloc(sizeof(char) * tot_len + 1);
-        if (ret)
-        {
-            ret[tot_len] = '\0';
-            while (tot_len >= 0)
-                ret[tot_len--] = str_len < 0 ? ' ' : str[str_len--];
-            return (ret);
-        }
-    }
-    return (NULL);
-}
-
 void    ft_arg_conversion(va_list arg, t_struct *node)
 {
-    unsigned int        i;
+    signed int        i;
     unsigned long long  y;
     char                *str;
     
@@ -45,15 +23,31 @@ void    ft_arg_conversion(va_list arg, t_struct *node)
         case 's' : str = va_arg(arg, char *);
             node->str = str_char_specifier(str, node);
             break;
-        case 'c' : i = va_arg(arg, int);
+        case 'c' : i = va_arg(arg, unsigned int);
             node->str = str_char_specifier((char *)&i, node);
             break;
+        case 'i' : i = va_arg(arg, unsigned int);
+            node->str = nbr_specifier(i, 10);
+            break;
+        case 'd' : i = va_arg(arg, unsigned int);
+            node->str = nbr_specifier(i, 10);
+            break;
+        case 'o' : i = va_arg(arg, unsigned int);
+            node->str = nbr_specifier(i, 8);
+            break;
+        case 'x' : y = va_arg(arg, unsigned long long);
+            node->str = ft_hex(i);
+            break;
+        case 'X' : y = va_arg(arg, unsigned long long);
+            node->str = ft_hex(i);
+            break;
     }
-    if (node->str)
-        ft_putstr(node->str);
-    else
-        ft_putstr("(null)");
-    free(node->str);
+    // if (node->str)
+    //     ft_putstr(node->str);
+    // else
+    //     ft_putstr("(null)");
+    // //free(node->str);
+    // node->str = NULL;
 }
 
 void    ft_flags_check(char *format, t_struct *node)
@@ -100,6 +94,7 @@ void    ft_printf(char *format, ...)
     t_struct    node[1];
 
     node->pos = 0;
+    node->str = NULL;
     va_start(arg, format);
     while(format[node->pos] != '\0')
     {
@@ -109,9 +104,9 @@ void    ft_printf(char *format, ...)
         {
             ft_flags_check(format, node);
             ft_arg_conversion(arg, node);
+            ft_putstr(node->str);
+            //ft_strdel(&node->str);
         }
-            //ft_putstr(node.str);
-            //free(node.str);
         node->pos++;
     }
     va_end(arg);

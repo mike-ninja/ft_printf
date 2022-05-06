@@ -13,11 +13,14 @@ int     main(void)
     // ft_printf("ft %%16X\n");
     // ft_printf("ft %%16.2X\n");
     //printf("pr %016i\n", 15);
-    ft_printf("%20s\n", "Some string");
-    printf("%20s\n\n", "Some string");
-    ft_printf("%20.4s\n", "Some string");
-    printf("%20.4s\n\n", "Some string");
-       
+    // ft_printf("%20s\n", "Some string");
+    // printf("%20s\n\n", "Some string");
+    // ft_printf("%20.4s\n", "Some string");
+    // printf("%20.4s\n\n", "Some string");
+
+    //ft_printf("int %s\n", "string");
+    //ft_printf("%s\n", "string");
+    ft_printf("%i\n", 153);   
     // Flags checks
     // ft_printf("Flags check: %#\n");
     // ft_printf("Flags check: %0\n");
