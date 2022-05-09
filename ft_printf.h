@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/08 16:19:27 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/09 10:37:37 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ char    *ft_hex(unsigned long long value);
 char    *ft_char_convert(char c, t_struct *node);
 char    *ft_str_convert(char *str, t_struct *node);
 char    *ft_nbr_converter(signed int value, int base, t_struct *node);
+char     *ft_min_width_generator(t_struct *node);
+void	ft_width_joiner(char *min_width, char *ret, t_struct *node, int len);
 
 #endif

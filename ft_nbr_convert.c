@@ -3,150 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nbr_convert.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/08 19:41:09 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:51:30 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void     ft_str_joiner(char *min_width, char *ret, t_struct *node)
-{
-    int i;
-    int y;
-
-    i = node->width;
-    y = ft_strlen(ret);
-    // if (!node->minus)
-    //     while (y > 0 || node->precision > 0)
-    //     {
-    //         min_width[--i] = --y >= 0 ? ret[y] : 0 + '0';
-    //         node->precision--;
-    //     }
-    // else
-    while (y > 0 || node->precision > 0)
-    {
-        min_width[--i] = --y >= 0 ? ret[y] : 0 + '0';
-        node->precision--;
-    }
-}
-
-static char     *ft_min_width_generator(t_struct *node)
-{
-    int     i;
-    char    *ret;
-    
-    if (node->width > 0)
-    {
-        i = 0;
-        ret = (char *)malloc(node->width + 1);
-        if (ret)
-        {
-            ret[node->width] = '\0';
-            while (i < node->width)
-                ret[i++] = node->zero > 0 && node->precision == 0 ? '0' : ' ';
-            return (ret);
-        }
-    }
-    return (NULL);
-}
-
-static char		ft_int_to_str(unsigned int nbr, int base)
-{
-    char    ret;
-
-    switch (base)
-    {
-        case 10:
-            ret = (nbr % 10) + '0';
-            break;
-        case 8:
-            ret = (nbr % base) + '0';
-            break;
-    }
-    return (ret);
-}
-
-// char    *ft_nbr_converter(signed int value, int base, t_struct *node)
-// {
-//     int             digits;
-//     char            *ret;
-//     char            *min_width;
-//     unsigned int    nbr;
-
-//     nbr = (value < 0 && base == 10) ? value*-1 : (unsigned int)value;
-//     digits = ((value < 0 && base == 10) || value == 0) ? 1 : 0;
-//     while (nbr != 0)
-//     {
-//         digits++;
-//         nbr /= base;
-//     }
-//     ret = (char *)malloc(digits + 1);
-//     if (ret)
-//     {
-//         ret[digits] = '\0';
-//         nbr = (value < 0 && base == 10) ? value*-1 : (unsigned int)value;
-//         while (digits > 0)
-//         {
-//             ret[--digits] = ft_int_to_str(nbr, base);
-//             nbr /= base;
-//         }
-//         if (value < 0 && base == 10) ret[0] = '-';
-//         if (digits < node->width)
-//         {
-//             min_width = ft_min_width_generator(node);
-//             if (min_width)
-//             {
-//                 ft_str_joiner(min_width, ret, node);
-//                 return (min_width);
-//             }
-//         }
-//         return (ret);
-//     }
-//     return (NULL);
-// }
-
 static void ft_decimal_convert(unsigned int val, int len, t_struct *node, char *ret)
 {
-    char *min_width;
-    int tmp;
+    char    *min_width;
+    int     tmp;
     
     tmp = len;
+    min_width = NULL;
     while (tmp > 0)
     {
         ret[--tmp] = (val % 10) + '0';
         val /= 10;
     }
-    if (val < 0)
-        ret[0] = '-';
+    if (val < 0 || node->plus)
+    {
+        if (val < 0)
+            ret[0] = '-';
+        else
+            ret[0] = '+';
+    }
     if (len < node->width)
     {
         min_width = ft_min_width_generator(node);
         if (min_width)
-        {
-            printf("This happens\nlen %i %i\n", len, node->width);
-            ft_str_joiner(min_width, ret, node);
-        }
-            
+            ft_width_joiner(min_width, ret, node, len);
     }
 }
 
 static void ft_octal_convert(unsigned int val, int len, t_struct *node, char *ret)
 {
-    char *min_width;
+    char    *min_width;
+    int     tmp;
     
-    while (len > 0)
+    tmp = len;
+    min_width = NULL;
+    while (tmp > 0)
     {
-        ret[--len] = (val % 8) + '0';
+        ret[--tmp] = (val % 8) + '0';
         val /= 8;
     }
     if (len < node->width)
     {
         min_width = ft_min_width_generator(node);
         if (min_width)
-            ft_str_joiner(min_width, ret, node);
+            ft_width_joiner(min_width, ret, node, len);
     }
 }
 
@@ -156,7 +65,7 @@ static int  int_len(signed int value, int base, t_struct *node)
     int val;
 
     val = (value < 0 && base == 10) ? value*-1 : (unsigned int)value;
-    ret = ((value < 0 && base == 10) || value == 0 || (base == 10 && node->plus > 0)) ? 1 : 0;
+    ret = ((value < 0 && base == 10) || value == 0 || (base == 10 && node->plus > 0) || (base != 10 && node->hash > 0)) ? 1 : 0;
     while (val != 0)
     {
         ret++;
@@ -187,24 +96,6 @@ char    *ft_nbr_converter(signed int value, int base, t_struct *node)
                 break;
         }
         return (ret);
-        // ret[len] = '\0';
-        // nbr = (value < 0 && base == 10) ? value*-1 : (unsigned int)value;
-        // while (len > 0)
-        // {
-        //     ret[--len] = ft_int_to_str(nbr, base);
-        //     nbr /= base;
-        // }
-        // if (value < 0 && base == 10) ret[0] = '-';
-        // if (len < node->width)
-        // {
-        //     min_width = ft_min_width_generator(node);
-        //     if (min_width)
-        //     {
-        //         ft_str_joiner(min_width, ret, node);
-        //         return (min_width);
-        //     }
-        // }
-        // return (ret);
     }
     return (NULL);
 }

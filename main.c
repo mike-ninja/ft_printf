@@ -24,44 +24,48 @@ int     main(void)
     // printf("%23c\n", 'v');
     // ft_printf("\n\n");
 
-    // ft_printf("%23.2s\n", "Some string");
-    // printf("%23.2s\n", "Some string");
+    // ft_printf("[%23.16s]\n", "Some string");
+    // printf("[%23.16s]\n", "Some string");
     // ft_printf("\n\n");
 
     // ft_printf("%-23s\n", "Some string");
     // printf("%-23s\n", "Some string");
     // ft_printf("\n\n");
 
-    ft_printf("[%i]\n", 54236);
-    printf("[%i]\n", 54236);
-    ft_printf("\n\n");
+    // ft_printf("[%i]\n", 54236);
+    // printf("[%i]\n", 54236);
+    // ft_printf("\n\n");
 
-    ft_printf("[%15i]\n", 54236);
-    printf("[%15i]\n", 54236);
-    ft_printf("\n\n");
+    // ft_printf("[%-+15i]\n", 54236);
+    // printf("[%-+15i]\n", 54236);
+    // ft_printf("\n\n");
 
-    ft_printf("[%015i]\n", 54236);
-    printf("[%015i]\n", 54236);
-    ft_printf("\n\n");
+    // ft_printf("[%015i]\n", 54236);
+    // printf("[%015i]\n", 54236);
+    // ft_printf("\n\n");
 
-    ft_printf("[%-15i]\n", 54236);
-    printf("[%-15i]\n", 54236);
-    ft_printf("\n\n");
+    // ft_printf("[%-15i]\n", 54236);
+    // printf("[%-15i]\n", 54236);
+    // ft_printf("\n\n");
 
-    ft_printf("[%15o]\n", 54236);
-    printf("[%15o]\n", 54236);
-    ft_printf("\n\n");
+    // ft_printf("[%15.8i]\n", 54236);
+    // printf("[%15.8i]\n", 54236);
+    // ft_printf("\n\n");
+
+    // ft_printf("[%#23o]\n", 54236);
+    // printf("[%#23o]\n", 54236);
+    // ft_printf("\n\n");
+
+    // ft_printf("[%-15o]\n", 54236);
+    // printf("[%-15o]\n", 54236);
+    // ft_printf("\n\n");
+
+    // ft_printf("[%015o]\n", 54236);
+    // printf("[%015o]\n", 54236);
+    // ft_printf("\n\n");
 
     ft_printf("[%-15o]\n", 54236);
     printf("[%-15o]\n", 54236);
-    ft_printf("\n\n");
-
-    ft_printf("[%015o]\n", 54236);
-    printf("[%015o]\n", 54236);
-    ft_printf("\n\n");
-
-    ft_printf("[%#15o]\n", 54236);
-    printf("[%#15o]\n", 54236);
     ft_printf("\n\n");
 
 
