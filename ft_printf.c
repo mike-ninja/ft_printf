@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/08 16:19:49 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:49:29 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void    ft_arg_conversion(va_list arg, t_struct *node)
             node->str = ft_nbr_converter(i, 8, node);
             break;
         case 'x' : y = va_arg(arg, unsigned long long);
-            node->str = ft_hex(i);
+            node->str = ft_hex_convert(y, 'x', node);
             break;
         case 'X' : y = va_arg(arg, unsigned long long);
-            node->str = ft_hex(i);
+            node->str = ft_hex_convert(y, 'X', node);
             break;
         case '%' :
             node->str = ft_percent_convert();

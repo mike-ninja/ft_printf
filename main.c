@@ -64,8 +64,8 @@ int     main(void)
     // printf("[%015o]\n", 54236);
     // ft_printf("\n\n");
 
-    ft_printf("[%-15o]\n", 54236);
-    printf("[%-15o]\n", 54236);
+    ft_printf("[%25X]\n", 54236);
+    printf("[%25X]\n", 54236);
     ft_printf("\n\n");
 
 
