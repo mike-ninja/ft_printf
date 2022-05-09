@@ -4,31 +4,74 @@ int     main(void)
 {
     char    i;
 
-    // No Argument Check
-    //ft_printf("There are no arguments in this text\n");
-    // ft_printf("ft %016s\n", "Some string");
-    // ft_printf("ft %#16i\n");
-    // ft_printf("ft %-16x\n");
-    // ft_printf("ft %+16o\n");
-    // ft_printf("ft %%16X\n");
-    // ft_printf("ft %%16.2X\n");
-    //printf("pr %016i\n", 15);
-    // ft_printf("%20s\n", "Some string");
-    // printf("%20s\n\n", "Some string");
-    // ft_printf("%20.4s\n", "Some string");
-    // printf("%20.4s\n\n", "Some string");
+    // ft_printf("Some string\n");
+    // printf("Some string\n");
+    // ft_printf("\n\n");
 
-    //ft_printf("int %s\n", "string");
-    //ft_printf("%s\n", "string");
-    ft_printf("%i\n", 153);   
-    // Flags checks
-    // ft_printf("Flags check: %#\n");
-    // ft_printf("Flags check: %0\n");
-    // ft_printf("Flags check: %+\n");
-    // ft_printf("Flags check: %-\n");
-    // ft_printf("Flags check: % \n");
-    // ft_printf("Flags check: %%\n");
-    // ft_printf("Width check: %20\n");
+    // ft_printf("%s\n", "Some String");
+    // printf("%s\n","Some string");
+    // ft_printf("\n\n");
+
+    // ft_printf("%s %s\n" ,"Some", "string");
+    // printf("%s %s\n" ,"Some", "string");
+    // ft_printf("\n\n");
+
+    // ft_printf("%c\n", 'v');
+    // printf("%c\n", 'v');
+    // ft_printf("\n\n");
+
+    // ft_printf("%23c\n", 'v');
+    // printf("%23c\n", 'v');
+    // ft_printf("\n\n");
+
+    // ft_printf("%23.2s\n", "Some string");
+    // printf("%23.2s\n", "Some string");
+    // ft_printf("\n\n");
+
+    // ft_printf("%-23s\n", "Some string");
+    // printf("%-23s\n", "Some string");
+    // ft_printf("\n\n");
+
+    ft_printf("[%i]\n", 54236);
+    printf("[%i]\n", 54236);
+    ft_printf("\n\n");
+
+    ft_printf("[%15i]\n", 54236);
+    printf("[%15i]\n", 54236);
+    ft_printf("\n\n");
+
+    ft_printf("[%015i]\n", 54236);
+    printf("[%015i]\n", 54236);
+    ft_printf("\n\n");
+
+    ft_printf("[%-15i]\n", 54236);
+    printf("[%-15i]\n", 54236);
+    ft_printf("\n\n");
+
+    ft_printf("[%15o]\n", 54236);
+    printf("[%15o]\n", 54236);
+    ft_printf("\n\n");
+
+    ft_printf("[%-15o]\n", 54236);
+    printf("[%-15o]\n", 54236);
+    ft_printf("\n\n");
+
+    ft_printf("[%015o]\n", 54236);
+    printf("[%015o]\n", 54236);
+    ft_printf("\n\n");
+
+    ft_printf("[%#15o]\n", 54236);
+    printf("[%#15o]\n", 54236);
+    ft_printf("\n\n");
+
+
+    //ft_printf("[%20%]\n");
+    //printf("[%#X]\n\n", 5463);
+    //ft_printf("%20c\n", "string");
+    //printf("%20c\n", "Some string");
+
+    // ft_printf("[%20.12d]\n./c", 1676341);
+    // printf("[%20.12d]\n\n", 1676341);
 
     return (0);
 }
