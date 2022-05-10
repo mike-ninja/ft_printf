@@ -6,146 +6,104 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/09 14:49:29 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:57:20 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    ft_arg_conversion(va_list arg, t_struct *node)
+/*
+    Initialises both structs
+*/
+static  void    ft_init_struct(t_flags *flags, t_modifier *modifier)
 {
-    signed int        i;
-    unsigned long long  y;
-    char                *str;
-    
-    switch (node->specifier)
-    {
-        case 's' : str = va_arg(arg, char *);
-            node->str = ft_str_convert(str, node);
-            break;
-        case 'c' : i = va_arg(arg, unsigned int);
-            node->str = ft_char_convert(i, node);
-            break;
-        case 'i' : i = va_arg(arg, unsigned int);
-            node->str = ft_nbr_converter(i, 10, node);
-            break;
-        case 'd' : i = va_arg(arg, unsigned int);
-            node->str = ft_nbr_converter(i, 10, node);
-            break;
-        case 'o' : i = va_arg(arg, unsigned int);
-            node->str = ft_nbr_converter(i, 8, node);
-            break;
-        case 'x' : y = va_arg(arg, unsigned long long);
-            node->str = ft_hex_convert(y, 'x', node);
-            break;
-        case 'X' : y = va_arg(arg, unsigned long long);
-            node->str = ft_hex_convert(y, 'X', node);
-            break;
-        case '%' :
-            node->str = ft_percent_convert();
-            break;
-    }
-    if (node->str)
-        ft_putstr(node->str);
-    else
-        ft_putstr("(null)");
-    free(node->str);
-    node->str = NULL;
+    modifier->mod = 0;
+    flags->hash = 0;
+    flags->zero = 0;
+    flags->plus = 0;
+    flags->minus = 0;
+    flags->width = 0;
+    flags->space = 0;
+    flags->precision = 0;
 }
 
-void    ft_flags_check(char *format, t_struct *node)
+/*
+    Assigns the int value within modifier struct depending on the modifer
+    and will return current index position.
+*/
+static int    ft_modifier_check(char *format, t_modifier *modifier, int i)
 {
-    node->pos++;
-	node->hash = 0;
-	node->zero = 0;
-	node->plus = 0;
-	node->minus = 0;
-	node->width = 0;
-	node->space = 0;
-	node->percent = 0;
-    node->precision = 0;
-
-    while(format[node->pos] == '#' || format[node->pos] == '0' || format[node->pos] == '+' || format[node->pos] == '-' || format[node->pos] == ' ' || format[node->pos] == '.')
-    {
-        if (format[node->pos] == '#')
-            node->hash++;
-        if (format[node->pos] == '0')
-            node->zero++;
-        if (format[node->pos] == '+')
-            node->plus++;
-        if (format[node->pos] == '-')
-            node->minus++;
-        if (format[node->pos] == ' ')
-            node->space++;
-        node->pos++;
-    }
-    while (format[node->pos] >= '0' && format[node->pos] <= '9')
-        node->width = node->width * 10 + (format[node->pos++] - '0');
-    if (format[node->pos] == '.')
-    {
-        while(format[++node->pos] >= '0' && format[node->pos] <= '9')
-            node->precision = node->precision * 10 + (format[node->pos] - '0');
-    }
-    node->specifier = format[node->pos];
+    if ((ft_strncmp(&format[i], "h", 1)) == 0)
+        modifier->mod = 1;
+    if ((ft_strncmp(&format[i], "hh", 2)) == 0)
+        modifier->mod = 2;
+    if ((ft_strncmp(&format[i], "l", 1)) == 0)
+        modifier->mod = 3;
+    if ((ft_strncmp(&format[i], "L", 1)) == 0)
+        modifier->mod = 4;
+    if ((ft_strncmp(&format[i], "ll", 2)) == 0)
+        modifier->mod = 5;
+    while (format[i] == 'l' || format[i] == 'h' || format[i] == 'L')
+        i++;
+    return (i);
 }
 
-// void    ft_flags_check(char *format, t_struct *node)
-// {
-//     node->pos++;
-// 	node->hash = 0;
-// 	node->zero = 0;
-// 	node->plus = 0;
-// 	node->minus = 0;
-// 	node->width = 0;
-// 	node->space = 0;
-// 	node->percent = 0;
-//     node->precision = 0;
-
-//     while(format[node->pos] == '#' || format[node->pos] == '0' || format[node->pos] == '+' || format[node->pos] == '-' || format[node->pos] == ' ' || format[node->pos] == '%' || format[node->pos] == '.')
-//     {
-//         if (format[node->pos] == '#')
-//             node->hash++;
-//         if (format[node->pos] == '0')
-//             node->zero++;
-//         if (format[node->pos] == '+')
-//             node->plus++;
-//         if (format[node->pos] == '-')
-//             node->minus++;
-//         if (format[node->pos] == ' ')
-//             node->space++;
-//         if (format[node->pos] == '%')
-//             node->percent++;
-//         node->pos++;
-//     }
-//     while (format[node->pos] >= '0' && format[node->pos] <= '9')
-//         node->width = node->width * 10 + (format[node->pos++] - '0');
-//     if (format[node->pos] == '.')
-//     {
-//         while(format[++node->pos] >= '0' && format[node->pos] <= '9')
-//             node->precision = node->precision * 10 + (format[node->pos] - '0');
-//     }
-//     node->specifier = format[node->pos];
-// }
-
-void    ft_printf(char *format, ...)
+/*
+    If one of the flag characters is found, it increments the value in the struct
+*/
+static int  ft_flags_check(char *format, t_flags *flags, int i)
 {
+    i++;
+    while(format[i] == '#' || format[i] == '0' || format[i] == '+' || format[i] == '-' || format[i] == ' ' || format[i] == '.')
+    {
+        if (format[i] == '#')
+            flags->hash++;
+        if (format[i] == '0')
+            flags->zero++;
+        if (format[i] == '+')
+            flags->plus++;
+        if (format[i] == '-')
+            flags->minus++;
+        if (format[i] == ' ')
+            flags->space++;
+        i++;
+    }
+    while (format[i] >= '0' && format[i] <= '9')
+        flags->width = flags->width * 10 + (format[i++] - '0');
+    if (format[i] == '.')
+    {
+        while(format[++i] >= '0' && format[i] <= '9')
+            flags->precision = flags->precision * 10 + (format[i] - '0');
+    }
+    return (i);
+}
+
+/*
+    Initilizes the list
+    Prints characters that are not %
+    When % is encountered, ft_flag_check is called to collect all the flags and the specifier
+*/
+int ft_printf(char *format, ...)
+{
+    int         i;
     va_list     arg;
-    t_struct    node[1];
+    t_flags     flags[1];
+    t_modifier  modifier[1];
 
-    node->pos = 0;
-    node->str = NULL;
+    i = 0;
     va_start(arg, format);
-    while(format[node->pos] != '\0')
+    while(format[i] != '\0')
     {
-        if (format[node->pos] != '%')
-            ft_putchar(format[node->pos]);
+        if (format[i] != '%')
+            ft_putchar(format[i]);
         else
         {
-            ft_flags_check(format, node);
-            ft_arg_conversion(arg, node);
+            ft_init_struct(flags, modifier);
+            i = ft_flags_check(format, flags, i);
+            i = ft_modifier_check(format, modifier, i);
         }
-        node->pos++;
+        i++;
     }
     va_end(arg);
+    return (i); // This will not be accurate
 }
-
