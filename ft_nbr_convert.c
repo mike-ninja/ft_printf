@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nbr_convert.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/09 11:51:30 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/10 13:12:04 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,33 @@ static int  int_len(signed int value, int base, t_struct *node)
     return (ret);
 }
 
-char    *ft_nbr_converter(signed int value, int base, t_struct *node)
+// char    *ft_nbr_converter(signed int value, int base, t_struct *node)
+// {
+//     int             len;
+//     char            *ret;
+//     unsigned int    nbr;
+
+//     len = int_len(value, base, node);
+//     ret = (char *)malloc(len + 1);
+//     if (ret)
+//     {
+//         ret[len] = '\0';
+//         nbr = (value < 0 && base == 10) ? value*-1 : (unsigned int)value;
+//         switch (base)
+//         {
+//             case 10 :
+//                 ft_decimal_convert(nbr, len, node, ret);
+//                 break;
+//             case 8 :
+//                 ft_octal_convert(nbr, len, node, ret);
+//                 break;
+//         }
+//         return (ret);
+//     }
+//     return (NULL);
+// }
+
+char    *ft_nbr_converter(va_list arg, t_flags *flags, t_modifier *mod, int base)
 {
     int             len;
     char            *ret;

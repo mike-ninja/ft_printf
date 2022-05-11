@@ -64,7 +64,7 @@ int     main(void)
     // printf("[%015o]\n", 54236);
     // ft_printf("\n\n");
 
-    ft_printf("[%hhc]\n");
+    ft_printf("[%20s]", "home");
     printf("[%25X]\n", 54236);
     ft_printf("\n\n");
 

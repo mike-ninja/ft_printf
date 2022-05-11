@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/10 11:47:54 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/10 13:06:17 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ typedef struct s_modifier
 
 // char    *ft_percent_convert(void);
 int		ft_printf(char *format, ...);
+void	ft_arg_filter(char *format, va_list arg, t_flags *flags, t_modifier *mod);
 // char    *ft_hex_convert(unsigned long long value, char specifier, t_struct *node);
-// char    *ft_char_convert(char c, t_struct *node);
-// char    *ft_str_convert(char *str, t_struct *node);
+char    *ft_char_convert(unsigned int c, t_flags *flags);
+char	*ft_str_convert(char *str, t_flags *flags);
 // char    *ft_nbr_converter(signed int value, int base, t_struct *node);
 // char     *ft_min_width_generator(t_struct *node);
 // void	ft_width_joiner(char *min_width, char *ret, t_struct *node, int len);

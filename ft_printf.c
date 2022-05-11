@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/10 11:57:20 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/10 12:44:50 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int ft_printf(char *format, ...)
             ft_init_struct(flags, modifier);
             i = ft_flags_check(format, flags, i);
             i = ft_modifier_check(format, modifier, i);
+            ft_arg_filter(&format[i], arg, flags, modifier);
         }
         i++;
     }
