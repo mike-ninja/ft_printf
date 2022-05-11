@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/11 13:10:13 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/11 13:18:45 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int  int_len(signed long long value, int base, t_flags *flags)
 {
-    int ret;
-    int val;
+    int                 ret;
+    signed long long    val;
 
-    val = (value < 0 && base == 10) ? value*-1 : (unsigned int)value;
+    val = (value < 0 && base == 10) ? value*-1 : (unsigned long long)value;
     ret = ((value < 0 && base == 10) || value == 0 || (base == 10 && flags->plus > 0) || (base != 10 && flags->hash > 0)) ? 1 : 0;
     while (val != 0)
     {
@@ -115,7 +115,6 @@ char *ft_decimal_convert(signed long long val, t_flags *flags)
 char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
     char            *ret;
-    signed int      val;
 
     ret = NULL;
     if (arg->specifier == 'd' || arg->specifier == 'i')
@@ -125,11 +124,12 @@ char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
             case 0 :
                 ret = ft_decimal_convert(va_arg(arg->arg, signed int), flags);
                 break;
-            // case 1 :
-            //     ret = ft_decimal_convert(va_arg(arg->arg, short int), flags);
-            //     break;
+            case 1 :
+                ret = ft_decimal_convert(va_arg(arg->arg, unsigned short int), flags);
+                break;
             case 3:
-                ret = ft_decimal_convert(va_arg(arg->arg, long signed int), flags);
+                ret = ft_decimal_convert(va_arg(arg->arg, long int), flags);
+                break;
         }
     }
     return (ret);
