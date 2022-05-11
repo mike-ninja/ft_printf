@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_octal_convert.c                                 :+:      :+:    :+:   */
+/*   ft_min_width_generator.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 10:30:45 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/09 10:36:51 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/11 12:21:55 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char     *ft_min_width_generator(t_struct *node)
+char     *ft_min_width_generator(t_flags *flags)
 {
     int     i;
     char    *ret;
     
-    if (node->width > 0)
+    if (flags->width > 0)
     {
         i = 0;
-        ret = (char *)malloc(node->width + 1);
+        ret = (char *)malloc(flags->width + 1);
         if (ret)
         {
-            ret[node->width] = '\0';
-            while (i < node->width)
-                ret[i++] = node->zero > 0 && node->precision == 0 ? '0' : ' ';
+            ret[flags->width] = '\0';
+            while (i < flags->width)
+                ret[i++] = flags->zero > 0 && flags->precision == 0 ? '0' : ' ';
             return (ret);
         }
     }

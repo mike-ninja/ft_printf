@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/10 12:44:50 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/11 12:34:21 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,25 +86,31 @@ static int  ft_flags_check(char *format, t_flags *flags, int i)
 int ft_printf(char *format, ...)
 {
     int         i;
-    va_list     arg;
+    int         char_count;
+    t_arg       arg[1];
     t_flags     flags[1];
     t_modifier  modifier[1];
 
     i = 0;
-    va_start(arg, format);
+    char_count = 0;
+    va_start(arg->arg, format);
     while(format[i] != '\0')
     {
         if (format[i] != '%')
+        {
+            char_count++;
             ft_putchar(format[i]);
+        }
         else
         {
             ft_init_struct(flags, modifier);
             i = ft_flags_check(format, flags, i);
             i = ft_modifier_check(format, modifier, i);
-            ft_arg_filter(&format[i], arg, flags, modifier);
+            arg->specifier = format[i];
+            char_count += ft_arg_filter(arg, flags, modifier);
         }
         i++;
     }
-    va_end(arg);
-    return (i); // This will not be accurate
+    va_end(arg->arg);
+    return (char_count); // This will not be accurate
 }
