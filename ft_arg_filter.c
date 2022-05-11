@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:26:57 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/11 12:32:13 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/11 12:44:26 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 		case 's' :
 			str = ft_str_convert(va_arg(arg->arg, char *), flags);
 			break;
-		case 'd' || 'i' || 'f' || 'x' || 'X' || "u"  :
-			str = ft_nbr_converter(arg, flags, mod);
-			printf("decimal\n");
-			break;
 	}
+	if (ft_strchr("diouxXf", arg->specifier))
+		str = ft_nbr_converter(arg, flags, mod);
 	ft_putstr(str);
 	ret = ft_strlen(str);
 	free(str);

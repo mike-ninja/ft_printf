@@ -64,8 +64,12 @@ int     main(void)
     // printf("[%015o]\n", 54236);
     // ft_printf("\n\n");
 
-    printf("[%i]\n", ft_printf("[%15c]\n", 'c'));
-    printf("[%i]\n", printf("[%15c]\n", 'c'));
+    // printf("[%i]\n", ft_printf("[%20.3s]\n", "home"));
+    // printf("[%i]\n", printf("[%20.3s]\n", "home"));
+    // ft_printf("\n\n");
+
+    printf("[%i]\n", ft_printf("[%15ld]\n", 140000000000));
+    printf("[%i]\n", printf("[%15ld]\n", 140000000000));
     ft_printf("\n\n");
 
 
