@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nbr_convert.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/11 13:18:45 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/12 11:55:03 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char *ft_decimal_convert(signed long long val, t_flags *flags)
     
     len = int_len(val, 10, flags);
     ret = (char *)malloc(len + 1);
+    printf("[%lli]\n", val);
     if (ret)
     {
         tmp = len;
@@ -115,22 +116,21 @@ char *ft_decimal_convert(signed long long val, t_flags *flags)
 char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
     char            *ret;
+    int             tmp;
 
     ret = NULL;
     if (arg->specifier == 'd' || arg->specifier == 'i')
     {
-        switch (mod->mod)
+      
+        if (mod->mod == 1)
+            ret = ft_decimal_convert(va_arg(arg->arg, signed short int), flags);
+        if (mod->mod == 3)
         {
-            case 0 :
-                ret = ft_decimal_convert(va_arg(arg->arg, signed int), flags);
-                break;
-            case 1 :
-                ret = ft_decimal_convert(va_arg(arg->arg, unsigned short int), flags);
-                break;
-            case 3:
-                ret = ft_decimal_convert(va_arg(arg->arg, long int), flags);
-                break;
+            ret = ft_decimal_convert(va_arg(arg->arg, signed long int), flags); // This is not working
         }
+           
+        if (mod->mod == 5)
+            ret = ft_decimal_convert(va_arg(arg->arg, signed long long int), flags);
     }
     return (ret);
     // switch (mod->mod)
