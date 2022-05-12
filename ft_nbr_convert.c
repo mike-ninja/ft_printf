@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/12 11:55:03 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:55:34 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char *ft_decimal_convert(signed long long val, t_flags *flags)
     
     len = int_len(val, 10, flags);
     ret = (char *)malloc(len + 1);
-    printf("[%lli]\n", val);
     if (ret)
     {
         tmp = len;
@@ -85,75 +84,77 @@ char *ft_decimal_convert(signed long long val, t_flags *flags)
 //     }
 // }
 
-
-
-// char    *ft_nbr_converter(signed int value, int base, t_struct *node)
-// {
-//     int             len;
-//     char            *ret;
-//     unsigned int    nbr;
-
-//     len = int_len(value, base, node);
-//     ret = (char *)malloc(len + 1);
-//     if (ret)
-//     {
-//         ret[len] = '\0';
-//         nbr = (value < 0 && base == 10) ? value*-1 : (unsigned int)value;
-//         switch (base)
-//         {
-//             case 10 :
-//                 ft_decimal_convert(nbr, len, node, ret);
-//                 break;
-//             case 8 :
-//                 ft_octal_convert(nbr, len, node, ret);
-//                 break;
-//         }
-//         return (ret);
-//     }
-//     return (NULL);
-// }
-
 char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
     char            *ret;
     int             tmp;
+    int             index;
+    char            *min_width;
 
     ret = NULL;
+    index = 0;
+    min_width = ft_min_width_generator(flags);
     if (arg->specifier == 'd' || arg->specifier == 'i')
     {
-      
+        if (mod->mod == 0)
+            ret = ft_itoa_base(va_arg(arg->arg, int), 10);
         if (mod->mod == 1)
-            ret = ft_decimal_convert(va_arg(arg->arg, signed short int), flags);
+            ret = ft_itoa_base((short)va_arg(arg->arg, int), 10);
+        if (mod->mod == 2)
+            ret = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 10);
         if (mod->mod == 3)
-        {
-            ret = ft_decimal_convert(va_arg(arg->arg, signed long int), flags); // This is not working
-        }
-           
+            ret = ft_litoa_base(va_arg(arg->arg, long), 10);
         if (mod->mod == 5)
-            ret = ft_decimal_convert(va_arg(arg->arg, signed long long int), flags);
+            ret = ft_llitoa_base(va_arg(arg->arg, long long), 10); 
+        ft_width_joiner(min_width, ret, flags, ft_strlen(ret));
+    }
+    if (arg->specifier == 'o') // # Flag not taken into account yet;
+    {
+        if (mod->mod == 0)
+            ret = ft_itoa_base(va_arg(arg->arg, int), 8);
+        if (mod->mod == 1)
+            ret = ft_itoa_base((short)va_arg(arg->arg, int), 8);
+        if (mod->mod == 2)
+            ret = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 8);
+        if (mod->mod == 3)
+            ret = ft_litoa_base(va_arg(arg->arg, long), 8);
+        if (mod->mod == 5)
+            ret = ft_llitoa_base(va_arg(arg->arg, long long), 8);
+        ft_width_joiner(min_width, ret, flags, ft_strlen(ret));
+    }
+    if (arg->specifier == 'u')
+    {
+        if (mod->mod == 0)
+            ret = ft_itoa_base(va_arg(arg->arg, int), 10);
+        if (mod->mod == 1)
+            ret = ft_itoa_base((short)va_arg(arg->arg, int), 10);
+        if (mod->mod == 2)
+            ret = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 10);
+        if (mod->mod == 3)
+            ret = ft_litoa_base(va_arg(arg->arg, long), 10);
+        if (mod->mod == 5)
+            ret = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 10);
+        ft_width_joiner(min_width, ret, flags, ft_strlen(ret));
+    }
+    if (arg->specifier == 'x' || arg->specifier == 'X') // # Flag not taken into account yet;
+    {
+        if (mod->mod == 0)
+            ret = ft_itoa_base(va_arg(arg->arg, int), 16);
+        if (mod->mod == 1)
+            ret = ft_itoa_base((short)va_arg(arg->arg, int), 16);
+        if (mod->mod == 2)
+            ret = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 16);
+        if (mod->mod == 3)
+            ret = ft_litoa_base(va_arg(arg->arg, long), 16);
+        if (mod->mod == 5)
+            ret = ft_llitoa_base(va_arg(arg->arg, long long), 16);
+        if (arg->specifier == 'X')
+            while (ret[index] != '\0')
+            {
+                ret[index] = ft_toupper(ret[index]);
+                index++;
+            }
+        ft_width_joiner(min_width, ret, flags, ft_strlen(ret));
     }
     return (ret);
-    // switch (mod->mod)
-    // {
-    //     // case 0:
-    //     //     function(va_arg(arg->arg, signed int), arg->specifier, flags);
-    //     //     break;
-    //     // case 1 :
-    //     //     function(va_arg(arg->arg, short int), arg->specifier, flags);
-    //     //     break;
-    //     // case 2 :
-    //     //     function(va_arg(arg->arg, short short int), arg->specifier, flags);
-    //     //     break;
-    //     // case 3 : 
-    //     //     function(va_arg(arg->arg, long int), arg->specifier, flags);
-    //     //     break;
-    //     // case 4 :
-    //     //     function(va_arg(arg->arg, long long int), arg->specifier, flags);
-    //     //     break;
-    //     // case 5 :
-    //     //     function(va_arg(arg->arg, long double), arg->specifier, flags);
-    //     //     break;
-    // }
-
-    // return (ret);
 }

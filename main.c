@@ -68,9 +68,9 @@ int     main(void)
     // printf("[%i]\n", printf("[%20.3s]\n", "home"));
     // ft_printf("\n\n");
 
-    printf("[%i]\n", ft_printf("[%15ld]\n", 140000000000));
-    printf("[%i]\n", printf("[%15ld]\n", 140000000000));
-    ft_printf("\n\n");
+    // printf("[%i]\n", ft_printf("[%15lo]\n", 1400000000000000000));
+    // printf("[%i]\n", printf("[%15lo]\n", 1400000000000000000));
+    // ft_printf("\n\n");
 
 
     //ft_printf("[%20%]\n");
@@ -80,6 +80,10 @@ int     main(void)
 
     // ft_printf("[%20.12d]\n./c", 1676341);
     // printf("[%20.12d]\n\n", 1676341);
+    
+    printf("[%i]\n", ft_printf("[%lld]\n", nbr));
+    printf("[%i]\n", printf("[%lld]\n", nbr));
+    ft_printf("\n\n");
 
     return (0);
 }
