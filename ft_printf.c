@@ -18,6 +18,7 @@
 static  void    ft_init_struct(t_flags *flags, t_modifier *modifier)
 {
     modifier->mod = 0;
+    flags->dot = 0;
     flags->hash = 0;
     flags->zero = 0;
     flags->plus = 0;
@@ -54,7 +55,7 @@ static int    ft_modifier_check(char *format, t_modifier *modifier, int i)
 static int  ft_flags_check(char *format, t_flags *flags, int i)
 {
     i++;
-    while(format[i] == '#' || format[i] == '0' || format[i] == '+' || format[i] == '-' || format[i] == ' ' || format[i] == '.')
+    while(format[i] == '#' || format[i] == '0' || format[i] == '+' || format[i] == '-' || format[i] == ' ')
     {
         if (format[i] == '#')
             flags->hash++;
@@ -70,8 +71,9 @@ static int  ft_flags_check(char *format, t_flags *flags, int i)
     }
     while (format[i] >= '0' && format[i] <= '9')
         flags->width = flags->width * 10 + (format[i++] - '0');
-    if (format[i] == '.')
+    if (format[i] == '.') // default if . is found, then precision is 1. If there are digits after, then precision should be it
     {
+        flags->dot++;
         while(format[++i] >= '0' && format[i] <= '9')
             flags->precision = flags->precision * 10 + (format[i] - '0');
     }

@@ -12,22 +12,27 @@
 
 #include "ft_printf.h"
 
-char     *ft_min_width_generator(t_flags *flags)
+char	*ft_min_width_generator(t_flags *flags)
 {
-    int     i;
-    char    *ret;
-    
-    if (flags->width > 0)
-    {
-        i = 0;
-        ret = (char *)malloc(flags->width + 1);
-        if (ret)
-        {
-            ret[flags->width] = '\0';
-            while (i < flags->width)
-                ret[i++] = flags->zero > 0 && flags->precision == 0 ? '0' : ' ';
-            return (ret);
-        }
-    }
-    return (NULL);
+	int		i;
+	char	*ret;
+
+	if (flags->width > 0)
+	{
+		i = 0;
+		ret = (char *)malloc(flags->width + 1);
+		if (ret)
+		{
+			ret[flags->width] = '\0';
+			while (i < flags->width)
+			{
+				if (flags->zero)
+					ret[i++] = '0';
+				else
+					ret[i++] = ' ';
+			}
+			return (ret);
+		}
+	}
+	return (NULL);
 }

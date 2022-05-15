@@ -21,6 +21,7 @@
 
 typedef struct s_flags
 {
+	int		dot;
 	int		hash;
 	int		zero;
 	int		plus;
@@ -32,14 +33,6 @@ typedef struct s_flags
 
 typedef struct s_modifier
 {
-	/*
-	0 - Default
-	1 - h
-	2 - hh
-	3 - l
-	4 - L
-	5 - ll
-	*/
 	int	mod;
 }				t_modifier;
 
@@ -49,14 +42,14 @@ typedef struct s_arg
 	char	specifier;
 }				t_arg;
 
-// char    *ft_percent_convert(void);
+#define U_LLONG unsigned long long
+
 int		ft_printf(char *format, ...);
-int		ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod);
-// char    *ft_hex_convert(unsigned long long value, char specifier, t_struct *node);
-char    *ft_char_convert(unsigned int c, t_flags *flags);
-char	*ft_str_convert(char *str, t_flags *flags);
-char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod);
 char     *ft_min_width_generator(t_flags *flags);
+char	*ft_str_convert(char *str, t_flags *flags);
+char    *ft_char_convert(unsigned int c, t_flags *flags);
+int		ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod);
+char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod);
 void	ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len);
 
 #endif

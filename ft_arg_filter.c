@@ -12,22 +12,31 @@
 
 #include "ft_printf.h"
 
+static char	*ft_address_convert(t_arg *arg, t_flags *flags)
+{
+	char	*ret;
+
+	ret = NULL;
+	ret = ft_strjoin("0x", ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 16));
+	ft_width_joiner(ft_min_width_generator(flags), ret, flags, ft_strlen(ret));
+	return (ret);
+}
+
 int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
-	char	*str; 
+	char	*str;
 	int		ret;
-	
+
 	ret = 0;
 	str = NULL;
-	switch(arg->specifier)
-	{
-		case 'c' :
-			str = ft_char_convert(va_arg(arg->arg, signed int), flags);
-			break;
-		case 's' :
-			str = ft_str_convert(va_arg(arg->arg, char *), flags);
-			break;
-	}
+	if (arg->specifier == 'c')
+		str = ft_char_convert(va_arg(arg->arg, signed int), flags);
+	if (arg->specifier == 's')
+		str = ft_str_convert(va_arg(arg->arg, char *), flags);
+	if (arg->specifier == 'p')
+		str = ft_address_convert(arg, flags);
+	if (arg->specifier == '%')
+		str = ft_strdup("%");
 	if (ft_strchr("diouxXf", arg->specifier))
 		str = ft_nbr_converter(arg, flags, mod);
 	ft_putstr(str);
