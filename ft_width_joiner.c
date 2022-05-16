@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_width_joiner.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 10:32:02 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/12 16:35:59 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/16 09:37:02 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void     ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len)
                 min_width[i] = i < y ? ret[--y] : ' ';
             }
         ft_strcpy(ret, min_width);
-        ft_strdel(&min_width);
     }
+    if (min_width)
+        ft_strdel(&min_width);
 }
