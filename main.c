@@ -6,9 +6,9 @@ int     main(void)
     printf(" [%i]\n", printf("%#.x\n", 0));
     printf("\n\n");
 
-    printf(" [%i]\n", ft_printf("%#.0x\n", 223));
-    printf(" [%i]\n", printf("%#.0x\n", 223));
-    printf("\n\n");
+    // printf(" [%i]\n", ft_printf("%#.0x\n", 223));
+    // printf(" [%i]\n", printf("%#.0x\n", 223));
+    // printf("\n\n");
 
     // printf(" [%i]\n", ft_printf("[%-5%]"));
     // printf(" [%i]\n", printf("[%-5%]"));
