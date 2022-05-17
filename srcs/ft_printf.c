@@ -18,14 +18,13 @@
 static  void    ft_init_struct(t_flags *flags, t_modifier *modifier)
 {
     modifier->mod = 0;
-    flags->dot = 0;
     flags->hash = 0;
     flags->zero = 0;
     flags->plus = 0;
     flags->minus = 0;
     flags->width = 0;
     flags->space = 0;
-    flags->precision = 0;
+    flags->precision = -1;
 }
 
 /*
@@ -73,7 +72,7 @@ static int  ft_flags_check(char *format, t_flags *flags, int i)
         flags->width = flags->width * 10 + (format[i++] - '0');
     if (format[i] == '.') // default if . is found, then precision is 1. If there are digits after, then precision should be it
     {
-        flags->dot++;
+        flags->precision++;
         while(format[++i] >= '0' && format[i] <= '9')
             flags->precision = flags->precision * 10 + (format[i] - '0');
     }

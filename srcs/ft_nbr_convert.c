@@ -17,16 +17,16 @@ static char *precision_cut(char *str, t_flags *flags)
     char *ret;
 
     ret = NULL;
-    if (flags->dot)
+    if (flags->precision)
     {
         ret = (char *)malloc(flags->precision + 1);
         if (ret)
         {
-            printf("precision: [%i]\n", flags->precision);
+            // printf("precision: [%i]\n", flags->precision);
             ret[flags->precision] = '\0';
             ret = ft_strncpy(ret, str, flags->precision);
             //free(str);
-            printf("[%s]\n", ret);
+            //printf("[%s]\n", ret);
             return (ret);
         }
     }
