@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/18 13:19:59 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/18 13:51:40 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static char *precision_cut(char *str, t_flags *flags)
     char *ret;
 
     ret = NULL;
-    if (flags->precision >= 0)
+    //printf("[%i]\n", flags->width);
+    if (flags->precision >= 0 && flags->precision > (int)ft_strlen(str))
     {
         ret = (char *)malloc(flags->precision + 1);
         if (ret)
@@ -230,6 +231,8 @@ char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
             ret = ft_float_convert(va_arg(arg->arg, double), flags);
     }
     // Cut for precision
-    ft_width_joiner(width, precision_cut(ret, flags), flags, ft_strlen(ret));
+    ret = precision_cut(ret, flags);
+    ft_width_joiner(width, ret, flags, ft_strlen(ret));
+    // printf("ret %s]", ret);
     return (ret);
 }
