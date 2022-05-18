@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nbr_convert.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/17 12:48:10 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/18 13:19:59 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static char *precision_cut(char *str, t_flags *flags)
     char *ret;
 
     ret = NULL;
-    if (flags->precision)
+    if (flags->precision >= 0)
     {
         ret = (char *)malloc(flags->precision + 1);
         if (ret)
         {
             // printf("precision: [%i]\n", flags->precision);
             ret[flags->precision] = '\0';
-            ret = ft_strncpy(ret, str, flags->precision);
+            ret = ft_strncpy(ret, str, flags->precision-1);
             //free(str);
             //printf("[%s]\n", ret);
             return (ret);
