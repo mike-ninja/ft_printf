@@ -12,6 +12,16 @@
 
 #include "../incs/ft_printf.h"
 
+static char	*second_percent(unsigned int c)
+{
+	char *ret;
+
+	ret = NULL;
+	if (c == '%')
+		ret = ft_strdup("%");
+	return (ret);
+}
+
 char	*ft_char_convert(unsigned int c, t_flags *flags)
 {
 	int		i;
@@ -19,6 +29,9 @@ char	*ft_char_convert(unsigned int c, t_flags *flags)
 	char	*ret;
 
 	i = 0;
+	ret = second_percent(c);
+	if (ret)
+		return (ret);
 	if (flags->width)
 		len = flags->width;
 	else

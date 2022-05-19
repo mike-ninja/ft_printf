@@ -116,26 +116,41 @@ static char *ft_float_convert(double nbr, t_flags *flags)
 static char *plus_hash(t_flags *flags, char *str, char *width, char specifier)
 {
     char    *ret;
+    char    *tmp;
+    char    *precision;
+    int     len;
 
     ret = NULL;
     if (str && *str != '0')
     {
+        len = ft_strlen(str);
         if (specifier == 'i' || specifier == 'd')
             if (flags->plus)
                 ret = ft_strjoin("+", str);
-        
+        if (flags->precision > 1 && flags->precision > len)
+        {
+            flags->precision -= len;
+            precision = (char *)malloc(flags->precision);
+            precision[flags->precision] = '\0';
+            while (flags->precision > 0)
+                    precision[--flags->precision] = '0';
+            tmp = str;
+            str = ft_strjoin(precision, str);
+            free(tmp);
+        }
         if (flags->hash)
         {
             if (specifier == 'o')
                 ret = ft_strjoin("0x", str);
             if (specifier == 'x')
             {
-                if (!width || flags->zero == 0)
+                if (!width || flags->zero == 0 || flags->minus)
                     ret = ft_strjoin("0x", str);
                 else
                     width[1] = 'x';
+                    
             }
-            if (specifier == 'X')
+            if (specifier == 'X' || flags->zero == 0 || flags->minus)
             {
                 if (!width)
                     ret = ft_strjoin("0X", str);

@@ -16,7 +16,6 @@ void     ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len)
 {
     int i;
     int y;
-
     if (min_width && len < (int)ft_strlen(min_width))
     {
         y = len;

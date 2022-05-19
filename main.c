@@ -6,13 +6,14 @@ int     main(void)
 //     printf("[%i]\n", printf("[%#.x]\n", 0));
 //     printf("\n\n");
 
-    printf("[%i]\n", ft_printf("[%#.5x]\n", 123));
-    printf("[%i]\n", printf("[%#.5x]\n", 123));
+
+    printf("[%i]\n", ft_printf("@moulitest: %#.x %#.0x\n", 0, 0));
+    printf("[%i]\n", printf("@moulitest: %#.x %#.0x\n", 0, 0));
     printf("\n\n");
 
-    printf("[%i]\n", ft_printf("[%20.5i]\n", 123));
-    printf("[%i]\n", printf("[%20.5i]\n", 123));
-    printf("\n\n");
+    // printf("[%i]\n", ft_printf("[%20.23s]\n", "Some String"));
+    // printf("[%i]\n", printf("[%20.23s]\n", "Some String"));
+    // printf("\n\n");
 
     // printf("[%i]\n", ft_printf("[%#20.5x]\n", 123));
     // printf("[%i]\n", printf("[%#20.5x]\n", 123));
