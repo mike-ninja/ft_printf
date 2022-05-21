@@ -25,12 +25,17 @@ static char	*ft_address_convert(t_arg *arg, t_flags *flags)
 int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
 	char	*str;
+	int		c;
 	int		ret;
 
 	ret = 0;
 	str = NULL;
 	if (arg->specifier == 'c')
-		str = ft_char_convert(va_arg(arg->arg, signed int), flags);
+	{
+		c = va_arg(arg->arg, signed int);
+		if (c != 0)
+			str = ft_char_convert(c, flags);
+	}
 	if (arg->specifier == 's')
 		str = ft_str_convert(va_arg(arg->arg, char *), flags);
 	if (arg->specifier == 'p')
@@ -39,8 +44,17 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 		str = ft_char_convert('%', flags);
 	if (ft_strchr("diouxXf", arg->specifier))
 		str = ft_nbr_converter(arg, flags, mod);
-	ft_putstr(str);
-	ret = ft_strlen(str);
-	free(str);
+	if (str)
+	{
+		ft_putstr(str);
+		ret = ft_strlen(str);
+		free(str);
+	}
+	else
+	{
+		ft_putstr("\0");
+		ret++;
+	}
+		
 	return (ret);
 }

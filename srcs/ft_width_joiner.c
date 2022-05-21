@@ -28,7 +28,6 @@ void     ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len)
                 if (y >= 0)
                     min_width[--i] = ret[y];
                 else
-                    
                     min_width[--i] = ' ';
                 flags->precision--;
             }
