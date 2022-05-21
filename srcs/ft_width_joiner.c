@@ -19,18 +19,27 @@ void     ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len)
     if (min_width && len < (int)ft_strlen(min_width))
     {
         y = len;
+        // printf("[%i]\n", y);
         i = flags->width;
         if (!flags->minus)
             while (y > 0 || flags->precision > 0)
             {
-                min_width[--i] = --y >= 0 ? ret[y] : 0 + '0';
+                y--;
+                if (y >= 0)
+                    min_width[--i] = ret[y];
+                else
+                    
+                    min_width[--i] = ' ';
                 flags->precision--;
             }
         else
             while (y > 0)
             {
                 i--;
-                min_width[i] = i < y ? ret[--y] : ' ';
+                if (i < y)
+                    min_width[i] = ret[--y];
+                else
+                    min_width[i] = ' ';
             }
         //printf("[1:%s]", ret);
         ft_strcpy(ret, min_width);

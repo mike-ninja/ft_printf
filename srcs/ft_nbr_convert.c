@@ -31,6 +31,8 @@ static char *precision_cut(char *str, t_flags *flags)
             return (ret);
         }
     }
+    if (flags->precision == 0)
+        str[flags->precision] = '\0';
     return (str);
 }
 
@@ -150,9 +152,9 @@ static char *plus_hash(t_flags *flags, char *str, char *width, char specifier)
                     width[1] = 'x';
                     
             }
-            if (specifier == 'X' || flags->zero == 0 || flags->minus)
+            if (specifier == 'X')
             {
-                if (!width)
+                if (!width || flags->zero == 0 || flags->minus)
                     ret = ft_strjoin("0X", str);
                 else
                     width[1] = 'X';

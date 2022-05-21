@@ -100,6 +100,7 @@ int ft_printf(char *format, ...)
         if (format[i] != '%')
         {
             char_count++;
+            // printf("[%c]", format[i]);
             ft_putchar(format[i]);
         }
         else

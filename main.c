@@ -7,8 +7,8 @@ int     main(void)
 //     printf("\n\n");
 
 
-    printf("[%i]\n", ft_printf("@moulitest: %#.x %#.0x\n", 0, 0));
-    printf("[%i]\n", printf("@moulitest: %#.x %#.0x\n", 0, 0));
+    // printf("[%i]\n", ft_printf("@moulitest: %s", NULL));
+    printf("[%i]\n", printf("@moulitest: %s", NULL));
     printf("\n\n");
 
     // printf("[%i]\n", ft_printf("[%20.23s]\n", "Some String"));
