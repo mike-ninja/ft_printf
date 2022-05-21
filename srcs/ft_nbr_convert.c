@@ -18,7 +18,7 @@ static char *precision_cut(char *str, t_flags *flags)
 
     ret = NULL;
     //printf("[%i]\n", flags->width);
-    if (flags->precision >= 0 && flags->precision > (int)ft_strlen(str))
+    if (flags->precision > (int)ft_strlen(str))
     {
         ret = (char *)malloc(flags->precision + 1);
         if (ret)
