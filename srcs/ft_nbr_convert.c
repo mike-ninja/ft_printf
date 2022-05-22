@@ -12,7 +12,7 @@
 
 #include "../incs/ft_printf.h"
 
-static char *precision_cut(char *str, t_flags *flags, char speci)
+static char *precision_cut(char *str, t_flags *flags)
 {
     char *ret;
 
@@ -30,7 +30,7 @@ static char *precision_cut(char *str, t_flags *flags, char speci)
             return (ret);
         }
     }
-    if (flags->precision == 0 && (speci == 'x' || speci == 'X'))
+    if (flags->precision == 0 && !flags->hash)
         str[flags->precision] = '\0';
     return (str);
 }
@@ -250,7 +250,7 @@ char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
             ret = ft_float_convert(va_arg(arg->arg, double), flags);
     }
     // Cut for precision
-    ret = precision_cut(ret, flags, arg->specifier);
+    ret = precision_cut(ret, flags);
     // printf("width[%i]\n", flags->width)
     ft_width_joiner(width, ret, flags, ft_strlen(ret));
     // printf("ret %s]", ret);
