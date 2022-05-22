@@ -24,11 +24,10 @@ static char	*second_percent(unsigned int c)
 
 char	*ft_char_convert(unsigned int c, t_flags *flags)
 {
-	int		i;
 	int		len;
 	char	*ret;
+	char	*width;
 
-	i = 0;
 	ret = second_percent(c);
 	if (ret)
 		return (ret);
@@ -36,16 +35,14 @@ char	*ft_char_convert(unsigned int c, t_flags *flags)
 		len = flags->width;
 	else
 		len = 1;
+	width = ft_min_width_generator(flags);
 	ret = (char *)malloc(sizeof(char) * len + 1);
 	if (ret)
 	{
 		ret[len] = '\0';
-		while (i < len)
-			ret[i++] = ' ';
-		if (flags->minus)
-			ret[0] = c;
-		else
-			ret[--len] = c;
+		ret[0] = c;
+		if (width)
+			ft_width_joiner(width, ret, flags, 1);
 		return (ret);
 	}
 	return (NULL);

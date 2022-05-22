@@ -25,16 +25,17 @@ static char	*ft_address_convert(t_arg *arg, t_flags *flags)
 int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
 	char	*str;
-	int		c;
 	int		ret;
+	int		c;
 
 	ret = 0;
 	str = NULL;
 	if (arg->specifier == 'c')
 	{
 		c = va_arg(arg->arg, signed int);
-		if (c != 0)
-			str = ft_char_convert(c, flags);
+		str = ft_char_convert(c, flags);
+		if (!c)
+			ret++;
 	}
 	if (arg->specifier == 's')
 		str = ft_str_convert(va_arg(arg->arg, char *), flags);
@@ -47,7 +48,7 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 	if (str)
 	{
 		ft_putstr(str);
-		ret = ft_strlen(str);
+		ret += ft_strlen(str);
 		free(str);
 	}
 	else

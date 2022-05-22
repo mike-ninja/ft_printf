@@ -143,7 +143,7 @@ static char *plus_hash(t_flags *flags, char *str, char *width, char specifier)
         if (flags->hash)
         {
             if (specifier == 'o')
-                ret = ft_strjoin("0x", str);
+                ret = ft_strjoin("0", str);
             if (specifier == 'x')
             {
                 if (!width || flags->zero == 0 || flags->minus)
@@ -249,6 +249,7 @@ char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
     }
     // Cut for precision
     ret = precision_cut(ret, flags);
+    // printf("width[%i]\n", flags->width);
     ft_width_joiner(width, ret, flags, ft_strlen(ret));
     // printf("ret %s]", ret);
     return (ret);
