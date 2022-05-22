@@ -10,8 +10,8 @@ int     main(void)
     // printf("[%i]\n", printf("[%o]\n", 2500));
     // printf("\n\n");
 
-    printf("[%i]\n", ft_printf("[%-2.5i]\n", 2500));
-    printf("[%i]\n", printf("[%-2.5i]\n", 2500));
+    printf("[%i]\n", ft_printf("%d", -2147483648));
+    printf("[%i]\n", printf("%d", -2147483648));
     printf("\n\n");
 
     // printf("[%i]\n", ft_printf("[%20.23s]\n", "Some String"));

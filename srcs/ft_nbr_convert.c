@@ -12,12 +12,11 @@
 
 #include "../incs/ft_printf.h"
 
-static char *precision_cut(char *str, t_flags *flags)
+static char *precision_cut(char *str, t_flags *flags, char speci)
 {
     char *ret;
 
     ret = NULL;
-    //printf("[%i]\n", flags->width);
     if (flags->precision > (int)ft_strlen(str))
     {
         ret = (char *)malloc(flags->precision + 1);
@@ -31,7 +30,7 @@ static char *precision_cut(char *str, t_flags *flags)
             return (ret);
         }
     }
-    if (flags->precision == 0)
+    if (flags->precision == 0 && (speci == 'x' || speci == 'X'))
         str[flags->precision] = '\0';
     return (str);
 }
@@ -121,21 +120,23 @@ static char *plus_hash(t_flags *flags, char *str, char *width, char specifier)
     char    *tmp;
     char    *precision;
     int     len;
+    int     int_tmp;
 
     ret = NULL;
+    int_tmp = flags->precision;
     if (str && *str != '0')
     {
         len = ft_strlen(str);
         if (specifier == 'i' || specifier == 'd')
             if (flags->plus)
                 ret = ft_strjoin("+", str);
-        if (flags->precision > 1 && flags->precision > len)
+        if (int_tmp > 1 && int_tmp > len)
         {
-            flags->precision -= len;
-            precision = (char *)malloc(flags->precision);
-            precision[flags->precision] = '\0';
-            while (flags->precision > 0)
-                    precision[--flags->precision] = '0';
+            int_tmp -= len;
+            precision = (char *)malloc(int_tmp);
+            precision[int_tmp] = '\0';
+            while (int_tmp > 0)
+                    precision[--int_tmp] = '0';
             tmp = str;
             str = ft_strjoin(precision, str);
             free(tmp);
@@ -226,6 +227,7 @@ char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
                 index++;
             }
     }
+   
     ret = plus_hash(flags, ret, width, arg->specifier);
     if (arg->specifier == 'u')
     {
@@ -248,8 +250,8 @@ char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
             ret = ft_float_convert(va_arg(arg->arg, double), flags);
     }
     // Cut for precision
-    ret = precision_cut(ret, flags);
-    // printf("width[%i]\n", flags->width);
+    ret = precision_cut(ret, flags, arg->specifier);
+    // printf("width[%i]\n", flags->width)
     ft_width_joiner(width, ret, flags, ft_strlen(ret));
     // printf("ret %s]", ret);
     return (ret);
