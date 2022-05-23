@@ -6,13 +6,13 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/18 13:51:40 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/23 13:47:41 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-static char *precision_cut(char *str, t_flags *flags)
+static char *precision_cut(char *str, t_flags *flags, char speci)
 {
     char *ret;
 
@@ -30,8 +30,11 @@ static char *precision_cut(char *str, t_flags *flags)
             return (ret);
         }
     }
-    if (flags->precision == 0 && !flags->hash)
-        str[flags->precision] = '\0';
+        // printf("This happens\n");
+    //printf("\n[%i][%i]\n", flags->precision, flags->hash);
+    if (flags->precision == 0)
+        if (!flags->hash || ft_strchr("xX", speci))
+            str[flags->precision] = '\0';
     return (str);
 }
 
@@ -250,8 +253,10 @@ char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
             ret = ft_float_convert(va_arg(arg->arg, double), flags);
     }
     // Cut for precision
-    ret = precision_cut(ret, flags);
+    // printf("\nret -> [%s]\n", ret);
+    ret = precision_cut(ret, flags, arg->specifier);
     // printf("width[%i]\n", flags->width)
+    
     ft_width_joiner(width, ret, flags, ft_strlen(ret));
     // printf("ret %s]", ret);
     return (ret);

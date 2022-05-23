@@ -10,13 +10,17 @@ int     main(void)
     // printf("[%i]\n", printf("[%o]\n", 2500));
     // printf("\n\n");
 
-    printf("[%i]\n", ft_printf("@moulitest: %#.o %#.0o", 0, 0));
-    printf("[%i]\n", printf("@moulitest: %#.o %#.0o", 0, 0));
+    printf("[%i]\n", ft_printf("% d", 42));
+    printf("[%i]\n", printf("% d", 42));
     printf("\n\n");
 
-    printf("[%i]\n", ft_printf("@moulitest: %#.x %#.0x", 0, 0));
-    printf("[%i]\n", printf("@moulitest: %#.x %#.0x", 0, 0));
-    printf("\n\n");
+    // printf("[%i]\n", ft_printf("@moulitest: %#.o %#.0o", 0, 0));
+    // printf("[%i]\n", printf("@moulitest: %#.o %#.0o", 0, 0));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("% d", 42));
+    // printf("[%i]\n", printf("% d", 42));
+    // printf("\n\n");
 
 
     // printf("[%i]\n", ft_printf("[%20.23s]\n", "Some String"));

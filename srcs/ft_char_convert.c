@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_char_convert.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:36:22 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/16 10:34:23 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/23 13:12:59 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,18 @@ char	*ft_char_convert(unsigned int c, t_flags *flags)
 	char	*ret;
 	char	*width;
 
+	width = ft_min_width_generator(flags);
 	ret = second_percent(c);
 	if (ret)
+	{
+		if (width)
+			ft_width_joiner(width, ret, flags, 1);
 		return (ret);
+	}
 	if (flags->width)
 		len = flags->width;
 	else
 		len = 1;
-	width = ft_min_width_generator(flags);
 	ret = (char *)malloc(sizeof(char) * len + 1);
 	if (ret)
 	{
