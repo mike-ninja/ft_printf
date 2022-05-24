@@ -31,52 +31,56 @@ static  void    ft_init_struct(t_flags *flags, t_modifier *modifier)
     Assigns the int value within modifier struct depending on the modifer
     and will return current index position.
 */
-static int    ft_modifier_check(char *format, t_modifier *modifier, int i)
+static char    *ft_modifier_check(char *format, t_modifier *modifier)
 {
-    if ((ft_strncmp(&format[i], "h", 1)) == 0)
+    if ((ft_strncmp(format, "h", 1) == 0))
         modifier->mod = 1;
-    if ((ft_strncmp(&format[i], "hh", 2)) == 0)
+    if ((ft_strncmp(format, "hh", 2) == 0))
         modifier->mod = 2;
-    if ((ft_strncmp(&format[i], "l", 1)) == 0)
+    if ((ft_strncmp(format, "l", 1) == 0))
         modifier->mod = 3;
-    if ((ft_strncmp(&format[i], "L", 1)) == 0)
+    if ((ft_strncmp(format, "L", 1) == 0))
         modifier->mod = 4;
-    if ((ft_strncmp(&format[i], "ll", 2)) == 0)
+    if ((ft_strncmp(format, "ll", 2) == 0))
         modifier->mod = 5;
-    while (format[i] == 'l' || format[i] == 'h' || format[i] == 'L')
-        i++;
-    return (i);
+    while (*format == 'l' || *format == 'h' || *format == 'L')
+        format++;
+    return (format);
 }
 
 /*
     If one of the flag characters is found, it increments the value in the struct
 */
-static int  ft_flags_check(char *format, t_flags *flags, int i)
+static char  *ft_flags_check(char *format, t_flags *flags)
 {
-    i++;
-    while(format[i] == '#' || format[i] == '0' || format[i] == '+' || format[i] == '-' || format[i] == ' ')
+    format++;
+    while(*format == '#' || *format == '0' || *format == '+' || *format == '-' || *format == ' ')
     {
-        if (format[i] == '#')
+        if (*format == '#')
             flags->hash++;
-        if (format[i] == '0')
+        if (*format == '0')
             flags->zero++;
-        if (format[i] == '+')
+        if (*format == '+')
             flags->plus++;
-        if (format[i] == '-')
+        if (*format == '-')
             flags->minus++;
-        if (format[i] == ' ')
+        if (*format == ' ')
             flags->space++;
-        i++;
+        format++;
     }
-    while (format[i] >= '0' && format[i] <= '9')
-        flags->width = flags->width * 10 + (format[i++] - '0');
-    if (format[i] == '.') // default if . is found, then precision is 1. If there are digits after, then precision should be it
+    while (*format >= '0' && *format <= '9')
+    {
+        flags->width = flags->width * 10 + (*format - '0');
+        format++;
+    }
+    if (*format == '.') // default if . is found, then precision is 1. If there are digits after, then precision should be it
     {
         flags->precision++;
-        while(format[++i] >= '0' && format[i] <= '9')
-            flags->precision = flags->precision * 10 + (format[i] - '0');
+        format++;
+        while(*format >= '0' && *format <= '9')
+            flags->precision = flags->precision * 10 + (*format - '0');
     }
-    return (i);
+    return (format);
 }
 
 /*
@@ -86,32 +90,27 @@ static int  ft_flags_check(char *format, t_flags *flags, int i)
 */
 int ft_printf(char *format, ...)
 {
-    int         i;
     int         char_count;
     t_arg       arg[1];
     t_flags     flags[1];
     t_modifier  modifier[1];
 
-    i = 0;
     char_count = 0;
     va_start(arg->arg, format);
-    while(format[i] != '\0')
+    while(*format != '\0')
     {
-        if (format[i] != '%')
-        {
-            char_count++;
-            // printf("[%c]", format[i]);
-            ft_putchar(format[i]);
-        }
+        if (*format != '%')
+            char_count += write(1, format, 1);
         else
         {
             ft_init_struct(flags, modifier);
-            i = ft_flags_check(format, flags, i);
-            i = ft_modifier_check(format, modifier, i);
-            arg->specifier = format[i];
+            format = ft_flags_check(format, flags);
+            format = ft_modifier_check(format, modifier);
+            // printf("[%c]\n", *format);
+            arg->specifier = *format;
             char_count += ft_arg_filter(arg, flags, modifier);
         }
-        i++;
+        format++;
     }
     va_end(arg->arg);
     return (char_count); // This will not be accurate

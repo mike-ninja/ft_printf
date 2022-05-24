@@ -17,6 +17,7 @@ static char	*second_percent(unsigned int c)
 	char *ret;
 
 	ret = NULL;
+	// printf("This happens [%c]\n", c);
 	if (c == '%')
 		ret = ft_strdup("%");
 	return (ret);
@@ -28,14 +29,10 @@ char	*ft_char_convert(unsigned int c, t_flags *flags)
 	char	*ret;
 	char	*width;
 
-	width = ft_min_width_generator(flags);
 	ret = second_percent(c);
 	if (ret)
-	{
-		if (width)
-			ft_width_joiner(width, ret, flags, 1);
 		return (ret);
-	}
+	width = ft_min_width_generator(flags);
 	if (flags->width)
 		len = flags->width;
 	else
