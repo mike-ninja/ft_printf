@@ -46,8 +46,8 @@ typedef struct s_arg
 
 int		ft_printf(char *format, ...);
 char     *ft_min_width_generator(t_flags *flags);
-char	*ft_str_convert(char *str, t_flags *flags);
-char    *ft_char_convert(unsigned int c, t_flags *flags);
+int		ft_str_convert(char *str, t_flags *flags);
+int    ft_char_convert(unsigned int c, t_flags *flags);
 int		ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod);
 char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod);
 void	ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len);

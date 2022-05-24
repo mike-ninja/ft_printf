@@ -10,8 +10,8 @@ int     main(void)
     // printf("[%i]\n", printf("[%o]\n", 2500));
     // printf("\n\n");
 
-    printf("[%i]\n", ft_printf("Hello Mike %-05%"));
-    printf("[%i]\n", printf("Hello Mike %-05%"));
+    printf("[%i]\n", ft_printf("[%012.13s]\n", "string"));
+    printf("[%i]\n", printf("[%012.13s]\n", "string"));
     printf("\n\n");
 
     // printf("[%i]\n", ft_printf("@moulitest: %#.o %#.0o", 0, 0));

@@ -12,32 +12,80 @@
 
 #include "../incs/ft_printf.h"
 
-char	*ft_str_convert(char *str, t_flags *flags)
+// char	*ft_str_convert(char *str, t_flags *flags)
+// {
+// 	char	*ret;
+// 	char	*width;
+// 	int		str_len;
+// 	int		tmp;
+// 	int		int_ret;
+
+// 	int_ret = 0;
+// 	ret = NULL;
+// 	if (str)
+// 	{
+// 		width = ft_min_width_generator(flags);
+// 		str_len = (int)ft_strlen(str);
+// 		if (flags->precision > 0 && flags->precision < str_len)
+// 			str_len = flags->precision;
+// 		tmp = str_len;
+// 		ret = (char *)malloc(sizeof(char) * str_len + 1);
+// 		if (ret)
+// 		{
+// 			ret[str_len] = '\0';
+// 			while (str_len--)
+// 				ret[str_len] = str[str_len];
+// 			if (width)
+// 				ft_width_joiner(width, ret, flags, tmp);
+// 		}
+// 	}
+// 	else
+// 		ret = ft_strdup("(null)");
+// 	return (ret);
+// 
+
+
+int	ft_str_convert(char *str, t_flags *flags)
 {
-	char	*ret;
-	char	*width;
-	int		str_len;
+	int		ret;
 	int		tmp;
 
-	ret = NULL;
-	if (str)
+	ret = 0;
+	if (flags->minus)
 	{
-		width = ft_min_width_generator(flags);
-		str_len = (int)ft_strlen(str);
-		if (flags->precision > 0 && flags->precision < str_len)
-			str_len = flags->precision;
-		tmp = str_len;
-		ret = (char *)malloc(sizeof(char) * str_len + 1);
-		if (ret)
+		if (flags->precision)
+			tmp = ret;
+		while (*str != '\0')
 		{
-			ret[str_len] = '\0';
-			while (str_len--)
-				ret[str_len] = str[str_len];
-			if (width)
-				ft_width_joiner(width, ret, flags, tmp);
+			ret += write(1, str, 1);
+			if ((ret - tmp) == flags->precision)
+				break;
+			str++;
 		}
 	}
-	else
-		ret = ft_strdup("(null)");
+	if (flags->width)
+	{
+		if (!flags->minus)
+			tmp = flags->width - (int)ft_strlen(str);
+		else
+			tmp = ret;
+		while ((--flags->width - tmp) >= 0)
+			ret += write(1, " ", 1);
+	}
+	if (!flags->minus)
+	{
+		if (flags->precision)
+			tmp = ret;
+		while (*str != '\0')
+		{
+			ret += write(1, str, 1);
+			if ((ret - tmp) == flags->precision)
+				break;
+			str++;
+		}
+	}
 	return (ret);
 }
+
+
+	

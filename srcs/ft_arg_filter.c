@@ -33,16 +33,16 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 	if (arg->specifier == 'c')
 	{
 		c = va_arg(arg->arg, signed int);
-		str = ft_char_convert(c, flags);
+		ret += ft_char_convert(c, flags);
 		if (!c)
 			ret++;
 	}
 	if (arg->specifier == 's')
-		str = ft_str_convert(va_arg(arg->arg, char *), flags);
+		ret += ft_str_convert(va_arg(arg->arg, char *), flags);
 	if (arg->specifier == 'p')
 		str = ft_address_convert(arg, flags);
 	if (arg->specifier == '%')
-		str = ft_char_convert('%', flags);
+		ret += write(1, "%", 1);
 	if (ft_strchr("diouxXf", arg->specifier))
 		str = ft_nbr_converter(arg, flags, mod);
 	if (str)
@@ -54,7 +54,6 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 	else
 	{
 		ft_putstr("\0");
-		ret++;
 	}
 		
 	return (ret);

@@ -78,7 +78,10 @@ static char  *ft_flags_check(char *format, t_flags *flags)
         flags->precision++;
         format++;
         while(*format >= '0' && *format <= '9')
+        {
             flags->precision = flags->precision * 10 + (*format - '0');
+            format++;
+        }
     }
     return (format);
 }
