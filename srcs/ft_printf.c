@@ -109,7 +109,6 @@ int ft_printf(char *format, ...)
             ft_init_struct(flags, modifier);
             format = ft_flags_check(format, flags);
             format = ft_modifier_check(format, modifier);
-            // printf("[%c]\n", *format);
             arg->specifier = *format;
             char_count += ft_arg_filter(arg, flags, modifier);
         }

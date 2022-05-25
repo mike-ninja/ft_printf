@@ -183,12 +183,16 @@
 //     return (ret);
 // }
 
-int ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
+// void    flag_input(t_flags *flags, char c)
+// {   
+//     if ((c == 'd' || c == 'i') && flags->precision > flags->width)
+//         flags->precision = -1;
+// }
+
+static char *option_a(t_arg *arg, t_modifier *mod)
 {
-    int     ret;
-    char    *str; 
-    
-    ret = 0;
+    char *str;
+
     str = NULL;
     if (arg->specifier == 'd' || arg->specifier == 'i')
     {
@@ -203,7 +207,30 @@ int ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
         if (mod->mod == 5)
             str = ft_llitoa_base(va_arg(arg->arg, long long), 10);
     }
-    if (arg->specifier == 'o')
+    if (arg->specifier == 'u')
+    {
+        if (mod->mod == 0)
+            str = ft_itoa_base(va_arg(arg->arg, int), 10);
+        if (mod->mod == 1)
+            str = ft_itoa_base((short)va_arg(arg->arg, int), 10);
+        if (mod->mod == 2)
+            str = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 10);
+        if (mod->mod == 3)
+            str = ft_litoa_base(va_arg(arg->arg, long), 10);
+        if (mod->mod == 5)
+            str = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 10);
+    }
+    return (str);
+}
+
+static char *option_b(t_arg *arg, t_modifier *mod)
+{
+    char *str;
+    char *tmp;
+
+    str = NULL;
+    tmp = NULL;
+     if (arg->specifier == 'o')
     {
         if (mod->mod == 0)
             str = ft_itoa_base(va_arg(arg->arg, int), 8);
@@ -228,20 +255,24 @@ int ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
             str = ft_litoa_base(va_arg(arg->arg, long), 16);
         if (mod->mod == 5)
             str = ft_llitoa_base(va_arg(arg->arg, long long), 16);
+        if (arg->specifier == 'X')
+        {
+            tmp = str;
+            while (*tmp != '\0')
+            {
+                *tmp = ft_toupper(*tmp);
+                tmp++;
+            }
+        }
     }
-    if (arg->specifier == 'u')
-    {
-        if (mod->mod == 0)
-            str = ft_itoa_base(va_arg(arg->arg, int), 10);
-        if (mod->mod == 1)
-            str = ft_itoa_base((short)va_arg(arg->arg, int), 10);
-        if (mod->mod == 2)
-            str = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 10);
-        if (mod->mod == 3)
-            str = ft_litoa_base(va_arg(arg->arg, long), 10);
-        if (mod->mod == 5)
-            str = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 10);
-    }
+    return (str);
+}
+
+static char *option_f(t_arg *arg, t_flags *flags)
+{
+    char *str;
+
+    str = NULL;
     if (arg->specifier == 'f')
     {
         if (flags->dot > 0 && flags->precision == 0)
@@ -249,9 +280,25 @@ int ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
         else
             str = ft_float_convert(va_arg(arg->arg, double), flags);
     }
+    return (str);
+}
+
+int ft_diouxX_converter(t_arg *arg, t_flags *flags, t_modifier *mod)
+{
+    int     ret;
+    char    *str; 
+
+    ret = 0;
+    if (arg->specifier == 'd' || arg->specifier == 'i' || arg->specifier == 'u')
+        str = option_a(arg, mod);
+    if (arg->specifier == 'o' || arg->specifier == 'x' || arg->specifier == 'X')
+        str = option_b(arg, mod);
+    if (arg->specifier == 'f')
+        str = option_f(arg, flags);
     if (str)
     {
-        ret	+= ft_nbr_printer(str, flags);
+        // flag_input(flags, arg->specifier);
+        ret	+= ft_nbr_convert(str, flags);
         free(str);
     }
     return (ret);

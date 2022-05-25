@@ -49,13 +49,13 @@ char     *ft_min_width_generator(t_flags *flags);
 int		ft_str_convert(char *str, t_flags *flags);
 int    ft_char_convert(unsigned int c, t_flags *flags);
 int		ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod);
-int		ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod);
+int		ft_diouxX_converter(t_arg *arg, t_flags *flags, t_modifier *mod);
 void	ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len);
 
 //Restructure
 
 int	ft_printer(char *str, t_flags *flags);
-int	ft_nbr_printer(char *str, t_flags *flags);
+int	ft_nbr_convert(char *str, t_flags *flags);
 char *ft_float_convert(double nbr, t_flags *flags);
 
 #endif
