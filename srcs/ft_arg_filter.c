@@ -3,23 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arg_filter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:26:57 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/16 10:40:59 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:54:03 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-static char	*ft_address_convert(t_arg *arg, t_flags *flags)
+static int	ft_address_convert(t_arg *arg, t_flags *flags)
 {
-	char	*ret;
+	char	*str;
+	char	*hex;
 
-	ret = NULL;
-	ret = ft_strjoin("0x", ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 16));
-	ft_width_joiner(ft_min_width_generator(flags), ret, flags, ft_strlen(ret));
-	return (ret);
+	str = NULL;
+	hex = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 16);
+	if (hex)
+	{
+		str = ft_strjoin("0x", hex);
+		free(hex);
+	}
+	return (ft_str_convert(str, flags));
 }
 
 int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
@@ -40,7 +45,7 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 	if (arg->specifier == 's')
 		ret += ft_str_convert(va_arg(arg->arg, char *), flags);
 	if (arg->specifier == 'p')
-		str = ft_address_convert(arg, flags);
+		ret += ft_address_convert(arg, flags);
 	if (arg->specifier == '%')
 		ret += write(1, "%", 1);
 	if (ft_strchr("diouxXf", arg->specifier))

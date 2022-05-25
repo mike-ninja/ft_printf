@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_convert.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:35:48 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/16 10:34:37 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:49:58 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,38 +52,18 @@ int	ft_str_convert(char *str, t_flags *flags)
 
 	ret = 0;
 	if (flags->minus)
-	{
-		if (flags->precision)
-			tmp = ret;
-		while (*str != '\0')
-		{
-			ret += write(1, str, 1);
-			if ((ret - tmp) == flags->precision)
-				break;
-			str++;
-		}
-	}
+		ret += ft_printer(str, flags);
 	if (flags->width)
 	{
 		if (!flags->minus)
-			tmp = flags->width - (int)ft_strlen(str);
+			tmp = (int)ft_strlen(str);
 		else
 			tmp = ret;
 		while ((--flags->width - tmp) >= 0)
 			ret += write(1, " ", 1);
 	}
 	if (!flags->minus)
-	{
-		if (flags->precision)
-			tmp = ret;
-		while (*str != '\0')
-		{
-			ret += write(1, str, 1);
-			if ((ret - tmp) == flags->precision)
-				break;
-			str++;
-		}
-	}
+		ret += ft_printer(str, flags);
 	return (ret);
 }
 
