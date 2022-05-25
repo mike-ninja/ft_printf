@@ -9,16 +9,16 @@ int     main(void)
     // printf("[%i]\n", ft_printf("[%o]\n", 2500));
     // printf("[%i]\n", printf("[%o]\n", 2500));
     // printf("\n\n");
-    char *i;
+    // char *i;
 
-    i = ft_strdup("Hello\n");
+    // i = ft_strdup("Hello\n");
     // printf("[%i]\n", ft_printf("[%21s][%s]\n", "Strings", "Some"));
     // printf("[%i]\n", printf("[%21s][%s]\n", "Strings", "Some"));
     // printf("\n\n");
-    printf("[%i]\n", ft_printf("[%#p]\n", i));
-    printf("[%i]\n", printf("[%#p]\n", i));
+    printf("[%i]\n", ft_printf("[%i]\n", 25));
+    printf("[%i]\n", printf("[%i]\n", 25));
     printf("\n\n");
-    free(i);
+    // free(i);
 
     // printf("[%i]\n", ft_printf("[%21.8s]\n", "Strings"));
     // printf("[%i]\n", printf("[%21.8s]\n", "Strings"));

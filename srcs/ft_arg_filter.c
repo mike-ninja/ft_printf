@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:26:57 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/25 13:54:03 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/25 14:59:15 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static int	ft_address_convert(t_arg *arg, t_flags *flags)
 
 int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
-	char	*str;
+	// char	*str;
 	int		ret;
 	int		c;
 
 	ret = 0;
-	str = NULL;
+	// str = NULL;
 	if (arg->specifier == 'c')
 	{
 		c = va_arg(arg->arg, signed int);
@@ -49,17 +49,16 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 	if (arg->specifier == '%')
 		ret += write(1, "%", 1);
 	if (ft_strchr("diouxXf", arg->specifier))
-		str = ft_nbr_converter(arg, flags, mod);
-	if (str)
-	{
-		ft_putstr(str);
-		ret += ft_strlen(str);
-		free(str);
-	}
-	else
-	{
-		ft_putstr("\0");
-	}
-		
+		ret += ft_nbr_converter(arg, flags, mod);
+	// if (str)
+	// {
+	// 	ft_putstr(str);
+	// 	ret += ft_strlen(str);
+	// 	free(str);
+	// }
+	// else
+	// {
+	// 	ft_putstr("\0");
+	// }
 	return (ret);
 }

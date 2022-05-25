@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/25 13:32:29 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/25 15:04:34 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ char     *ft_min_width_generator(t_flags *flags);
 int		ft_str_convert(char *str, t_flags *flags);
 int    ft_char_convert(unsigned int c, t_flags *flags);
 int		ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod);
-char    *ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod);
+int		ft_nbr_converter(t_arg *arg, t_flags *flags, t_modifier *mod);
 void	ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len);
 
 //Restructure
 
 int	ft_printer(char *str, t_flags *flags);
+int	ft_nbr_printer(char *str, t_flags *flags);
+char *ft_float_convert(double nbr, t_flags *flags);
 
 #endif
