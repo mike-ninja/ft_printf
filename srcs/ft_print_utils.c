@@ -43,18 +43,32 @@ int ft_diu_printer(char *str, t_flags *flags, int len)
 int ft_x_printer(char *str, t_flags *flags, int len, char speci)
 {
 	int	ret;
+
 	ret = 0;
-	if (flags->hash)
+
+	if (flags->hash && !flags->zero)
 	{
-		if (speci == 'X')
-			ret += write(1, "0X", 2);
-		else
-			ret += write(1, "0x", 2);
+		if (len != 1 || *str != '0')
+		{
+			if (speci == 'X')
+				ret += write(1, "0X", 2);
+			else
+				ret += write(1, "0x", 2);
+		}
 	}
-	while (flags->precision > len++)
-		ret += write(1, "0", 1);
+	if (flags->precision)
+		while (flags->precision > len++)
+			ret += write(1, "0", 1);
+	//if (flags->zero)
+	//{
+	
+	//	while (flags->width > len++)
+	//		ret += write(1, "0", 1);
+	//}
 	while (*str != '\0')
 	{
+		if (flags->precision == 0)
+			break;
 		ret += write(1, str, 1);
 		str++;
 	}
@@ -65,6 +79,9 @@ int ft_o_printer(char *str, t_flags *flags, int len)
 {
 	int	ret;
 	ret = 0;
+
+	if (flags->hash)
+		ret += write(1, "0", 1);
 	while (flags->precision > len++)
 		ret += write(1, "0", 1);
 	while (*str != '\0')

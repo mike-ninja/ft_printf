@@ -52,27 +52,32 @@ int	ft_str_convert(char *str, t_flags *flags)
 	int		len;
 
 	ret = 0;
-	if (flags->minus)
-		ret += ft_printer(str, flags);
-	if (flags->width)
+	if (str)
 	{
-		if (!flags->minus)
+		if (flags->minus)
+			ret += ft_printer(str, flags);
+		if (flags->width)
 		{
-			len = (int)ft_strlen(str);
-			
-			if (flags->precision > 0 && flags->precision < len)
-				tmp = len - flags->precision;
+			if (!flags->minus)
+			{
+				len = (int)ft_strlen(str);
+				
+				if (flags->precision > 0 && flags->precision < len)
+					tmp = len - flags->precision;
+				else
+					tmp = len;
+			}
 			else
-				tmp = len;
+				tmp = ret;
+			// printf("[%i]\n", tmp);
+			while ((--flags->width - tmp) >= 0)
+				ret += write(1, " ", 1);
 		}
-		else
-			tmp = ret;
-		// printf("[%i]\n", tmp);
-		while ((--flags->width - tmp) >= 0)
-			ret += write(1, " ", 1);
+		if (!flags->minus)
+			ret += ft_printer(str, flags);
 	}
-	if (!flags->minus)
-		ret += ft_printer(str, flags);
+	else
+		ret += write(1, "(null)", 6);
 	return (ret);
 }
 
