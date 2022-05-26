@@ -43,7 +43,7 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 	if (arg->specifier == '%')
 		ret += write(1, "%", 1);
 	if (ft_strchr("diouxXf", arg->specifier))
-		ret += ft_diouxX_converter(arg, flags, mod);
+		ret += ft_diouxf_filter(arg, flags, mod);
 	// if (str)
 	// {
 	// 	ft_putstr(str);

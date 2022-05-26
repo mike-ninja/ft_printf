@@ -15,9 +15,14 @@ int     main(void)
     // printf("[%i]\n", ft_printf("[%21s][%s]\n", "Strings", "Some"));
     // printf("[%i]\n", printf("[%21s][%s]\n", "Strings", "Some"));
     // printf("\n\n");
-    printf("[%i]\n", ft_printf("[%20X]\n", 42));
-    printf("[%i]\n", printf("[%20X]\n", 42));
+    printf("[%i]\n", ft_printf("[%-#23X]", 42));
+    printf("[%i]\n", printf("[%-#23X]", 42));
     printf("\n\n");
+
+    printf("[%i]\n", ft_printf("[%#020x]", 42));
+    printf("[%i]\n", printf("[%#020x]", 42));
+    printf("\n\n");
+
     // free(i);
 
     // printf("[%i]\n", ft_printf("[%21.8s]\n", "Strings"));

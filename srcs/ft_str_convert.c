@@ -49,6 +49,7 @@ int	ft_str_convert(char *str, t_flags *flags)
 {
 	int		ret;
 	int		tmp;
+	int		len;
 
 	ret = 0;
 	if (flags->minus)
@@ -56,9 +57,17 @@ int	ft_str_convert(char *str, t_flags *flags)
 	if (flags->width)
 	{
 		if (!flags->minus)
-			tmp = (int)ft_strlen(str);
+		{
+			len = (int)ft_strlen(str);
+			
+			if (flags->precision > 0 && flags->precision < len)
+				tmp = len - flags->precision;
+			else
+				tmp = len;
+		}
 		else
 			tmp = ret;
+		// printf("[%i]\n", tmp);
 		while ((--flags->width - tmp) >= 0)
 			ret += write(1, " ", 1);
 	}

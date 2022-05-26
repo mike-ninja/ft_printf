@@ -53,7 +53,7 @@ static void ft_banker_round(char *ret, double nbr, int index)
         ret[--index]++;
 }
 
-char *ft_float_convert(double nbr, t_flags *flags)
+char *ft_float(double nbr, t_flags *flags)
 {
     char    *ret;
     char    *tmp;

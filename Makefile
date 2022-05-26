@@ -38,14 +38,12 @@ WHITE = \033[0;97m
 
 SRC_FILES	=	ft_arg_filter
 SRC_FILES	+=	ft_char_convert
-SRC_FILES	+=	ft_min_width_generator
-SRC_FILES	+=	ft_diouxX_converter
+SRC_FILES	+=	ft_diouxf_convert
+SRC_FILES	+=	ft_diouxf_filter
+SRC_FILES	+=	ft_float
 SRC_FILES	+=	ft_printf
 SRC_FILES	+=	ft_str_convert
-SRC_FILES	+=	ft_width_joiner
-SRC_FILES	+=	ft_utils
-SRC_FILES	+=	ft_float_convert
-
+SRC_FILES	+=	ft_print_utils
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))

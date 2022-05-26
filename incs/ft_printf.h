@@ -44,18 +44,30 @@ typedef struct s_arg
 
 #define U_LLONG unsigned long long
 
-int		ft_printf(char *format, ...);
-char     *ft_min_width_generator(t_flags *flags);
+char    *ft_min_width_generator(t_flags *flags);
 int		ft_str_convert(char *str, t_flags *flags);
-int    ft_char_convert(unsigned int c, t_flags *flags);
+int		ft_char_convert(unsigned int c, t_flags *flags);
 int		ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod);
-int		ft_diouxX_converter(t_arg *arg, t_flags *flags, t_modifier *mod);
+int		ft_diouxf_filter(t_arg *arg, t_flags *flags, t_modifier *mod);
 void	ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len);
 
 //Restructure
 
 int	ft_printer(char *str, t_flags *flags);
 int	ft_nbr_convert(char *str, t_flags *flags);
-char *ft_float_convert(double nbr, t_flags *flags);
+char *ft_float(double nbr, t_flags *flags);
+
+// dioux convert
+int	ft_diu_convert(char *str, t_flags *flags);
+int	ft_x_convert(char *str, t_flags *flags, char speci);
+int	ft_o_convert(char *str, t_flags *flags);
+int	ft_f_convert(char *str, t_flags *flags);
+
+// print_utils
+int		ft_printf(char *format, ...);
+int ft_diu_printer(char *str, t_flags *flags, int len);
+int ft_x_printer(char *str, t_flags *flags, int len, char speci);
+int ft_o_printer(char *str, t_flags *flags, int len);
+int ft_f_printer(char *str, t_flags *flags, int len);
 
 #endif
