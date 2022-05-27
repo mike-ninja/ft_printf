@@ -7,15 +7,24 @@ int	ft_diu_convert(char *str, t_flags *flags)
 	int	len;
 	
 	ret = 0;
+	tmp = 0;
 	len = (int)ft_strlen(str);
 	if (flags->minus)
 		ret += ft_diu_printer(str, flags, len);
+	if (flags->plus || *str == '-')
+	{
+		if (*str != '-')
+			ret += write(1, "+", 1);
+		else
+			ret += write(1, "-", 1);
+		tmp++;
+	}
 	if (flags->width)
 	{
 		if (!flags->minus)
-			tmp = len;
+			tmp += len;
 		else
-			tmp = ret;
+			tmp += ret;
 		if (flags->precision > len)
 			tmp = flags->precision;
 		while ((--flags->width - tmp) >= 0)
