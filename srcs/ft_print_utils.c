@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:21:05 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/27 14:26:39 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/27 14:51:51 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ int ft_diu_printer(char *str, t_flags *flags, int len)
 		ret += write(1, "0", 1);
 	if (flags->space && !flags->plus && *str != '-')
 		ret += write(1, " ", 1);
-	// if (flags->plus && *str != '-')
-	// 	ret += write(1, "+", 1);
+	if (flags->plus && *str != '-' && !flags->zero)
+		ret += write(1, "+", 1);
 	while (flags->precision > len++)
 		ret += write(1, "0", 1);
 	while (*str != '\0')
 	{
 		if (flags->precision == 0)
 			break;
-		if (flags->width && *str == '-')
+		if (flags->zero && flags->width && !flags->minus && *str == '-')
 			str++;
 		ret += write(1, str, 1);
 		str++;

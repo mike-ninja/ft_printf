@@ -19,8 +19,16 @@ int     main(void)
     //printf("[%i]\n", printf("[%-#23X]", 42));
     //printf("\n\n");
 
-    printf("[%i]\n", ft_printf("%05d", -42));
-    printf("[%i]\n", printf("%05d", -42));
+    // printf("[%i]\n", ft_printf("%05d", -42));
+    // printf("[%i]\n", printf("%05d", -42));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("%05d", 42));
+    // printf("[%i]\n", printf("%05d", 42));
+    // printf("\n\n");
+
+    printf("[%i]\n", ft_printf("%lld", -9223372036854775808));
+    printf("[%i]\n", printf("%lld", -9223372036854775808));
     printf("\n\n");
 
     // printf("[%i]\n", ft_printf("%+05d", 42));

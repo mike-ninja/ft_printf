@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nbr_convert.c                                   :+:      :+:    :+:   */
+/*   ft_diouxf_filter.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/25 15:04:49 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/27 15:06:17 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ static char *option_a(t_arg *arg, t_modifier *mod)
 		if (mod->mod == 1)
 			str = ft_itoa_base((short)va_arg(arg->arg, int), 10);
 		if (mod->mod == 2)
-			str = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 10);
+			str = ft_itoa_base((signed char)va_arg(arg->arg, int), 10);
 		if (mod->mod == 3)
 			str = ft_litoa_base(va_arg(arg->arg, long), 10);
 		if (mod->mod == 5)

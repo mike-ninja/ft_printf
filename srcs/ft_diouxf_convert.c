@@ -11,12 +11,15 @@ int	ft_diu_convert(char *str, t_flags *flags)
 	len = (int)ft_strlen(str);
 	if (flags->minus)
 		ret += ft_diu_printer(str, flags, len);
-	if (flags->plus || *str == '-')
+	if ((flags->plus || *str == '-') && flags->zero && !flags->minus)
 	{
 		if (*str != '-')
 			ret += write(1, "+", 1);
-		else
+		if (flags->width && *str == '-')
+		{
 			ret += write(1, "-", 1);
+			len--;
+		}
 		tmp++;
 	}
 	if (flags->width)
