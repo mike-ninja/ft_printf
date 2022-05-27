@@ -19,8 +19,8 @@ int     main(void)
     //printf("[%i]\n", printf("[%-#23X]", 42));
     //printf("\n\n");
 
-    printf("[%i]\n", ft_printf("%o", 2500));
-    printf("[%i]\n", printf("%o", 2500));
+    printf("[%i]\n", ft_printf("%+ d", 42));
+    printf("[%i]\n", printf("%+ d", 42));
     printf("\n\n");
     
     // free(i);
@@ -36,12 +36,12 @@ int     main(void)
     // printf("[%i]\n", ft_printf("[%-21.25s]\n", "Strings"));
     // printf("[%i]\n", printf("[%-21.25s]\n", "Strings"));
     // printf("\n\n");
-    // printf("[%i]\n", ft_printf("@moulitest: %#.o %#.0o", 0, 0));
-    // printf("[%i]\n", printf("@moulitest: %#.o %#.0o", 0, 0));
+    // printf("[%i]\n", ft_printf(% +d", 42));
+    // printf("[%i]\n", printf(% +d", 42));
     // printf("\n\n");
 
-    // printf("[%i]\n", ft_printf("% d", 42));
-    // printf("[%i]\n", printf("% d", 42));
+    // printf("[%i]\n", ft_printf(% +d", 42));
+    // printf("[%i]\n", printf(% +d", 42));
     // printf("\n\n");
 
 

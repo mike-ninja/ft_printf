@@ -12,46 +12,9 @@
 
 #include "../incs/ft_printf.h"
 
-// static char	*second_percent(unsigned int c)
-// {
-// 	char *ret;
-
-// 	ret = NULL;
-// 	// printf("This happens [%c]\n", c);
-// 	if (c == '%')
-// 		ret = ft_strdup("%");
-// 	return (ret);
-// }
-
-// char	*ft_char_convert(unsigned int c, t_flags *flags)
-// {
-// 	int		len;
-// 	char	*ret;
-// 	char	*width;
-
-// 	ret = second_percent(c);
-// 	if (ret)
-// 		return (ret);
-// 	width = ft_min_width_generator(flags);
-// 	if (flags->width)
-// 		len = flags->width;
-// 	else
-// 		len = 1;
-// 	ret = (char *)malloc(sizeof(char) * len + 1);
-// 	if (ret)
-// 	{
-// 		ret[len] = '\0';
-// 		ret[0] = c;
-// 		if (width)
-// 			ft_width_joiner(width, ret, flags, 1);
-// 		return (ret);
-// 	}
-// 	return (NULL);
-// }
-
-int ft_char_convert(unsigned int c, t_flags *flags)
+int	ft_char_convert(unsigned int c, t_flags *flags)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (c)
@@ -71,6 +34,5 @@ int ft_char_convert(unsigned int c, t_flags *flags)
 				ret += write(1, " ", 1);
 		ret += write(1, "\0", 1);
 	}
-		
 	return (ret);
 }

@@ -29,11 +29,9 @@ static int	ft_address_convert(t_arg *arg, t_flags *flags)
 
 int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
-	// char	*str;
 	int		ret;
 
 	ret = 0;
-	// str = NULL;
 	if (arg->specifier == 'c')
 		ret += ft_char_convert(va_arg(arg->arg, signed int), flags);
 	if (arg->specifier == 's')
@@ -44,15 +42,5 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 		ret += write(1, "%", 1);
 	if (ft_strchr("diouxXf", arg->specifier))
 		ret += ft_diouxf_filter(arg, flags, mod);
-	// if (str)
-	// {
-	// 	ft_putstr(str);
-	// 	ret += ft_strlen(str);
-	// 	free(str);
-	// }
-	// else
-	// {
-	// 	ft_putstr("\0");
-	// }
 	return (ret);
 }

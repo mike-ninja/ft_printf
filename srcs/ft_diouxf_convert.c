@@ -98,18 +98,25 @@ int	ft_o_convert(char *str, t_flags *flags)
 	int	len;
 	
 	ret = 0;
+	tmp = 0;
 	len = (int)ft_strlen(str);
 	if (flags->minus)
 		ret += ft_o_printer(str, flags, len);
 	if (flags->width)
 	{
 		if (!flags->minus)
+		{
 			tmp = len;
+			if (flags->hash)
+				tmp++;
+		}	
 		else
 			tmp = ret;
 		if (flags->precision > len)
 			tmp = flags->precision;
-		while ((--flags->width - tmp - flags->hash) >= 0)
+		if (flags->precision == 0)
+			tmp = 0;
+		while ((--flags->width - tmp) >= 0)
 		{
 			if (flags->zero && !flags->minus)
 				ret += write(1, "0", 1);
