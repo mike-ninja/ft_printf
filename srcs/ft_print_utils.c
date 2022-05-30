@@ -33,10 +33,11 @@ int ft_diu_printer(char *str, t_flags *flags, int len)
 	ret = 0;
 	if (flags->hash)
 		ret += write(1, "0", 1);
-	if (flags->space && !flags->plus && *str != '-')
-		ret += write(1, " ", 1);
-	if (flags->plus && *str != '-' && !flags->zero)
-		ret += write(1, "+", 1);
+	if (*str == '-')
+	{
+		str++;
+		len--;
+	}
 	while (flags->precision > len++)
 		ret += write(1, "0", 1);
 	while (*str != '\0')

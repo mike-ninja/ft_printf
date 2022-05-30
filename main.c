@@ -27,8 +27,20 @@ int     main(void)
     // printf("[%i]\n", printf("%05d", 42));
     // printf("\n\n");
 
-    printf("[%i]\n", ft_printf("%lld", -9223372036854775808));
-    printf("[%i]\n", printf("%lld", -9223372036854775808));
+    printf("[%i]\n", ft_printf("%-6d", 0));
+    printf("[%i]\n", printf("%-6d", 0));
+    printf("\n\n");
+
+    printf("[%i]\n", ft_printf("%06.3d", 0));
+    printf("[%i]\n", printf("%06.3d", 0));
+    printf("\n\n");
+
+    printf("[%i]\n", ft_printf("%06d", 0));
+    printf("[%i]\n", printf("%06d", 0));
+    printf("\n\n");
+    
+    printf("[%i]\n", ft_printf("%06.2d", -1));
+    printf("[%i]\n", printf("%06.2d", -1));
     printf("\n\n");
 
     // printf("[%i]\n", ft_printf("%+05d", 42));
