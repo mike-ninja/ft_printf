@@ -19,28 +19,12 @@ int     main(void)
     //printf("[%i]\n", printf("[%-#23X]", 42));
     //printf("\n\n");
 
-    // printf("[%i]\n", ft_printf("%05d", -42));
-    // printf("[%i]\n", printf("%05d", -42));
-    // printf("\n\n");
-
-    // printf("[%i]\n", ft_printf("%05d", 42));
-    // printf("[%i]\n", printf("%05d", 42));
-    // printf("\n\n");
-
-    printf("[%i]\n", ft_printf("%-6d", 0));
-    printf("[%i]\n", printf("%-6d", 0));
+    printf("[%i]\n", ft_printf("%-05d", -42));
+    printf("[%i]\n", printf("%-05d", -42));
     printf("\n\n");
 
-    printf("[%i]\n", ft_printf("%06.3d", 0));
-    printf("[%i]\n", printf("%06.3d", 0));
-    printf("\n\n");
-
-    printf("[%i]\n", ft_printf("%06d", 0));
-    printf("[%i]\n", printf("%06d", 0));
-    printf("\n\n");
-    
-    printf("[%i]\n", ft_printf("%06.2d", -1));
-    printf("[%i]\n", printf("%06.2d", -1));
+    printf("[%i]\n", ft_printf("%10.5d", 4242));
+    printf("[%i]\n", printf("%10.5d", 4242));
     printf("\n\n");
 
     // printf("[%i]\n", ft_printf("%+05d", 42));
