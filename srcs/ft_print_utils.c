@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:21:05 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/30 12:17:56 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/05/30 13:03:38 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int ft_diu_printer(char *str, t_flags *flags, int len)
 	ret = 0;
 	if (flags->hash)
 		ret += write(1, "0", 1);
-
+	if (flags->plus)
+		ret += write(1, "+", 1);
 	// printf("[%i]\n", flags->minus);
 	if (*str == '-')
 	{
