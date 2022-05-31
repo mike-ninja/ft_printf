@@ -108,12 +108,17 @@ static int	str_printer(t_flags *flags, char *str, int len)
 	tmp = flags->precision;
 	if (*str == '-' && flags->zero)
 		str++;
+	if (flags->precision > len && *str == '-')
+	{
+		ret += write(1, "-", 1);
+		len--;
+		str++;
+	}
+	//printf("\n[%i][%i]\n", tmp, len);
 	while (tmp-- > len)
 		ret += write(1, "0", 1);
 	while (*str != '\0')
 	{
-		if (ret == flags->precision)
-			break;
 		ret += write(1, str, 1);
 		str++;
 	}	
