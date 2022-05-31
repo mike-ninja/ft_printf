@@ -62,54 +62,86 @@ int	ft_diu_convert(char *str, t_flags *flags)
 	return (ret);
 }*/
 
+static int sign_space_print(t_flags *flags, char *str)
+{
+	int ret;
+	
+	ret = 0;
+	if (flags->plus && *str != '-')
+		ret += write(1, "+", 1);
+	if (*str == '-' && flags->zero) // This zero may not be needed
+		ret += write(1, "-", 1);
+	if (flags->space && !flags->plus)
+		ret += write(1, " ", 1);
+	return (ret);
+}
+
+static int width_printer(t_flags *flags, char *str, int len)
+{
+	int tmp;
+	int	ret;
+
+	ret = 0;
+	if (flags->precision >= 0)
+		tmp = flags->width - flags->precision;
+	else
+		tmp = flags->width - len;
+	
+	if (flags->space || (flags->plus && *str != '-'))
+		tmp--;
+	while (--tmp >= 0)
+	{
+		if (flags->zero && !flags->minus && flags->precision < len)
+			ret += write(1, "0", 1);
+		else
+			ret += write(1, " ", 1);
+	}
+	return  (ret);
+}
+
+static int	str_printer(t_flags *flags, char *str, int len)
+{
+	int ret;
+	int tmp;
+
+	ret = 0;
+	tmp = flags->precision;
+	if (*str == '-' && flags->zero)
+		str++;
+	while (tmp-- > len)
+		ret += write(1, "0", 1);
+	while (*str != '\0')
+	{
+		if (ret == flags->precision)
+			break;
+		ret += write(1, str, 1);
+		str++;
+	}	
+	return (ret);
+}
+
 int	ft_diu_convert(char *str, t_flags *flags)
 {
 	int	ret;
-	int	tmp;
 	int	len;
-	
+
 	ret = 0;
-	tmp = 0;
-	len = (int)ft_strlen(str);
+	len = ft_strlen(str);
 	if (flags->minus)
-		ret += ft_diu_printer(str, flags, len);
-	if ((flags->plus || flags->space) && *str != '-')
 	{
-		if (!flags->minus)
-		{
-			if (flags->plus)
-				ret += write(1, "+", 1);
-			if (!flags->plus && flags->space)
-				ret += write(1, " ", 1);
-		}
+		ret += sign_space_print(flags, str);
+		ret += str_printer(flags, str, len);
+		ret += width_printer(flags, str, len);
 	}
-	if (*str == '-' && flags->zero && !flags->minus)
+	else
 	{
-		ret += write(1, "-", 1);
-		len--;
-		str++;
-		tmp++;
+		if (flags->zero)
+			ret += sign_space_print(flags, str);
+		ret += width_printer(flags, str, len);
+		if (!flags->zero)
+			ret += sign_space_print(flags, str);
+		ret += str_printer(flags, str, len);
 	}
-	if (flags->width)
-	{
-		if (!flags->minus)
-			tmp += len;
-		else
-			tmp += ret;
-		if (flags->precision > len)
-			tmp = flags->precision;
-		if (flags->plus || flags->space)
-			tmp++;
-		while ((--flags->width - tmp) >= 0)
-		{
-			if (flags->zero && !flags->minus)
-				ret += write(1, "0", 1);
-			else
-				ret += write(1, " ", 1);
-		}
-	}
-	if (!flags->minus)
-		ret += ft_diu_printer(str, flags, len);
 	return (ret);
 }
 
