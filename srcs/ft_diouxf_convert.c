@@ -76,7 +76,7 @@ static int sign_space_print(t_flags *flags, char *str)
 	return (ret);
 }
 
-static int width_printer(t_flags *flags, char *str, int len)
+static int di_width_printer(t_flags *flags, char *str, int len)
 {
 	int tmp;
 	int	ret;
@@ -146,15 +146,57 @@ int	ft_diu_convert(char *str, t_flags *flags)
 	{
 		ret += sign_space_print(flags, str);
 		ret += str_printer(flags, str, len);
-		ret += width_printer(flags, str, len);
+		ret += di_width_printer(flags, str, len);
 	}
 	else
 	{
 		if (flags->zero)
 			ret += sign_space_print(flags, str);
-		ret += width_printer(flags, str, len);
+		ret += di_width_printer(flags, str, len);
 		if (!flags->zero)
 			ret += sign_space_print(flags, str);
+		ret += str_printer(flags, str, len);
+	}
+	return (ret);
+}
+
+static int u_width_printer(t_flags *flags, char *str, int len)
+{
+	int tmp;
+	int	ret;
+
+	ret = 0;
+	if (flags->precision >= 0)
+		tmp = flags->width - flags->precision;
+	else
+		tmp = flags->width - len;
+	if (*str == '-' && flags->precision > 0)
+		tmp--;
+	while (--tmp >= 0)
+	{
+		if (flags->zero && !flags->minus && flags->precision < len)
+			ret += write(1, "0", 1);
+		else
+			ret += write(1, " ", 1);
+	}
+	return  (ret);
+}
+
+int	ft_u_convert(char *str, t_flags *flags)
+{
+	int	ret;
+	int	len;
+
+	ret = 0;
+	len = ft_strlen(str);
+	if (flags->minus)
+	{
+		ret += str_printer(flags, str, len);
+		ret += u_width_printer(flags, str, len);
+	}
+	else
+	{
+		ret += u_width_printer(flags, str, len);
 		ret += str_printer(flags, str, len);
 	}
 	return (ret);

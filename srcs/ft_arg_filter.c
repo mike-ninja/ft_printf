@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arg_filter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:26:57 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/25 14:59:15 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/01 09:29:16 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 	if (arg->specifier == 'p')
 		ret += ft_address_convert(arg, flags);
 	if (arg->specifier == '%')
-		ret += write(1, "%", 1);
+		ret += ft_char_convert('%', flags);
 	if (ft_strchr("diouxXf", arg->specifier))
 		ret += ft_diouxf_filter(arg, flags, mod);
 	return (ret);

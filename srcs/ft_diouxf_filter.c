@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/30 11:13:01 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/01 09:25:41 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,13 +210,13 @@ static char *option_a(t_arg *arg, t_modifier *mod)
 	if (arg->specifier == 'u')
 	{
 		if (mod->mod == 0)
-			str = ft_itoa_base(va_arg(arg->arg, int), 10);
+			str = ft_litoa_base((unsigned)va_arg(arg->arg, int), 10);
 		if (mod->mod == 1)
 			str = ft_itoa_base((short)va_arg(arg->arg, int), 10);
 		if (mod->mod == 2)
 			str = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 10);
 		if (mod->mod == 3)
-			str = ft_litoa_base(va_arg(arg->arg, long), 10);
+			str = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 10);
 		if (mod->mod == 5)
 			str = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 10);
 	}
@@ -297,8 +297,10 @@ int ft_diouxf_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 		str = option_f(arg, flags);
 	if (str)
 	{
-		if (arg->specifier == 'd' || arg->specifier == 'i' || arg->specifier == 'u')
+		if (arg->specifier == 'd' || arg->specifier == 'i')
 			ret	+= ft_diu_convert(str, flags);
+		if (arg->specifier == 'u')
+			ret	+= ft_u_convert(str, flags);
 		if (arg->specifier == 'x' || arg->specifier == 'X')
 			ret += ft_x_convert(str, flags, arg->specifier);
 		if (arg->specifier == 'o')

@@ -101,13 +101,25 @@ int     main(void)
     // printf("[%i]\n", printf("[%5.d] [%5.0d]", 0, 0));
     // printf("\n\n");
 
-    printf("[%i]\n", ft_printf("%u", -1));
-    printf("[%i]\n", printf("%u", -1));
+    printf("[%i]\n", ft_printf("%lld", -9223372036854775808));
+    printf("[%i]\n", printf("%lld", -9223372036854775808));
     printf("\n\n");
 
-    printf("[%i]\n", ft_printf("%u", 4294967295));
-    printf("[%i]\n", printf("%u", 4294967295));
-    printf("\n\n");
+    // printf("[%i]\n", ft_printf("%5%"));
+    // printf("[%i]\n", printf("%5%"));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("%u", -1));
+    // printf("[%i]\n", printf("%u", -1));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("%5u", 4294967295));
+    // printf("[%i]\n", printf("%5u", 4294967295));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("%5u", 4294967295));
+    // printf("[%i]\n", printf("%5u", 4294967295));
+    // printf("\n\n");
 
     // free(i);
 
