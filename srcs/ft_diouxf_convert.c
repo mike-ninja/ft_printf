@@ -71,7 +71,7 @@ static int sign_space_print(t_flags *flags, char *str)
 		ret += write(1, "+", 1);
 	if (*str == '-' && flags->zero) // This zero may not be needed
 		ret += write(1, "-", 1);
-	if (flags->space && !flags->plus)
+	if (flags->space && (!flags->plus && *str != '-'))
 		ret += write(1, " ", 1);
 	return (ret);
 }
@@ -86,8 +86,9 @@ static int width_printer(t_flags *flags, char *str, int len)
 		tmp = flags->width - flags->precision;
 	else
 		tmp = flags->width - len;
-	
 	if (flags->space || (flags->plus && *str != '-'))
+		tmp--;
+	if (*str == '-' && flags->precision > 0)
 		tmp--;
 	while (--tmp >= 0)
 	{
@@ -114,7 +115,15 @@ static int	str_printer(t_flags *flags, char *str, int len)
 		len--;
 		str++;
 	}
-	//printf("\n[%i][%i]\n", tmp, len);
+	if (flags->zero) // This zero may not be needed
+	{
+		str--;
+		if (*str == '-')
+			len--;
+		str++;
+	}
+		
+	//printf("\n[%i][%i]\n", tmp, len);	
 	while (tmp-- > len)
 		ret += write(1, "0", 1);
 	while (*str != '\0')
