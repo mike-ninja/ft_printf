@@ -1,4 +1,5 @@
 #include "incs/ft_printf.h"
+#include <limits.h>
 
 int     main(void)
 {
@@ -101,9 +102,15 @@ int     main(void)
     // printf("[%i]\n", printf("[%5.d] [%5.0d]", 0, 0));
     // printf("\n\n");
 
+    // printf("[%i]\n", ft_printf("norm:%ld\n", 2147483648));
+    // printf("[%i]\n", printf("norm:%ld\n", 2147483648));
+    // printf("\n\n");
+
     printf("[%i]\n", ft_printf("%lld", -9223372036854775808));
     printf("[%i]\n", printf("%lld", -9223372036854775808));
     printf("\n\n");
+
+    printf("[%s]\n", ft_llitoa_base(-9223372036854775808, 10));
 
     // printf("[%i]\n", ft_printf("%5%"));
     // printf("[%i]\n", printf("%5%"));
