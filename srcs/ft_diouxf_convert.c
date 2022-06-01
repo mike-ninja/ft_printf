@@ -122,12 +122,13 @@ static int	str_printer(t_flags *flags, char *str, int len)
 			len--;
 		str++;
 	}
-		
 	//printf("\n[%i][%i]\n", tmp, len);	
 	while (tmp-- > len)
 		ret += write(1, "0", 1);
 	while (*str != '\0')
 	{
+		if (flags->precision == 0 && *str == '0')
+			break;
 		ret += write(1, str, 1);
 		str++;
 	}	

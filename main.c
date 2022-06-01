@@ -59,48 +59,56 @@ int     main(void)
     // printf("[%i]\n", printf("%03.2d", 1));
     // printf("\n\n");
 
-    printf("[%i]\n", ft_printf("%03.2d", -1));
-    printf("[%i]\n", printf("%03.2d", -1));
-    printf("\n\n");
-
-    printf("[%i]\n", ft_printf("%04.6d", -1));
-    printf("[%i]\n", printf("%04.6d", -1));
-    printf("\n\n");
-
-
-    printf("[%i]\n", ft_printf("%10.5d", -42));
-    printf("[%i]\n", printf("%10.5d", -42));
-    printf("\n\n");
-
-
-    printf("[%i]\n", ft_printf("%10.5d", 42));
-    printf("[%i]\n", printf("%10.5d", 42));
-    printf("\n\n");
-
-    printf("[%i]\n", ft_printf("% d", -42));
-    printf("[%i]\n", printf("% d", -42));
-    printf("\n\n");
-
-    printf("[%i]\n", ft_printf("%5d", -42));
-    printf("[%i]\n", printf("%5d", -42));
-    printf("\n\n");
-
-    printf("[%i]\n", ft_printf("%05d", -42));
-    printf("[%i]\n", printf("%05d", -42));
-    printf("\n\n");
-
-    printf("[%i]\n", ft_printf("%0+5d", -42));
-    printf("[%i]\n", printf("%0+5d", -42));
-    printf("\n\n");
-
-
-    //   printf("[%i]\n", ft_printf("@moulitest: %.d %.0d", 0, 0));
-    // printf("[%i]\n", printf("@moulitest: %.d %.0d", 0, 0));
+    // printf("[%i]\n", ft_printf("%03.2d", -1));
+    // printf("[%i]\n", printf("%03.2d", -1));
     // printf("\n\n");
 
-    //   printf("[%i]\n", ft_printf("[%5.d] [%5.0d]", 0, 0));
+    // printf("[%i]\n", ft_printf("%04.6d", -1));
+    // printf("[%i]\n", printf("%04.6d", -1));
+    // printf("\n\n");
+
+
+    // printf("[%i]\n", ft_printf("%10.5d", -42));
+    // printf("[%i]\n", printf("%10.5d", -42));
+    // printf("\n\n");
+
+
+    // printf("[%i]\n", ft_printf("%10.5d", 42));
+    // printf("[%i]\n", printf("%10.5d", 42));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("% d", -42));
+    // printf("[%i]\n", printf("% d", -42));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("%5d", -42));
+    // printf("[%i]\n", printf("%5d", -42));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("%05d", -42));
+    // printf("[%i]\n", printf("%05d", -42));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("%0+5d", -42));
+    // printf("[%i]\n", printf("%0+5d", -42));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("@moulitest: %.d %.0d", 1, 1));
+    // printf("[%i]\n", printf("@moulitest: %.d %.0d", 1, 1));
+    // printf("\n\n");
+
+    // printf("[%i]\n", ft_printf("[%5.d] [%5.0d]", 0, 0));
     // printf("[%i]\n", printf("[%5.d] [%5.0d]", 0, 0));
     // printf("\n\n");
+
+    printf("[%i]\n", ft_printf("%u", -1));
+    printf("[%i]\n", printf("%u", -1));
+    printf("\n\n");
+
+    printf("[%i]\n", ft_printf("%u", 4294967295));
+    printf("[%i]\n", printf("%u", 4294967295));
+    printf("\n\n");
+
     // free(i);
 
     // printf("[%i]\n", ft_printf("[%21.8s]\n", "Strings"));
