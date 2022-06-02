@@ -1,67 +1,5 @@
 #include "../incs/ft_printf.h"
 
-/*static int	width_printer(char *str, t_flags *flags, int len)
-{
-	int ret;
-	int	tmp;
-	
-	ret = 0;
-	tmp = 0;
-	if (flags->zero)
-		tmp++;
-	if (flags->plus || flags->space)
-		tmp++;
-	if (flags->precision >= len)
-		tmp+=flags->precision;
-	while (--flags->width > 0)
-	{
-		if (flags->minus && *str != '\0')
-			ret += write(1, str, 1);
-		else
-		{
-			if (!flags->zero)
-				write(1, " ", 1);
-			else
-				ret += write(1, "0", 1);
-		}
-			
-		if (str)
-			str++;
-	}
-		ret += write(1, "0", 1);
-	return(ret);
-}
-
-int	ft_diu_convert(char *str, t_flags *flags)
-{
-	int	ret;
-	int	tmp;
-	int	len;
-	
-	ret = 0;
-	tmp = 0;
-	len = (int)ft_strlen(str);
-	if (flags->plus || *str == '-')
-	{
-		if (*str != '-')
-			ret += write(1, "+", 1);
-		else
-			ret += write(1, "-", 1);
-		tmp++;
-	}
-	//if (flags->minus)
-	//	ret += ft_diu_printer(str, flags, len);
-	if (flags->width)
-	{
-		//printf("%%\n");
-		ret += width_printer(str, flags, len);
-	}
-		
-	//if (!flags->minus)
-	//	ret += ft_diu_printer(str, flags, len);
-	return (ret);
-}*/
-
 static int sign_space_print(t_flags *flags, char *str)
 {
 	int ret;
@@ -69,7 +7,7 @@ static int sign_space_print(t_flags *flags, char *str)
 	ret = 0;
 	if (flags->plus && *str != '-')
 		ret += write(1, "+", 1);
-	if (*str == '-' && flags->zero) // This zero may not be needed
+	if (*str == '-' && flags->zero)
 		ret += write(1, "-", 1);
 	if (flags->space && (!flags->plus && *str != '-'))
 		ret += write(1, " ", 1);
@@ -115,14 +53,13 @@ static int	str_printer(t_flags *flags, char *str, int len)
 		len--;
 		str++;
 	}
-	if (flags->zero) // This zero may not be needed
+	if (flags->zero)
 	{
 		str--;
 		if (*str == '-')
 			len--;
 		str++;
 	}
-	//printf("\n[%i][%i]\n", tmp, len);	
 	while (tmp-- > len)
 		ret += write(1, "0", 1);
 	while (*str != '\0')

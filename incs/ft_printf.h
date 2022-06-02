@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/01 09:25:13 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/01 10:51:36 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_o_convert(char *str, t_flags *flags);
 int	ft_f_convert(char *str, t_flags *flags);
 
 // print_utils
-int		ft_printf(char *format, ...);
+int	ft_printf(const char *restrict format, ...);
 int ft_diu_printer(char *str, t_flags *flags, int len);
 int ft_x_printer(char *str, t_flags *flags, int len, char speci);
 int ft_o_printer(char *str, t_flags *flags, int len);

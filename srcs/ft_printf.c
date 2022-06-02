@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/05/16 10:34:34 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/01 12:05:04 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static char	*ft_flags_check(char *format, t_flags *flags)
 	When % is encountered, ft_flag_check 
 	is called to collect all the flags and the specifier
 */
-int	ft_printf(char *format, ...)
+int	ft_printf(const char *restrict format, ...)
 {
 	int			char_count;
 	t_arg		arg[1];
@@ -114,13 +114,15 @@ int	ft_printf(char *format, ...)
 		else
 		{
 			ft_init_struct(flags, modifier);
-			format = ft_flags_check(format, flags);
-			format = ft_modifier_check(format, modifier);
+			format = ft_flags_check((char *)format, flags);
+			format = ft_modifier_check((char *)format, modifier);
 			arg->specifier = *format;
 			char_count += ft_arg_filter(arg, flags, modifier);
 		}
-		format++;
+		if (*format != '\0')
+			format++;
 	}
+	
 	va_end(arg->arg);
 	return (char_count);
 }

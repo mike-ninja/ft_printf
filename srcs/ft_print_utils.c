@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:21:05 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/01 08:56:38 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/01 13:05:42 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,9 @@ int ft_diu_printer(char *str, t_flags *flags, int len)
 		ret += write(1, "0", 1);
 	if (flags->plus)
 		ret += write(1, "+", 1);
-	// printf("[%i]\n", flags->minus);
 	if (*str == '-')
 	{
 		len--;
-		// if (flags->width < len || flags->precision > len)
-		// 	ret += write(1, "-", 1);
 		ret += write(1, "-", 1);
 		str++;
 	}
