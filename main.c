@@ -4,20 +4,24 @@
 // Float Check
 int     main(void)
 {
-    // printf("[%i]\n", ft_printf("[%f]", 42.42));
-    // printf("[%i]\n", printf("[%f]", 42.42));
+    printf("[%i]\n", ft_printf("[%Lf]", 2.5555545L));
+    printf("[%i]\n", printf("[%Lf]", 2.5555545L));
+    printf("\n");
+	// printf("[%i]\n", ft_printf("[%f]", 422.9999999));
+    // printf("[%i]\n", printf("[%f]", 422.9999999));
     // printf("\n");
-	printf("[%i]\n", ft_printf("[%f]", 2.3));
-    printf("[%i]\n", printf("[%f]", 2.3));
-    printf("\n");
 
-    printf("[%i]\n", ft_printf("[%f]", 2.99999999));
-    printf("[%i]\n", printf("[%f]", 2.99999999));
-    printf("\n");
+    // printf("[%i]\n", ft_printf("[%f]", 2.423));
+    // printf("[%i]\n", printf("[%f]", 2.423));
+    // printf("\n");
 
-    printf("[%i]\n", ft_printf("[%f]", 2.36526382));
-    printf("[%i]\n", printf("[%f]", 2.36526382));
-    printf("\n");
+    // printf("[%i]\n", ft_printf("[%f]", 2.9999999));
+    // printf("[%i]\n", printf("[%f]", 2.9999999));
+    // printf("\n");
+
+    // printf("[%i]\n", ft_printf("[%f]", 2.36526382));
+    // printf("[%i]\n", printf("[%f]", 2.36526382));
+    // printf("\n");
 	// printf("[%i]\n", ft_printf("%f\n", 2.5555545L));
     // printf("[%i]\n", printf("%f\n", 2.5555545L));
     //printf("\n");
@@ -129,3 +133,5 @@ int     main(void)
 // 	printf("[%i]", ft_printf("Test 03i: %03i", 0));
 //     return (0);
 // }
+
+// 0.00000

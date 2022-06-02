@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/01 10:51:36 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/02 13:05:22 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_width_joiner(char *min_width, char *ret, t_flags *flags, int len);
 int	ft_printer(char *str, t_flags *flags);
 int	ft_nbr_convert(char *str, t_flags *flags);
 char *ft_float(double nbr, t_flags *flags);
+char *ft_lfloat(long double nbr, t_flags *flags);
 
 // dioux convert
 int	ft_diu_convert(char *str, t_flags *flags);

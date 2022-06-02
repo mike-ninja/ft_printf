@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_diouxf_filter.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/01 13:05:30 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/02 13:06:26 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static char *option_b(t_arg *arg, t_modifier *mod)
 	return (str);
 }
 
-static char *option_f(t_arg *arg, t_flags *flags)
+static char *option_f(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
 	char *str;
 
@@ -101,7 +101,13 @@ static char *option_f(t_arg *arg, t_flags *flags)
 		if (flags->dot > 0 && flags->precision == 0)
 			str = ft_itoa_base((int)va_arg(arg->arg, double), 10);
 		else
-			str = ft_float(va_arg(arg->arg, double), flags);
+		{
+			if (mod->mod == 4)
+				str = ft_lfloat(va_arg(arg->arg, long double), flags);
+			else
+				str = ft_float(va_arg(arg->arg, double), flags);
+		}
+			
 	}
 	return (str);
 }
@@ -117,7 +123,7 @@ int ft_diouxf_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 	if (arg->specifier == 'o' || arg->specifier == 'x' || arg->specifier == 'X')
 		str = option_b(arg, mod);
 	if (arg->specifier == 'f')
-		str = option_f(arg, flags);
+		str = option_f(arg, flags, mod);
 	if (str)
 	{
 		if (arg->specifier == 'd' || arg->specifier == 'i')
