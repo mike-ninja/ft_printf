@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:56:37 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/02 13:03:43 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/02 13:32:19 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,22 @@ static char *ft_float_base(int val)
     char    *ret;
 
     len = 1;
-    tmp = val;
+    if (val < 0)
+    {
+        len++;
+        tmp = val*-1;
+    }
+    else
+        tmp = val;
     while (tmp)
     {
         len++;
         tmp /= 10;
     }
+    if (val < 0)
+        tmp = val*-1;
+    else
+        tmp = val;
     if (val == 0)
         len++;
     ret = (char *)malloc(len + 1);
@@ -34,11 +44,14 @@ static char *ft_float_base(int val)
         ret[len--] = '.';
         if (val == 0)
             ret[len] = '0';
-        while(val)
+        if (val < 0)
+            ret[0] = '-';
+        while(tmp)
         {
-            ret[len--] = (val % 10) + '0';
-            val /= 10;
-        }
+            ret[len--] = (tmp % 10) + '0';
+            tmp /= 10;
+        }   
+        // printf("-[%s]\n", ret);
         return (ret);
     }
     return (NULL);
@@ -62,7 +75,6 @@ static void ft_banker_round(char *ret, double nbr)
                 ret[index-1] = '0';
                 index--;
             }
-            
         }
         ret[index-1]++;
     }
@@ -82,6 +94,12 @@ char *ft_float(double nbr, t_flags *flags)
     first_part = NULL;
     base = (int)nbr;
     first_part = ft_float_base(base);
+    if (nbr < 0)
+    {
+        nbr *= -1;
+        base *= -1;
+    }
+        
     if (flags->precision > 0)
         len = flags->precision;
     else
@@ -91,6 +109,7 @@ char *ft_float(double nbr, t_flags *flags)
     {
         ret[len] = '\0';
         nbr = nbr - base;
+        //printf("[%f]\n", nbr);
         while (i < len)
         {
             nbr *= 10;
@@ -98,6 +117,7 @@ char *ft_float(double nbr, t_flags *flags)
             nbr -= base;
             ret[i++] = base + '0';
         }
+        // printf("[%s][%s]\n", first_part, ret);
         tmp = ft_strjoin(first_part, ret);
         ft_banker_round(tmp, nbr);
         ft_strdel(&first_part);

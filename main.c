@@ -4,8 +4,8 @@
 // Float Check
 int     main(void)
 {
-    printf("[%i]\n", ft_printf("[%Lf]", 2.5555545L));
-    printf("[%i]\n", printf("[%Lf]", 2.5555545L));
+    printf("[%i]\n", ft_printf("[%f]", 42.42));
+    printf("[%i]\n", printf("[%f]", 42.42));
     printf("\n");
 	// printf("[%i]\n", ft_printf("[%f]", 422.9999999));
     // printf("[%i]\n", printf("[%f]", 422.9999999));
