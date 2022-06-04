@@ -30,7 +30,7 @@ static int di_width_printer(t_flags *flags, char *str, int len)
 		tmp--;
 	while (--tmp >= 0)
 	{
-		if (flags->zero && !flags->minus && flags->precision < len)
+		if (flags->zero && flags->precision < len)
 			ret += write(1, "0", 1);
 		else
 			ret += write(1, " ", 1);

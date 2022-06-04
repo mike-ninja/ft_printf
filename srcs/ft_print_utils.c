@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 13:21:05 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/01 13:05:42 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:22:54 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int ft_f_printer(char *str, t_flags *flags, int len)
 {
 	int	ret;
 	ret = 0;
+	
 	while (flags->precision > len++)
 		ret += write(1, "0", 1);
 	while (*str != '\0')

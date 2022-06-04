@@ -6,7 +6,7 @@
 #    By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/07 15:11:37 by mbarutel          #+#    #+#              #
-#    Updated: 2022/05/25 15:03:32 by mbarutel         ###   ########.fr        #
+#    Updated: 2022/06/03 13:11:11 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC_FILES	+=	ft_float
 SRC_FILES	+=	ft_printf
 SRC_FILES	+=	ft_str_convert
 SRC_FILES	+=	ft_print_utils
+SRC_FILES	+=	ft_utils
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))

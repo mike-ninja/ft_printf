@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_float.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:56:37 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/02 13:32:19 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/03 12:03:27 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-static char *ft_float_base(int val)
+static char *ft_float_base(long val)
 {
     int     len;
-    int     tmp;
+    long     tmp;
     char    *ret;
 
     len = 1;
@@ -59,11 +59,12 @@ static char *ft_float_base(int val)
 
 static void ft_banker_round(char *ret, double nbr)
 {
-    double tmp;
+    int     tmp;
     int     index;
 
-    tmp = nbr*10 - nbr;
+    tmp = nbr*10;
     index = ft_strlen(ret);
+    //printf("[%d]\n", tmp);
     if (tmp >= 5)
     {
         while (ret[index-1] == '9' || ret[index-1] == '.')
@@ -85,14 +86,14 @@ char *ft_float(double nbr, t_flags *flags)
     char    *ret;
     char    *tmp;
     char    *first_part;
-    int     base;
+    long     base;
     int     len;
     int     i;
 
     i = 0;
     ret = NULL;
     first_part = NULL;
-    base = (int)nbr;
+    base = (long)nbr;
     first_part = ft_float_base(base);
     if (nbr < 0)
     {
@@ -127,19 +128,42 @@ char *ft_float(double nbr, t_flags *flags)
     return (NULL);
 }
 
+static void ft_lbanker_round(char *ret, long double nbr)
+{
+    long double tmp;
+    int     index;
+
+    tmp = nbr*10 - nbr;
+    index = ft_strlen(ret);
+    if (tmp >= 5)
+    {
+        while (ret[index-1] == '9' || ret[index-1] == '.')
+        {   
+            if (ret[index-1] == '.')
+                index--;
+            else
+            {
+                ret[index-1] = '0';
+                index--;
+            }
+        }
+        ret[index-1]++;
+    }
+}
+
 char *ft_lfloat(long double nbr, t_flags *flags)
 {
     char    *ret;
     char    *tmp;
     char    *first_part;
-    int     base;
+    long     base;
     int     len;
     int     i;
 
     i = 0;
     ret = NULL;
     first_part = NULL;
-    base = (int)nbr;
+    base = (long)nbr;
     first_part = ft_float_base(base);
     if (flags->precision > 0)
         len = flags->precision;
@@ -158,7 +182,7 @@ char *ft_lfloat(long double nbr, t_flags *flags)
             ret[i++] = base + '0';
         }
         tmp = ft_strjoin(first_part, ret);
-        ft_banker_round(tmp, nbr);
+        ft_lbanker_round(tmp, nbr);
         ft_strdel(&first_part);
         ft_strdel(&ret);
         return (tmp);

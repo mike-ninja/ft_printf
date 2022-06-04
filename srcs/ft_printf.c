@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/01 12:05:04 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/03 13:15:45 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,12 @@ int	ft_printf(const char *restrict format, ...)
 			format = ft_flags_check((char *)format, flags);
 			format = ft_modifier_check((char *)format, modifier);
 			arg->specifier = *format;
+			flags_correction(flags, arg->specifier);
 			char_count += ft_arg_filter(arg, flags, modifier);
 		}
 		if (*format != '\0')
 			format++;
 	}
-	
 	va_end(arg->arg);
 	return (char_count);
 }
