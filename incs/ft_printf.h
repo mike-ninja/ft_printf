@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/03 13:13:18 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/04 09:32:50 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char *ft_float(double nbr, t_flags *flags);
 char *ft_lfloat(long double nbr, t_flags *flags);
 
 // dioux convert
-int	ft_diu_convert(char *str, t_flags *flags);
+int	ft_diu_convert(char *str, t_flags *flags, char specifier);
 int	ft_x_convert(char *str, t_flags *flags, char speci);
 int	ft_o_convert(char *str, t_flags *flags);
 int	ft_f_convert(char *str, t_flags *flags);

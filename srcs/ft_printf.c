@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/03 13:15:45 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/05 15:49:39 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ static char	*ft_flags_check(char *format, t_flags *flags)
 */
 int	ft_printf(const char *restrict format, ...)
 {
-	int			char_count;
 	t_arg		arg[1];
 	t_flags		flags[1];
 	t_modifier	modifier[1];
+	int			char_count;
 
 	char_count = 0;
 	va_start(arg->arg, format);
@@ -119,6 +119,10 @@ int	ft_printf(const char *restrict format, ...)
 			arg->specifier = *format;
 			flags_correction(flags, arg->specifier);
 			char_count += ft_arg_filter(arg, flags, modifier);
+			// if (tmp)
+			// 	char_count += tmp;
+			// else
+			// 	char_count += write(1, format, 1);
 		}
 		if (*format != '\0')
 			format++;

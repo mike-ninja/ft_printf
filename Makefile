@@ -6,7 +6,7 @@
 #    By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/07 15:11:37 by mbarutel          #+#    #+#              #
-#    Updated: 2022/06/03 13:11:11 by mbarutel         ###   ########.fr        #
+#    Updated: 2022/06/04 21:31:28 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,5 +85,8 @@ re:			fclean all
 
 norm:
 			@norminette $(SRC) $(INCLUDE) $(LIBFT) | grep -v Norme -B1 || true
+
+libft:
+			@make re -C $(LIBFT)
 
 .PHONY:		all clean fclean re norm

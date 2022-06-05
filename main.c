@@ -4,28 +4,24 @@
 
 int     main(void)
 {
-    printf("[%i]\n", ft_printf("%010d", 97));
-    printf("[%i]\n", printf("%010d", 97));
-    printf("\n");
-
-    printf("[%i]\n", ft_printf("%#08x", 42));
-    printf("[%i]\n", printf("%#08x", 42));
-    printf("\n");
-
-    printf("[%i]\n", ft_printf("%-020.2u", 42453));
-    printf("[%i]\n", printf("%-020.2u", 42453));
-    printf("\n");
-
-    // printf("[%i]\n", ft_printf("%+d", 42));
-    // printf("[%i]\n", printf("%+d", 42));
+    // printf("[%i]\n", ft_printf("%5%"));
+    // printf("[%i]\n", printf("%5%"));
     // printf("\n");
 
-    // printf("[%i]\n", ft_printf("%+d", -42));
-    // printf("[%i]\n", printf("%+d", -42));
+    // printf("[%i]\n", ft_printf("%x", 012));
+    // printf("[%i]\n", printf("%x", 012));
     // printf("\n");
 
-    // printf("[%i]\n", ft_printf("%+ d", 42));
-    // printf("[%i]\n", printf("%+ d", 42));
+    // printf("[%i]\n", ft_printf("@moulitest: %#.x %#.2x", 0, 0));
+    // printf("[%i]\n", printf("@moulitest: %#.x %#.2x", 0, 0));
+    // printf("\n");
+
+    printf("[%i]\n", ft_printf("%jx", 4294967296));
+    printf("[%i]\n", printf("%jx", 4294967296));
+    printf("\n");
+
+    // printf("[%i]\n", ft_printf("%llu", 9223372036854775808));
+    // printf("[%i]\n", printf("%llu", 9223372036854775808));
     // printf("\n");
     
     return (0);
@@ -154,8 +150,8 @@ int     main(void)
 // 	printf("[%i]", ft_printf("Test #2.8X: %#2.8X", 42));
 // 	printf("[%i]", ft_printf("Test #08d: %#08d", 42));
 // 	printf("[%i]", ft_printf("Test #08o: %#08o", 42));
-// 	printf("[%i]", ft_printf("Test #08x: %#08x", 42));
-// 	printf("[%i]", ft_printf("Test #08X: %#08X", 42));
+// 	printf("[%i]", ft_printf("Test #08x: "%0+5d", 42));
+// 	printf("[%i]", ft_printf("Test #08X: "%0+5d", 42));
 // 	printf("[%i]", ft_printf("Test #08.2o: %#08.2o", 42));
 // 	printf("[%i]", ft_printf("Test #08.2x: %#08.2x", 42));
 // 	printf("[%i]", ft_printf("Test #08.2X: %#08.2X", 42));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_diouxf_filter.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/02 13:06:26 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/04 22:00:07 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,16 +126,17 @@ int ft_diouxf_filter(t_arg *arg, t_flags *flags, t_modifier *mod)
 		str = option_f(arg, flags, mod);
 	if (str)
 	{
-		if (arg->specifier == 'd' || arg->specifier == 'i')
-			ret	+= ft_diu_convert(str, flags);
-		if (arg->specifier == 'u')
-			ret	+= ft_u_convert(str, flags);
-		if (arg->specifier == 'x' || arg->specifier == 'X')
-			ret += ft_x_convert(str, flags, arg->specifier);
-		if (arg->specifier == 'o')
-			ret += ft_o_convert(str, flags);
-		if (arg->specifier == 'f')
-			ret += ft_f_convert(str, flags);
+		ret	+= ft_diu_convert(str, flags, arg->specifier);
+		// if (arg->specifier == 'd' || arg->specifier == 'i')
+		// 	ret	+= ft_diu_convert(str, flags);
+		// if (arg->specifier == 'u')
+		// 	ret	+= ft_u_convert(str, flags);
+		// if (arg->specifier == 'x' || arg->specifier == 'X')
+		// 	ret += ft_x_convert(str, flags, arg->specifier);
+		// if (arg->specifier == 'o')
+		// 	ret += ft_o_convert(str, flags);
+		// if (arg->specifier == 'f')
+		// 	ret += ft_f_convert(str, flags);
 		free(str);
 	}
 	return (ret);
