@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:35:48 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/01 13:06:01 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/05 15:54:02 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ int	ft_str_convert(char *str, t_flags *flags)
 			else
 				tmp = ret;
 			while ((--flags->width - tmp) >= 0)
-				ret += write(1, " ", 1);
+			{
+				if (flags->zero)
+					ret += write(1, "0", 1);
+				else
+					ret += write(1, " ", 1);
+			}
+				
 		}
 		if (!flags->minus)
 			ret += ft_printer(str, flags);

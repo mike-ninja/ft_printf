@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:10:54 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/05 15:40:58 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/05 16:03:52 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,22 @@ void flags_correction(t_flags *flags, char specifier)
 		flags->space = 0;
 		flags->plus = 0;	
 	}
+}
+
+int speci_correction(char specifier)
+{
+	char	c;
+
+	c = specifier;
+	if (c == 'c' || c == 's')
+		return (1);
+	if (c == '%' || c == 'f')
+		return (1);
+	if (c == 'd' || c == 'i')
+		return (1);
+	if (c == 'o' || c == 'u')
+		return (1);
+	if (c == 'x' || c == 'X')
+		return (1);
+	return (0);
 }

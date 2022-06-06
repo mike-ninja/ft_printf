@@ -4,9 +4,9 @@
 
 int     main(void)
 {
-    // printf("[%i]\n", ft_printf("%5%"));
-    // printf("[%i]\n", printf("%5%"));
-    // printf("\n");
+    printf("[%i]\n", ft_printf("%h"));
+    printf("[%i]\n", printf("%h"));
+    printf("\n");
 
     // printf("[%i]\n", ft_printf("%x", 012));
     // printf("[%i]\n", printf("%x", 012));

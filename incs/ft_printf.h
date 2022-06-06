@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/04 09:32:50 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/05 16:04:39 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int	ft_u_convert(char *str, t_flags *flags);
 
 // utils
 void flags_correction(t_flags *flags, char specifier);
+int speci_correction(char specifier);
 
 #endif
