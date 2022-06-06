@@ -4,24 +4,25 @@
 
 int     main(void)
 {
-    printf("[%i]\n", ft_printf("%h"));
-    printf("[%i]\n", printf("%h"));
-    printf("\n");
-
-    // printf("[%i]\n", ft_printf("%x", 012));
-    // printf("[%i]\n", printf("%x", 012));
+    // int i;
+    // printf("[%i]\n", ft_printf("%llo, %llo", 0llu, ULLONG_MAX));
+    // printf("[%i]\n", printf("%llo, %llo", 0llu, ULLONG_MAX));
     // printf("\n");
 
-    // printf("[%i]\n", ft_printf("@moulitest: %#.x %#.2x", 0, 0));
-    // printf("[%i]\n", printf("@moulitest: %#.x %#.2x", 0, 0));
+    // printf("[%i]\n", ft_printf("%#o", 0));
+    // printf("[%i]\n", printf("%#o", 0));
     // printf("\n");
 
-    printf("[%i]\n", ft_printf("%jx", 4294967296));
-    printf("[%i]\n", printf("%jx", 4294967296));
+    // printf("[%i]\n", ft_printf("@moulitest: %#.o %#.0o", 0, 0));
+    // printf("[%i]\n", printf("@moulitest: %#.o %#.0o", 0, 0));
+    // printf("\n");
+
+    printf("[%i]\n", ft_printf("%15.4s", "I am 42"));
+    printf("[%i]\n", printf("%15.4s", "I am 42"));
     printf("\n");
 
-    // printf("[%i]\n", ft_printf("%llu", 9223372036854775808));
-    // printf("[%i]\n", printf("%llu", 9223372036854775808));
+    // printf("[%i]\n", ft_printf("%03.2d", -1));
+    // printf("[%i]\n", printf("%03.2d", -1));
     // printf("\n");
     
     return (0);

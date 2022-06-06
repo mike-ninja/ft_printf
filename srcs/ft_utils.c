@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:10:54 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/05 16:03:52 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/06 12:26:00 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-void flags_correction(t_flags *flags, char specifier)
+void	flags_correction(t_flags *flags, char specifier)
 {
 	char	c;
 
@@ -31,16 +31,16 @@ void flags_correction(t_flags *flags, char specifier)
 	if (specifier == 'u')
 	{
 		flags->space = 0;
-		flags->plus = 0;	
+		flags->plus = 0;
 	}
 }
 
-int speci_correction(char specifier)
+int	speci_correction(char specifier)
 {
 	char	c;
 
 	c = specifier;
-	if (c == 'c' || c == 's')
+	if (c == 'c' || c == 's' || c == 'p')
 		return (1);
 	if (c == '%' || c == 'f')
 		return (1);

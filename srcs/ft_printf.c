@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/05 16:06:57 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/06 10:38:34 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ int	ft_printf(const char *restrict format, ...)
 				char_count += ft_arg_filter(arg, flags, modifier);
 			}
 			else
-				char_count += write(1, format, 1);
+				if (*format != '\0')
+					char_count += write(1, format, 1);
 		}
 		if (*format != '\0')
 			format++;

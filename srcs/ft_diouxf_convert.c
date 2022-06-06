@@ -3,296 +3,129 @@
 /*                                                        :::      ::::::::   */
 /*   ft_diouxf_convert.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/04 20:35:32 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/04 21:16:52 by mbarutel         ###   ########.fr       */
+/*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
+/*   Updated: 2022/06/06 12:16:51 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-static int sign_space_print(t_flags *flags, char *str, char specifier)
+static char	*option_a(t_arg *arg, t_modifier *mod)
 {
-	int ret;
-	
-	ret = 0;
-	if (flags->plus && *str != '-')
-		ret += write(1, "+", 1);
-	if (*str == '-' && flags->zero)
-		ret += write(1, "-", 1);
-	if (flags->space && (!flags->plus && *str != '-'))
-		ret += write(1, " ", 1);
-	if (flags->hash)
+	char	*str;
+
+	if (arg->specifier == 'd' || arg->specifier == 'i')
 	{
-		if (*str != '0')
+		if (mod->mod == 0)
+			str = ft_itoa_base(va_arg(arg->arg, int), 10);
+		if (mod->mod == 1)
+			str = ft_itoa_base((short)va_arg(arg->arg, int), 10);
+		if (mod->mod == 2)
+			str = ft_itoa_base((signed char)va_arg(arg->arg, int), 10);
+		if (mod->mod == 3)
+			str = ft_litoa_base(va_arg(arg->arg, long), 10);
+		if (mod->mod == 5)
+			str = ft_llitoa_base(va_arg(arg->arg, long long), 10);
+	}
+	if (arg->specifier == 'u')
+	{
+		if (mod->mod == 0)
+			str = ft_ullitoa_base(va_arg(arg->arg, unsigned int), 10);
+		if (mod->mod == 1)
+			str = ft_ullitoa_base((unsigned short)va_arg(arg->arg, int), 10);
+		if (mod->mod == 2)
+			str = ft_ullitoa_base((unsigned char)va_arg(arg->arg, int), 10);
+		if (mod->mod == 3)
+			str = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 10);
+		if (mod->mod == 5)
+			str = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 10);
+	}
+	return (str);
+}
+
+static char	*option_b(t_arg *arg, t_modifier *mod)
+{
+	char	*str;
+	char	*tmp;
+
+	str = NULL;
+	tmp = NULL;
+	if (arg->specifier == 'o')
+	{
+		if (mod->mod == 0)
+			str = ft_itoa_base(va_arg(arg->arg, int), 8);
+		if (mod->mod == 1)
+			str = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 8);
+		if (mod->mod == 2)
+			str = ft_itoa_base((unsigned char)va_arg(arg->arg, int), 8);
+		if (mod->mod == 3)
+			str = ft_litoa_base(va_arg(arg->arg, long), 8);
+		if (mod->mod == 5)
+			str = ft_llitoa_base(va_arg(arg->arg, long long), 8);
+	}
+	if (arg->specifier == 'x' || arg->specifier == 'X')
+	{
+		if (mod->mod == 0)
+			str = ft_itoa_base(va_arg(arg->arg, int), 16);
+		if (mod->mod == 1)
+			str = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 16);
+		if (mod->mod == 2)
+			str = ft_itoa_base((unsigned char)va_arg(arg->arg, int), 16);
+		if (mod->mod == 3)
+			str = ft_litoa_base(va_arg(arg->arg, long), 16);
+		if (mod->mod == 5)
+			str = ft_llitoa_base(va_arg(arg->arg, long long), 16);
+		if (arg->specifier == 'X')
 		{
-			if (specifier == 'x')
-				ret += write(1, "0x", 2);
-			if (specifier == 'X')
-				ret += write(1, "0X", 2);
+			tmp = str;
+			while (*tmp != '\0')
+			{
+				*tmp = ft_toupper(*tmp);
+				tmp++;
+			}
 		}
-		if (specifier == 'o')
-			ret += write(1, "0", 1);
 	}
-		
-	return (ret);
+	return (str);
 }
 
-static int di_width_printer(t_flags *flags, char *str, int len)
+static char	*option_f(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
-	int tmp;
-	int	ret;
+	char	*str;
 
-	ret = 0;
-	if (flags->precision >= len)
-		tmp = flags->width - flags->precision;
-	else
-		tmp = flags->width - len;
-	if (flags->precision == 0 && *str == '0')
-		tmp++;
-	if (flags->space || (flags->plus && *str != '-'))
-		tmp--;
-	if (*str == '-' && flags->precision > 0)
-		tmp--;
-	// printf("\n[%i]\n", tmp);
-	while (--tmp >= 0)
+	str = NULL;
+	if (arg->specifier == 'f')
 	{
-		if (flags->zero && flags->precision < len)
-			ret += write(1, "0", 1);
+		if (flags->dot > 0 && flags->precision == 0)
+			str = ft_itoa_base((int)va_arg(arg->arg, double), 10);
 		else
-			ret += write(1, " ", 1);
+		{
+			if (mod->mod == 4)
+				str = ft_lfloat(va_arg(arg->arg, long double), flags);
+			else
+				str = ft_float(va_arg(arg->arg, double), flags);
+		}
 	}
-	return  (ret);
+	return (str);
 }
 
-static int	str_printer(t_flags *flags, char *str, int len)
+int	ft_diouxf_convert(t_arg *arg, t_flags *flags, t_modifier *mod)
 {
-	int ret;
-	int tmp;
+	int		ret;
+	char	*str;
 
 	ret = 0;
-	tmp = flags->precision;
-	if (*str == '-' && flags->zero)
-		str++;
-	if (flags->precision > len && *str == '-')
+	if (arg->specifier == 'd' || arg->specifier == 'i' || arg->specifier == 'u')
+		str = option_a(arg, mod);
+	if (arg->specifier == 'o' || arg->specifier == 'x' || arg->specifier == 'X')
+		str = option_b(arg, mod);
+	if (arg->specifier == 'f')
+		str = option_f(arg, flags, mod);
+	if (str)
 	{
-		ret += write(1, "-", 1);
-		len--;
-		str++;
-	}
-	if (flags->zero)
-	{
-		str--;
-		if (*str == '-')
-			len--;
-		str++;
-	}
-	while (tmp-- > len)
-		ret += write(1, "0", 1);
-	while (*str != '\0')
-	{
-		if (flags->precision == 0 && *str == '0')
-			break;
-		ret += write(1, str, 1);
-		str++;
-	}	
-	return (ret);
-}
-
-int	ft_diu_convert(char *str, t_flags *flags, char specifier)
-{
-	int	ret;
-	int	len;
-
-	ret = 0;
-	len = ft_strlen(str);
-	if (flags->minus)
-	{
-		ret += sign_space_print(flags, str, specifier);
-		ret += str_printer(flags, str, len);
-		ret += di_width_printer(flags, str, len);
-	}
-	else
-	{
-		if (flags->zero)
-			ret += sign_space_print(flags, str, specifier);
-		ret += di_width_printer(flags, str, len);
-		if (!flags->zero)
-			ret += sign_space_print(flags, str, specifier);
-		ret += str_printer(flags, str, len);
+		ret += ft_diu_convert(str, flags, arg->specifier);
+		free(str);
 	}
 	return (ret);
 }
-
-// static int u_width_printer(t_flags *flags, char *str, int len)
-// {
-// 	int tmp;
-// 	int	ret;
-
-// 	ret = 0;
-// 	if (flags->precision >= 0)
-// 		tmp = flags->width - flags->precision;
-// 	else
-// 		tmp = flags->width - len;
-// 	if (*str == '-' && flags->precision > 0)
-// 		tmp--;
-// 	while (--tmp >= 0)
-// 	{
-// 		if (flags->zero && !flags->minus && flags->precision < len)
-// 			ret += write(1, "0", 1);
-// 		else
-// 			ret += write(1, " ", 1);
-// 	}
-// 	return  (ret);
-// }
-
-// int	ft_u_convert(char *str, t_flags *flags)
-// {
-// 	int	ret;
-// 	int	len;
-
-// 	ret = 0;
-// 	len = ft_strlen(str);
-// 	if (flags->minus)
-// 	{
-// 		ret += str_printer(flags, str, len);
-// 		ret += u_width_printer(flags, str, len);
-// 	}
-// 	else
-// 	{
-// 		ret += u_width_printer(flags, str, len);
-// 		ret += str_printer(flags, str, len);
-// 	}
-// 	return (ret);
-// }
-
-// int	ft_x_convert(char *str, t_flags *flags, char speci)
-// {
-// 	int	ret;
-// 	int	tmp;
-// 	int	len;
-	
-// 	ret = 0;
-// 	tmp = 0;
-// 	len = (int)ft_strlen(str);
-// 	if (flags->minus)
-// 	{
-// 		if (flags->hash)
-// 		{
-// 			if (speci == 'X')
-// 					ret += write(1, "0X", 2);
-// 			else
-// 				ret += write(1, "0x", 2);
-// 		}
-// 		ret += ft_x_printer(str, flags, len, speci);
-// 	}
-// 	if (flags->width)
-// 	{
-// 		if (!flags->minus)
-// 			tmp = len;
-// 		else
-// 			tmp = ret;
-// 		if (flags->precision > len)
-// 			tmp = flags->precision;
-// 		if (flags->hash && !flags->minus)
-// 			tmp+=2;
-// 		if (flags->precision == 0)
-// 			tmp = 0;
-// 		if (flags->hash && flags->zero && !flags->minus)
-// 		{
-// 			if (len != 1 || *str != '0')
-// 			{
-// 				if (speci == 'X')
-// 					ret += write(1, "0X", 2);
-// 				else
-// 					ret += write(1, "0x", 2);
-// 			}
-// 		}
-// 		while ((--flags->width - tmp) >= 0)
-// 		{
-// 			if (flags->zero && !flags->minus)
-// 			{
-// 				if (flags->zero)
-// 					ret += write(1, "0", 1);
-// 				else
-// 					ret += write(1, " ", 1);
-// 			}
-// 			else
-// 				ret += write(1, " ", 1);
-// 		}
-// 	}
-// 	if (!flags->minus)
-// 		ret += ft_x_printer(str, flags, len, speci);
-// 	return (ret);
-// }
-
-// int	ft_o_convert(char *str, t_flags *flags)
-// {
-// 	int	ret;
-// 	int	tmp;
-// 	int	len;
-	
-// 	ret = 0;
-// 	tmp = 0;
-// 	len = (int)ft_strlen(str);
-// 	if (flags->minus)
-// 		ret += ft_o_printer(str, flags, len);
-// 	if (flags->width)
-// 	{
-// 		if (!flags->minus)
-// 		{
-// 			tmp = len;
-// 			if (flags->hash)
-// 				tmp++;
-// 		}	
-// 		else
-// 			tmp = ret;
-// 		if (flags->precision > len)
-// 			tmp = flags->precision;
-// 		if (flags->precision == 0)
-// 			tmp = 0;
-// 		while ((--flags->width - tmp) >= 0)
-// 		{
-// 			if (flags->zero && !flags->minus)
-// 				ret += write(1, "0", 1);
-// 			else
-// 				ret += write(1, " ", 1);
-// 		}
-// 	}
-// 	if (!flags->minus)
-// 		ret += ft_o_printer(str, flags, len);
-// 	return (ret);
-// }
-
-
-// int	ft_f_convert(char *str, t_flags *flags)
-// {
-// 	int	ret;
-// 	int	tmp;
-// 	int	len;
-	
-// 	ret = 0;
-// 	len = (int)ft_strlen(str);
-// 	if (flags->minus)
-// 		ret += ft_f_printer(str, flags, len);
-// 	if (flags->width)
-// 	{
-// 		if (!flags->minus)
-// 			tmp = len;
-// 		else
-// 			tmp = ret;
-// 		if (flags->precision > len)
-// 			tmp = flags->precision;
-// 		while ((--flags->width - tmp) >= 0)
-// 		{
-// 			if (flags->zero && !flags->minus)
-// 				ret += write(1, "0", 1);
-// 			else
-// 				ret += write(1, " ", 1);
-// 		}
-// 	}
-// 	if (!flags->minus)
-// 		ret += ft_f_printer(str, flags, len);
-// 	return (ret);
-// }

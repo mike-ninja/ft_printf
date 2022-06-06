@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+         #
+#    By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/07 15:11:37 by mbarutel          #+#    #+#              #
-#    Updated: 2022/06/04 21:31:28 by mbarutel         ###   ########.fr        #
+#    Updated: 2022/06/06 10:51:56 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,12 +38,11 @@ WHITE = \033[0;97m
 
 SRC_FILES	=	ft_arg_filter
 SRC_FILES	+=	ft_char_convert
+SRC_FILES	+=	ft_printers
 SRC_FILES	+=	ft_diouxf_convert
-SRC_FILES	+=	ft_diouxf_filter
 SRC_FILES	+=	ft_float
 SRC_FILES	+=	ft_printf
 SRC_FILES	+=	ft_str_convert
-SRC_FILES	+=	ft_print_utils
 SRC_FILES	+=	ft_utils
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
