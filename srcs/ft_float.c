@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 14:56:37 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/06 10:36:55 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/07 12:46:40 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,11 @@ char	*ft_lfloat(long double nbr, t_flags *flags)
 	first_part = NULL;
 	base = (long)nbr;
 	first_part = ft_float_base(base);
+	if (nbr < 0)
+	{
+		nbr *= -1;
+		base *= -1;
+	}
 	if (flags->precision > 0)
 		len = flags->precision;
 	else

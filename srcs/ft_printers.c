@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 20:35:32 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/06 12:41:00 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/07 12:07:04 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ int	ft_printer(char *str, t_flags *flags)
 	ret = 0;
 	while (*str != '\0')
 	{
-		ret += write(1, str, 1);
 		if (ret == flags->precision)
 			break ;
+		ret += write(1, str, 1);
+		// if (ret == flags->precision)
+		// 	break ;
 		str++;
 	}
 	return (ret);
@@ -50,17 +52,20 @@ static int	sign_space_print(t_flags *flags, char *str, char specifier)
 		if (specifier == 'o')
 			if (*str != '0' || flags->precision >= 0)
 				ret += write(1, "0", 1);
-			
 	}
+	if (specifier == 'p')
+		ret += write(1, "0x", 2);
 	return (ret);
 }
 
-static int	di_width_printer(t_flags *flags, char *str, int len)
+static int	di_width_printer(t_flags *flags, char *str, int len, char speci)
 {
 	int	tmp;
 	int	ret;
 
 	ret = 0;
+	if (speci == 'p')
+		len += 2;
 	if (flags->precision >= len)
 	{
 		tmp = flags->width - flags->precision;
@@ -73,8 +78,6 @@ static int	di_width_printer(t_flags *flags, char *str, int len)
 		tmp++;
 	if (flags->space || (flags->plus && *str != '-'))
 		tmp--;
-	// if (*str == '-' && flags->precision > 0)
-	// 	tmp--;
 	while (--tmp >= 0)
 	{
 		if (flags->zero && flags->precision < len)
@@ -85,7 +88,7 @@ static int	di_width_printer(t_flags *flags, char *str, int len)
 	return (ret);
 }
 
-static int	str_printer(t_flags *flags, char *str, int len)
+static int	str_printer(t_flags *flags, char *str, int len, char speci)
 {
 	int	ret;
 	int	tmp;
@@ -99,6 +102,8 @@ static int	str_printer(t_flags *flags, char *str, int len)
 		str++;
 		len--;
 	}
+	if (flags->hash && speci == 'o')
+		tmp--;
 	while (tmp-- > len)
 		ret += write(1, "0", 1);
 	while (*str != '\0')
@@ -121,17 +126,17 @@ int	ft_diu_convert(char *str, t_flags *flags, char specifier)
 	if (flags->minus)
 	{
 		ret += sign_space_print(flags, str, specifier);
-		ret += str_printer(flags, str, len);
-		ret += di_width_printer(flags, str, len);
+		ret += str_printer(flags, str, len, specifier);
+		ret += di_width_printer(flags, str, len, specifier);
 	}
 	else
 	{
 		if (flags->zero)
 			ret += sign_space_print(flags, str, specifier);
-		ret += di_width_printer(flags, str, len);
+		ret += di_width_printer(flags, str, len, specifier);
 		if (!flags->zero)
 			ret += sign_space_print(flags, str, specifier);
-		ret += str_printer(flags, str, len);
+		ret += str_printer(flags, str, len, specifier);
 	}
 	return (ret);
 }

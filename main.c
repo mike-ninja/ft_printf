@@ -5,24 +5,28 @@
 int     main(void)
 {
     // int i;
-    // printf("[%i]\n", ft_printf("%llo, %llo", 0llu, ULLONG_MAX));
-    // printf("[%i]\n", printf("%llo, %llo", 0llu, ULLONG_MAX));
+    // printf("[%i]\n", ft_printf("%.p", 0));
+    // printf("[%i]\n", printf("%.p", 0));
     // printf("\n");
 
-    // printf("[%i]\n", ft_printf("%#o", 0));
-    // printf("[%i]\n", printf("%#o", 0));
+    // printf("[%i]\n", ft_printf("{%-5p}", 0));
+    // printf("[%i]\n", printf("{%-5p}", 0));
     // printf("\n");
 
-    // printf("[%i]\n", ft_printf("@moulitest: %#.o %#.0o", 0, 0));
-    // printf("[%i]\n", printf("@moulitest: %#.o %#.0o", 0, 0));
+    // printf("[%i]\n", ft_printf("%.5p", 0));
+    // printf("[%i]\n", printf("%.5p", 0));
     // printf("\n");
 
-    printf("[%i]\n", ft_printf("%15.4s", "I am 42"));
-    printf("[%i]\n", printf("%15.4s", "I am 42"));
+    // printf("[%i]\n", ft_printf("%*d", 5, 42));
+    // printf("[%i]\n", printf("%*d", 5, 42));
+    // printf("\n");
+
+    printf("[%i]\n", ft_printf("%010.5d", -216));
+    printf("[%i]\n", printf("%010.5d", -216));
     printf("\n");
 
-    // printf("[%i]\n", ft_printf("%03.2d", -1));
-    // printf("[%i]\n", printf("%03.2d", -1));
+    // printf("[%i]\n", ft_printf("[%5.2s]", ""));
+    // printf("[%i]\n", printf("[%5.2s]", ""));
     // printf("\n");
     
     return (0);
