@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/06 10:38:34 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:37:04 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 /*
 	Initialises both structs
 */
-static void	ft_init_struct(t_flags *flags, t_modifier *modifier)
+// static void	ft_init_struct(t_flags *flags, t_modifier *modifier)
+static void	ft_init_struct(t_flags *flags)
 {
-	modifier->mod = 0;
+	flags->mod = 0;
 	flags->hash = 0;
 	flags->zero = 0;
 	flags->plus = 0;
@@ -31,65 +32,65 @@ static void	ft_init_struct(t_flags *flags, t_modifier *modifier)
 	Assigns the int value within modifier struct depending on the modifer
 	and will return current index position.
 */
-static char	*ft_modifier_check(char *format, t_modifier *modifier)
+static char	*ft_modifier_check(char *format, t_flags *flags)
 {
 	if ((ft_strncmp(format, "h", 1) == 0))
-		modifier->mod = 1;
+		flags->mod = 1;
 	if ((ft_strncmp(format, "hh", 2) == 0))
-		modifier->mod = 2;
+		flags->mod = 2;
 	if ((ft_strncmp(format, "l", 1) == 0))
-		modifier->mod = 3;
+		flags->mod = 3;
 	if ((ft_strncmp(format, "L", 1) == 0))
-		modifier->mod = 4;
+		flags->mod = 4;
 	if ((ft_strncmp(format, "ll", 2) == 0))
-		modifier->mod = 5;
+		flags->mod = 5;
 	while (*format == 'l' || *format == 'h' || *format == 'L')
 		format++;
-	return (format);
-}
-
-static char	*flags_int(char *format, t_flags *flags)
-{
-	while (*format >= '0' && *format <= '9')
-	{
-		flags->width = flags->width * 10 + (*format - '0');
-		format++;
-	}
-	if (*format == '.')
-	{
-		flags->precision++;
-		format++;
-		while (*format >= '0' && *format <= '9')
-		{
-			flags->precision = flags->precision * 10 + (*format - '0');
-			format++;
-		}
-	}
 	return (format);
 }
 
 /*
 	If one of the flag characters is found, it increments the value in the struct
 */
-static char	*ft_flags_check(char *format, t_flags *flags)
+static char	*ft_flags_check(char *format, t_flags *flags, t_arg *arg)
 {
 	format++;
 	while (*format == '#' || *format == '0'
 		|| *format == '+' || *format == '-' || *format == ' ')
 	{
+		if (*format == '-')
+			flags->minus++;
 		if (*format == '#')
 			flags->hash++;
 		if (*format == '0')
 			flags->zero++;
 		if (*format == '+')
 			flags->plus++;
-		if (*format == '-')
-			flags->minus++;
 		if (*format == ' ')
 			flags->space++;
 		format++;
 	}
-	return (flags_int(format, flags));
+	format = width_calculator(format, flags, arg);
+	format = precision_calculator(format, flags, arg);
+	return (format);
+}
+
+static char	*arg_handler(char *format, t_flags *flags,
+t_arg *arg, int *char_count)
+{
+	ft_init_struct(flags);
+	format = ft_flags_check(format, flags, arg);
+	format = ft_modifier_check(format, flags);
+	arg->specifier = *format;
+	if (speci_correction(*format))
+	{
+		flags_correction(flags, arg->specifier);
+		char_count[0] += ft_arg_filter(arg, flags);
+	}
+	else
+		if (*format != '\0')
+			char_count[0] += write(1, format, 1);
+	return (format);
 }
 
 /*
@@ -100,35 +101,27 @@ static char	*ft_flags_check(char *format, t_flags *flags)
 */
 int	ft_printf(const char *restrict format, ...)
 {
+	int			ret;
 	t_arg		arg[1];
 	t_flags		flags[1];
-	t_modifier	modifier[1];
-	int			char_count;
+	int			*char_count;
 
-	char_count = 0;
+	char_count = (int *)malloc(sizeof(int));
+	if (!char_count)
+		return (0);
+	*char_count = 0;
 	va_start(arg->arg, format);
 	while (*format != '\0')
 	{
 		if (*format != '%')
-			char_count += write(1, format, 1);
+			*char_count += write(1, format, 1);
 		else
-		{
-			ft_init_struct(flags, modifier);
-			format = ft_flags_check((char *)format, flags);
-			format = ft_modifier_check((char *)format, modifier);
-			arg->specifier = *format;
-			if (speci_correction(*format))
-			{
-				flags_correction(flags, arg->specifier);
-				char_count += ft_arg_filter(arg, flags, modifier);
-			}
-			else
-				if (*format != '\0')
-					char_count += write(1, format, 1);
-		}
+			format = arg_handler((char *)format, flags, arg, char_count);
 		if (*format != '\0')
 			format++;
 	}
+	ret = *char_count;
+	free(char_count);
 	va_end(arg->arg);
-	return (char_count);
+	return (ret);
 }

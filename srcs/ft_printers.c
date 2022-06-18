@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 20:35:32 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/07 12:07:04 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:49:07 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	ft_printer(char *str, t_flags *flags)
 		if (ret == flags->precision)
 			break ;
 		ret += write(1, str, 1);
-		// if (ret == flags->precision)
-		// 	break ;
 		str++;
 	}
 	return (ret);
@@ -66,14 +64,13 @@ static int	di_width_printer(t_flags *flags, char *str, int len, char speci)
 	ret = 0;
 	if (speci == 'p')
 		len += 2;
+	tmp = flags->width - len;
 	if (flags->precision >= len)
 	{
 		tmp = flags->width - flags->precision;
 		if (*str == '-')
 			tmp--;
 	}
-	else
-		tmp = flags->width - len;
 	if (flags->precision == 0 && *str == '0')
 		tmp++;
 	if (flags->space || (flags->plus && *str != '-'))
@@ -95,9 +92,9 @@ static int	str_printer(t_flags *flags, char *str, int len, char speci)
 
 	ret = 0;
 	tmp = flags->precision;
-	if (*str == '-' && (flags->zero || flags->precision > len))
+	if (*str == '-' && (flags->zero || flags->precision >= len))
 	{
-		if (flags->precision > len && *str == '-')
+		if (flags->precision >= len && *str == '-')
 			ret += write(1, "-", 1);
 		str++;
 		len--;
@@ -116,7 +113,7 @@ static int	str_printer(t_flags *flags, char *str, int len, char speci)
 	return (ret);
 }
 
-int	ft_diu_convert(char *str, t_flags *flags, char specifier)
+int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 {
 	int	ret;
 	int	len;

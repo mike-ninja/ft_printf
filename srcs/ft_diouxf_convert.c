@@ -3,128 +3,117 @@
 /*                                                        :::      ::::::::   */
 /*   ft_diouxf_convert.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/06 12:16:51 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/18 12:47:48 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-static char	*option_a(t_arg *arg, t_modifier *mod)
+static char	*option_a(t_arg *arg, t_flags *flags)
 {
-	char	*str;
-
 	if (arg->specifier == 'd' || arg->specifier == 'i')
 	{
-		if (mod->mod == 0)
-			str = ft_itoa_base(va_arg(arg->arg, int), 10);
-		if (mod->mod == 1)
-			str = ft_itoa_base((short)va_arg(arg->arg, int), 10);
-		if (mod->mod == 2)
-			str = ft_itoa_base((signed char)va_arg(arg->arg, int), 10);
-		if (mod->mod == 3)
-			str = ft_litoa_base(va_arg(arg->arg, long), 10);
-		if (mod->mod == 5)
-			str = ft_llitoa_base(va_arg(arg->arg, long long), 10);
+		if (flags->mod == 1)
+			return (ft_itoa_base((short)va_arg(arg->arg, int), 10));
+		if (flags->mod == 2)
+			return (ft_itoa_base((signed char)va_arg(arg->arg, int), 10));
+		if (flags->mod == 3)
+			return (ft_ltoa_base(va_arg(arg->arg, long), 10));
+		if (flags->mod == 5)
+			return (ft_lltoa_base(va_arg(arg->arg, long long), 10));
+		return (ft_itoa_base(va_arg(arg->arg, int), 10));
 	}
-	if (arg->specifier == 'u')
-	{
-		if (mod->mod == 0)
-			str = ft_ullitoa_base(va_arg(arg->arg, unsigned int), 10);
-		if (mod->mod == 1)
-			str = ft_ullitoa_base((unsigned short)va_arg(arg->arg, int), 10);
-		if (mod->mod == 2)
-			str = ft_ullitoa_base((unsigned char)va_arg(arg->arg, int), 10);
-		if (mod->mod == 3)
-			str = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 10);
-		if (mod->mod == 5)
-			str = ft_ullitoa_base(va_arg(arg->arg, unsigned long long), 10);
-	}
-	return (str);
+	if (flags->mod == 1)
+		return (ft_ulltoa_base((unsigned short)va_arg(arg->arg, int), 10));
+	if (flags->mod == 2)
+		return (ft_ulltoa_base((unsigned char)va_arg(arg->arg, int), 10));
+	if (flags->mod == 3)
+		return (ft_ulltoa_base(va_arg(arg->arg, unsigned long long), 10));
+	if (flags->mod == 5)
+		return (ft_ulltoa_base(va_arg(arg->arg, unsigned long long), 10));
+	return (ft_ulltoa_base(va_arg(arg->arg, unsigned int), 10));
 }
 
-static char	*option_b(t_arg *arg, t_modifier *mod)
+static char	*option_b(t_arg *arg, t_flags *flags)
+{
+	if (flags->mod == 1)
+		return (ft_itoa_base((unsigned short)va_arg(arg->arg, int), 8));
+	if (flags->mod == 2)
+		return (ft_itoa_base((unsigned char)va_arg(arg->arg, int), 8));
+	if (flags->mod == 3)
+		return (ft_ltoa_base(va_arg(arg->arg, long), 8));
+	if (flags->mod == 5)
+		return (ft_lltoa_base(va_arg(arg->arg, long long), 8));
+	return (ft_itoa_base(va_arg(arg->arg, int), 8));
+}
+
+static char	*option_c(t_arg *arg, t_flags *flags)
 {
 	char	*str;
 	char	*tmp;
 
 	str = NULL;
 	tmp = NULL;
-	if (arg->specifier == 'o')
+	if (flags->mod == 0)
+		str = ft_itoa_base(va_arg(arg->arg, int), 16);
+	if (flags->mod == 1)
+		str = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 16);
+	if (flags->mod == 2)
+		str = ft_itoa_base((unsigned char)va_arg(arg->arg, int), 16);
+	if (flags->mod == 3)
+		str = ft_ltoa_base(va_arg(arg->arg, long), 16);
+	if (flags->mod == 5)
+		str = ft_lltoa_base(va_arg(arg->arg, long long), 16);
+	if (arg->specifier == 'X' && str)
 	{
-		if (mod->mod == 0)
-			str = ft_itoa_base(va_arg(arg->arg, int), 8);
-		if (mod->mod == 1)
-			str = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 8);
-		if (mod->mod == 2)
-			str = ft_itoa_base((unsigned char)va_arg(arg->arg, int), 8);
-		if (mod->mod == 3)
-			str = ft_litoa_base(va_arg(arg->arg, long), 8);
-		if (mod->mod == 5)
-			str = ft_llitoa_base(va_arg(arg->arg, long long), 8);
-	}
-	if (arg->specifier == 'x' || arg->specifier == 'X')
-	{
-		if (mod->mod == 0)
-			str = ft_itoa_base(va_arg(arg->arg, int), 16);
-		if (mod->mod == 1)
-			str = ft_itoa_base((unsigned short)va_arg(arg->arg, int), 16);
-		if (mod->mod == 2)
-			str = ft_itoa_base((unsigned char)va_arg(arg->arg, int), 16);
-		if (mod->mod == 3)
-			str = ft_litoa_base(va_arg(arg->arg, long), 16);
-		if (mod->mod == 5)
-			str = ft_llitoa_base(va_arg(arg->arg, long long), 16);
-		if (arg->specifier == 'X')
+		tmp = str;
+		while (*tmp != '\0')
 		{
-			tmp = str;
-			while (*tmp != '\0')
-			{
-				*tmp = ft_toupper(*tmp);
-				tmp++;
-			}
+			*tmp = ft_toupper(*tmp);
+			tmp++;
 		}
 	}
 	return (str);
 }
 
-static char	*option_f(t_arg *arg, t_flags *flags, t_modifier *mod)
+static char	*option_f(t_arg *arg, t_flags *flags)
 {
-	char	*str;
+	char			*str;
+	size_t			precision;
 
 	str = NULL;
-	if (arg->specifier == 'f')
-	{
-		if (flags->dot > 0 && flags->precision == 0)
-			str = ft_itoa_base((int)va_arg(arg->arg, double), 10);
-		else
-		{
-			if (mod->mod == 4)
-				str = ft_lfloat(va_arg(arg->arg, long double), flags);
-			else
-				str = ft_float(va_arg(arg->arg, double), flags);
-		}
-	}
+	if (flags->precision >= 0)
+		precision = (size_t)flags->precision;
+	else
+		precision = 6;
+	if (flags->mod == 4)
+		str = ft_lftoa(va_arg(arg->arg, long double), precision);
+	else
+		str = ft_ftoa(va_arg(arg->arg, double), precision);
 	return (str);
 }
 
-int	ft_diouxf_convert(t_arg *arg, t_flags *flags, t_modifier *mod)
+int	ft_diouxf_convert(t_arg *arg, t_flags *flags)
 {
 	int		ret;
 	char	*str;
 
 	ret = 0;
+	str = NULL;
 	if (arg->specifier == 'd' || arg->specifier == 'i' || arg->specifier == 'u')
-		str = option_a(arg, mod);
-	if (arg->specifier == 'o' || arg->specifier == 'x' || arg->specifier == 'X')
-		str = option_b(arg, mod);
+		str = option_a(arg, flags);
+	if (arg->specifier == 'o')
+		str = option_b(arg, flags);
+	if (arg->specifier == 'x' || arg->specifier == 'X')
+		str = option_c(arg, flags);
 	if (arg->specifier == 'f')
-		str = option_f(arg, flags, mod);
+		str = option_f(arg, flags);
 	if (str)
 	{
-		ret += ft_diu_convert(str, flags, arg->specifier);
+		ret += ft_diouxf_printer(str, flags, arg->specifier);
 		free(str);
 	}
 	return (ret);

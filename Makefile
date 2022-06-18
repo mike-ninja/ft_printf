@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/07 15:11:37 by mbarutel          #+#    #+#              #
-#    Updated: 2022/06/06 10:51:56 by mbarutel         ###   ########.fr        #
+#    Updated: 2022/06/16 08:52:44 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,9 @@ SRC_FILES	=	ft_arg_filter
 SRC_FILES	+=	ft_char_convert
 SRC_FILES	+=	ft_printers
 SRC_FILES	+=	ft_diouxf_convert
-SRC_FILES	+=	ft_float
+# SRC_FILES	+=	ft_float
+# SRC_FILES	+=	ft_putfloat
+# SRC_FILES	+=	ft_putlfloat
 SRC_FILES	+=	ft_printf
 SRC_FILES	+=	ft_str_convert
 SRC_FILES	+=	ft_utils
