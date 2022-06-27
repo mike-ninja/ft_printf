@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:10:54 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/27 12:01:43 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:23:05 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	speci_correction(char specifier)
 		return (1);
 	if (c == '%' || c == 'f' || c == 'b')
 		return (1);
-	if (c == 'd' || c == 'i')
+	if (c == 'd' || c == 'i' || c == 'r')
 		return (1);
 	if (c == 'o' || c == 'u')
 		return (1);
@@ -99,13 +99,4 @@ char	*precision_calculator(char *format, t_flags *flags, t_arg *arg)
 		}
 	}
 	return (format);
-}
-
-void	ft_bin_print(size_t nbr, int *ret)
-{
-	if (nbr > 1)
-		ft_bin_print(nbr / 2, ret);
-	else
-		ret[0] += ft_printf("0");
-	ret[0] += ft_printf("%i", nbr % 2);
 }
