@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/20 15:32:35 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:08:03 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,32 +101,26 @@ t_arg *arg, int *char_count)
 */
 int	ft_printf(const char *restrict format, ...)
 {
-	int			ret;
 	t_arg		arg[1];
 	t_flags		flags[1];
-	int			*char_count;
+	int			char_count;
 
-	char_count = (int *)malloc(sizeof(int));
-	if (!char_count)
-		return (0);
-	*char_count = 0;
+	char_count = 0;
 	va_start(arg->arg, format);
 	while (*format != '\0')
 	{
 		if (*format == '{')
-			format = coloring((char *)format, char_count);
+			format = coloring((char *)format, &char_count);
 		if (*format != '%')
 		{
 			if (*format != '\0')
-				*char_count += write(1, format, 1);
+				char_count += write(1, format, 1);
 		}
 		else
-			format = arg_handler((char *)format, flags, arg, char_count);
+			format = arg_handler((char *)format, flags, arg, &char_count);
 		if (*format != '\0')
 			format++;
 	}
-	ret = *char_count;
-	free(char_count);
 	va_end(arg->arg);
-	return (ret);
+	return (char_count);
 }

@@ -1,17 +1,19 @@
 #include "incs/ft_printf.h"
 #include <limits.h>
-
+#include <stdio.h>
 
 int     main(void)
 {
     // int i;
-    printf("[%i]\n", ft_printf("{RED}{HELLO}{RESET}"));
-    printf("[%i]\n", printf("\033[0;31m{HELLO}\033[0m"));
-    printf("\n");
-
-    // printf("[%i]\n", ft_printf("{%-5p}", 0));
-    // printf("[%i]\n", printf("{%-5p}", 0));
+    // printf("[%i]\n", ft_printf("{RED}{HELLO}{RESET}"));
+    // printf("[%i]\n", printf("\033[0;31m{HELLO}\033[0m"));
     // printf("\n");
+    // printf("[%i]\n", ft_printf("%b", 22));
+    // printf("[%i]\n", ft_printf("%b", 65));
+
+    // printf("[%i]\n", ft_printf("{%$i}", 5, 23));
+    printf("[%i]\n", printf("{}", int, 23));
+    printf("\n");
 
     // printf("[%i]\n", ft_printf("%.5p", 0));
     // printf("[%i]\n", printf("%.5p", 0));

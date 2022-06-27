@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_colouring.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 07:56:21 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/20 15:26:07 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:00:20 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ char	*coloring(char *format, int *char_count)
 	{
 		if (ft_strncmp(format + 1, colours[i].name, end) == 0)
 		{
-			// printf("[%i]\n", *char_count);
-			// printf("-[%zu]-", ft_strlen(colours[i].code));
 			*char_count += ft_printf("%s", colours[i].code);
 			return (&format[end + 2]);
 		}
