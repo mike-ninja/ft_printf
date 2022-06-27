@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/18 12:51:25 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/20 14:07:25 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ typedef struct s_arg
 	char	specifier;
 }				t_arg;
 
+typedef struct s_colours
+{
+	char	*code;
+	char	*name;
+}				t_colours;
+
+char	*coloring(char *format, int *char_count);
 int		ft_printf(const char *restrict format, ...);
 int		ft_str_convert(char *str, t_flags *flags);
 int		ft_char_convert(unsigned int c, t_flags *flags);

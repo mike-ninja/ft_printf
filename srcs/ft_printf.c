@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/18 11:37:04 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/20 15:32:35 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,13 @@ int	ft_printf(const char *restrict format, ...)
 	va_start(arg->arg, format);
 	while (*format != '\0')
 	{
+		if (*format == '{')
+			format = coloring((char *)format, char_count);
 		if (*format != '%')
-			*char_count += write(1, format, 1);
+		{
+			if (*format != '\0')
+				*char_count += write(1, format, 1);
+		}
 		else
 			format = arg_handler((char *)format, flags, arg, char_count);
 		if (*format != '\0')

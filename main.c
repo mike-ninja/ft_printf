@@ -5,9 +5,9 @@
 int     main(void)
 {
     // int i;
-    // printf("[%i]\n", ft_printf("%.p", 0));
-    // printf("[%i]\n", printf("%.p", 0));
-    // printf("\n");
+    printf("[%i]\n", ft_printf("{RED}{HELLO}{RESET}"));
+    printf("[%i]\n", printf("\033[0;31m{HELLO}\033[0m"));
+    printf("\n");
 
     // printf("[%i]\n", ft_printf("{%-5p}", 0));
     // printf("[%i]\n", printf("{%-5p}", 0));
@@ -21,12 +21,43 @@ int     main(void)
     // printf("[%i]\n", printf("%*d", 5, 42));
     // printf("\n");
 
-    printf("[%i]\n", ft_printf("%010.5d", -216));
-    printf("[%i]\n", printf("%010.5d", -216));
-    printf("\n");
+    // printf("[%i]\n", ft_printf("%10.5d", -216));
+    // printf("[%i]\n", printf("%10.5d", -216));
+    // printf("\n");
 
-    // printf("[%i]\n", ft_printf("[%5.2s]", ""));
-    // printf("[%i]\n", printf("[%5.2s]", ""));
+    // printf("[%i]\n", ft_printf("%010.d", -216));
+    // printf("[%i]\n", printf("%010.d", -216));
+    // printf("\n");
+    // printf("[%i]\n", ft_printf("%.5f", 2.9999999));
+    // printf("[%i]\n", printf("%.5f", 2.9999999));
+    // printf("\n");
+
+    // printf("[%i]\n", ft_printf("%.2f", 2.3999999));
+    // printf("[%i]\n", printf("%.2f", 2.3999999));
+    // printf("\n");
+
+    // printf("[%i]\n", ft_printf("%f", 2.5667821212));
+    // printf("[%i]\n", printf("%f", 2.5667821212));
+    // printf("\n");
+
+    // printf("[%i]\n", ft_printf("{%*c}", -15, 0));
+    // printf("[%i]\n", printf("{%*c}", -15, 0));
+    // printf("\n");
+
+    // printf("[%i]\n", ft_printf("%Lf", 2.556));
+    // printf("[%i]\n", printf("%Lf", 2.556));
+    // printf("\n");
+
+    // printf("[%i]\n", ft_printf("%Lf", 2.555556));
+    // printf("[%i]\n", printf("%Lf", 2.555556));
+    // printf("\n");   
+
+    // printf("[%i]\n", ft_printf("{%f}", -0.0));
+    // printf("[%i]\n", printf("{%f}", -0.0));
+    // printf("\n");
+
+    // printf("[%i]\n", ft_printf("%llo", -9223372036854775808));
+    // printf("[%i]\n", printf("%llo", -9223372036854775808));
     // printf("\n");
     
     return (0);

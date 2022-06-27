@@ -6,7 +6,7 @@
 #    By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/07 15:11:37 by mbarutel          #+#    #+#              #
-#    Updated: 2022/06/16 08:52:44 by mbarutel         ###   ########.fr        #
+#    Updated: 2022/06/20 14:01:07 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,7 @@ SRC_FILES	=	ft_arg_filter
 SRC_FILES	+=	ft_char_convert
 SRC_FILES	+=	ft_printers
 SRC_FILES	+=	ft_diouxf_convert
-# SRC_FILES	+=	ft_float
-# SRC_FILES	+=	ft_putfloat
-# SRC_FILES	+=	ft_putlfloat
+SRC_FILES	+=	ft_colouring
 SRC_FILES	+=	ft_printf
 SRC_FILES	+=	ft_str_convert
 SRC_FILES	+=	ft_utils
@@ -83,9 +81,6 @@ fclean:		clean
 
 re:			fclean all
 			@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
-
-norm:
-			@norminette $(SRC) $(INCLUDE) $(LIBFT) | grep -v Norme -B1 || true
 
 libft:
 			@make re -C $(LIBFT)
