@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:10:54 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/27 12:23:05 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/28 10:44:47 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	speci_correction(char specifier)
 		return (1);
 	if (c == 'd' || c == 'i' || c == 'r')
 		return (1);
-	if (c == 'o' || c == 'u')
+	if (c == 'o' || c == 'u' || c == 'k')
 		return (1);
 	if (c == 'x' || c == 'X')
 		return (1);

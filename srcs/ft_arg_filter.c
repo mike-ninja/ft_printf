@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:26:57 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/27 12:22:40 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/28 10:45:29 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags)
 			ft_bin_print((size_t)va_arg(arg->arg, int), &ret);
 		if (arg->specifier == 'r')
 			non_printa_print(va_arg(arg->arg, int), &ret);
+		if (arg->specifier == 'k')
+			print_date((size_t)va_arg(arg->arg, int), &ret);
 		if (arg->specifier == '%')
 			ret += ft_char_convert('%', flags);
 		if (ft_strchr("diouxXf", arg->specifier))

@@ -15,12 +15,13 @@ int     main(void)
     // printf("[%i]\n", printf("{}", int, 23));
     // printf("\n");
 
-    // printf("[%i]\n", ft_printf("[%c]", 9));
-    // printf("[%i]\n", ft_printf("[%c]", 10));
-    // printf("[%i]\n", ft_printf("[%c]", 11));
-    // printf("[%i]\n", ft_printf("[%c]", 12));
-    printf("[%i]\n", ft_printf("[%c]", 13));
-    printf("[%i]\n", ft_printf("[%c]", 15));
+    printf(" [%i]\n", ft_printf("[%k]", 10021996));
+    // printf("[%i]\n", ft_printf("[%r]", 10));
+    // printf("[%i]\n", ft_printf("[%r]", 11));
+    // printf("[%i]\n", ft_printf("[%r]", 12));
+    // printf("[%i]\n", ft_printf("[%r]", 12));
+    // printf("[%i]\n", ft_printf("[%r]", 13));
+    
 
     // printf("[%i]\n", ft_printf("%.5p", 0));
     // printf("[%i]\n", printf("%.5p", 0));

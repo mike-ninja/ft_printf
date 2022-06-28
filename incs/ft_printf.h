@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/27 12:29:43 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/06/28 11:15:05 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ typedef struct s_colours
 	char	*name;
 }				t_colours;
 
-void    non_printa_print(char val, int *ret);
+void	print_date(size_t date, int *ret);
+void	non_printa_print(char val, int *ret);
 void	ft_bin_print(size_t nbr, int *ret);
 char	*coloring(char *format, int *char_count);
 int		ft_printf(const char *restrict format, ...);
