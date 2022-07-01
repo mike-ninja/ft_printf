@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:10:54 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/28 10:44:47 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/01 16:01:20 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	flags_correction(t_flags *flags, char specifier)
 	char	c;
 
 	c = specifier;
-	if (flags->minus)
-		flags->zero = 0;
+	if (flags->minus && flags->zero)
+		exit(1);
 	if (c == 'd' || c == 'i' || c == 'u')
 		flags->hash = 0;
 	if (flags->hash)

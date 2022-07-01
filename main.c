@@ -5,6 +5,8 @@
 int     main(void)
 {
     // int i;
+    // printf("%-030x\n", 0);
+    ft_printf("%-030x\n", 0);
     // printf("[%i]\n", ft_printf("{RED}{HELLO}{RESET}"));
     // printf("[%i]\n", printf("\033[0;31m{HELLO}\033[0m"));
     // printf("\n");
@@ -15,7 +17,7 @@ int     main(void)
     // printf("[%i]\n", printf("{}", int, 23));
     // printf("\n");
 
-    printf(" [%i]\n", ft_printf("[%k]", 10021996));
+    // printf(" [%i]\n", ft_printf("[%k]", 10021996));
     // printf("[%i]\n", ft_printf("[%r]", 10));
     // printf("[%i]\n", ft_printf("[%r]", 11));
     // printf("[%i]\n", ft_printf("[%r]", 12));

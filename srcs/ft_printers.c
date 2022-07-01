@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 20:35:32 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/18 12:49:07 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/01 16:00:39 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	di_width_printer(t_flags *flags, char *str, int len, char speci)
 	}
 	if (flags->precision == 0 && *str == '0')
 		tmp++;
-	if (flags->space || (flags->plus && *str != '-'))
+	if ((flags->space || flags->plus) && *str != '-')
 		tmp--;
 	while (--tmp >= 0)
 	{
