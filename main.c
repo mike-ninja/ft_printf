@@ -5,8 +5,8 @@
 int     main(void)
 {
     // int i;
-    // printf("%-030x\n", 0);
-    ft_printf("%-030x\n", 0);
+    printf(" [%i]\n", printf("%.0f", 0.5));
+    printf(" [%i]\n", ft_printf("%.0f", 0.5));
     // printf("[%i]\n", ft_printf("{RED}{HELLO}{RESET}"));
     // printf("[%i]\n", printf("\033[0;31m{HELLO}\033[0m"));
     // printf("\n");
