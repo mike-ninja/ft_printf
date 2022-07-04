@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_more_complicated.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atenhune <atenhune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 12:08:12 by atenhune          #+#    #+#             */
-/*   Updated: 2022/05/26 18:37:40 by altikka          ###   ########.fr       */
+/*   Updated: 2022/07/04 11:24:36 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int main(void)
 	ft_printf("%+012d\n", INT_MIN);
 	ft_printf("%-01d\n", INT_MIN);
 	ft_printf("%-+012d\n", INT_MIN);
-
 	ft_printf("%012i\n", 42);
 	ft_printf("% 012i\n", 42);
 	ft_printf("%012i\n", -42);
@@ -47,7 +46,6 @@ int main(void)
 	ft_printf("%+012i\n", INT_MIN);
 	ft_printf("%-01i\n", INT_MIN);
 	ft_printf("%-+012i\n", INT_MIN);
-
 	ft_printf("%u\n", 0);
 	ft_printf("%12u\n", 0);
 	ft_printf("%012u\n", 0);
@@ -64,7 +62,6 @@ int main(void)
 	ft_printf("%030u\n", 11324);
 	ft_printf("%-30u\n", 1234);
 	ft_printf("%-030u\n", 99912);
-
 	ft_printf("%-030x\n", 0);
 	ft_printf("%#x\n", 0);
 	ft_printf("%-30x\n", 0);
@@ -75,7 +72,6 @@ int main(void)
 	ft_printf("%030x\n", 432134);
 	ft_printf("%03x\n", 12312);
 	ft_printf("%0#x\n", 12312);
-
 	ft_printf("%-030X\n", 0);
 	ft_printf("%-30X\n", 0);
 	ft_printf("%-#30X\n", 0);
@@ -84,7 +80,6 @@ int main(void)
 	ft_printf("%-0#30X\n", 123);
 	ft_printf("%030X\n", 432134);
 	ft_printf("%03X\n", 12312);
-
 	ft_printf("%03o\n", 12312);
 	ft_printf("%03o\n", 0);
 	ft_printf("%#o\n", 0);
@@ -97,5 +92,4 @@ int main(void)
 	ft_printf("%0o\n", UINT_MAX);
 	ft_printf("%-030o\n", UINT_MAX);
 	ft_printf("%-12o\n", UINT_MAX);
-
 }

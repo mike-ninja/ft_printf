@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/28 11:15:05 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/04 11:37:01 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef struct s_flags
 {
 	int		mod;
-	int		dot;
+	// int		dot; Not being used anymore I think
 	int		hash;
 	int		zero;
 	int		plus;
@@ -53,7 +53,7 @@ int		ft_arg_filter(t_arg *arg, t_flags *flags);
 int		ft_diouxf_convert(t_arg *arg, t_flags *flags);
 int		ft_printer(char *str, t_flags *flags);
 int		ft_diouxf_printer(char *str, t_flags *flags, char specifier);
-void	flags_correction(t_flags *flags, char specifier);
+void	flags_correction(char *str, t_flags *flags, char specifier);
 int		speci_correction(char specifier);
 char	*width_calculator(char *format, t_flags *flags, t_arg *arg);
 char	*precision_calculator(char *format, t_flags *flags, t_arg *arg);

@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/27 12:08:03 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/04 11:48:44 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_arg *arg, int *char_count)
 	arg->specifier = *format;
 	if (speci_correction(*format))
 	{
-		flags_correction(flags, arg->specifier);
+		// flags_correction(flags, arg->specifier); // moving this
 		char_count[0] += ft_arg_filter(arg, flags);
 	}
 	else

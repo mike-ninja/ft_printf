@@ -6,7 +6,7 @@
 #    By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/28 11:34:58 by mbarutel          #+#    #+#              #
-#    Updated: 2022/06/28 11:41:38 by mbarutel         ###   ########.fr        #
+#    Updated: 2022/07/04 11:18:10 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCLUDE		= incs
 SRC_DIR		= srcs/
 OBJ_DIR		= objs/
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -I
+CFLAGS		= -g -Wall -Werror -Wextra -I
 RM			= rm -f
 AR			= ar rcs
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_complicated.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atenhune <atenhune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 12:08:12 by atenhune          #+#    #+#             */
-/*   Updated: 2022/05/26 18:53:06 by altikka          ###   ########.fr       */
+/*   Updated: 2022/07/04 11:24:27 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,4 @@ int main(void)
 	printf("%0o\n", UINT_MAX);
 	printf("%-030o\n", UINT_MAX);
 	printf("%-12o\n", UINT_MAX);
-
 }

@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 20:35:32 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/01 16:00:39 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/04 12:15:08 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,13 @@ static int	sign_space_print(t_flags *flags, char *str, char specifier)
 				ret += write(1, "0X", 2);
 		}
 		if (specifier == 'o')
-			if (*str != '0' || flags->precision >= 0)
-				ret += write(1, "0", 1);
+			ret += write(1, "0", 1);
+			// if (*str != '0' || flags->precision >= 0)
+			// {
+			// 	ft_printf("This happens\n");
+				// ret += write(1, "0", 1);
+			// }
+				
 	}
 	if (specifier == 'p')
 		ret += write(1, "0x", 2);
@@ -62,8 +67,8 @@ static int	di_width_printer(t_flags *flags, char *str, int len, char speci)
 	int	ret;
 
 	ret = 0;
-	if (speci == 'p')
-		len += 2;
+	if (ft_strchr("xX", speci) && *str != '0') // This does nothing, delete when needed
+		len += 0; 
 	tmp = flags->width - len;
 	if (flags->precision >= len)
 	{
@@ -100,12 +105,12 @@ static int	str_printer(t_flags *flags, char *str, int len, char speci)
 		len--;
 	}
 	if (flags->hash && speci == 'o')
-		tmp--;
+		tmp+= 0; // This does nothing, delete when needed
 	while (tmp-- > len)
 		ret += write(1, "0", 1);
 	while (*str != '\0')
 	{
-		if (flags->precision == 0 && *str == '0')
+		if (flags->precision == 0 && *str == '0' && speci != 'f')
 			break ;
 		ret += write(1, str, 1);
 		str++;
@@ -120,6 +125,7 @@ int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 
 	ret = 0;
 	len = ft_strlen(str);
+	flags_correction(str, flags, specifier);
 	if (flags->minus)
 	{
 		ret += sign_space_print(flags, str, specifier);
