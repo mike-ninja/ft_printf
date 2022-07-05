@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_diouxf_convert.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/06/18 12:47:48 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:20:54 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,6 @@ int	ft_diouxf_convert(t_arg *arg, t_flags *flags)
 	if (arg->specifier == 'f')
 		str = option_f(arg, flags);
 	if (str)
-	{
 		ret += ft_diouxf_printer(str, flags, arg->specifier);
-		free(str);
-	}
 	return (ret);
 }

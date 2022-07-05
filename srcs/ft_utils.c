@@ -6,31 +6,18 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:10:54 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/04 12:11:42 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:05:14 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
 
-void	flags_correction(char *str, t_flags *flags, char spec)
+void	flags_correction(t_flags *flags, char spec)
 {
-	if (!str)
-		ft_printf("empty"); // This does nothing
 	if (flags->minus)
 		flags->zero = 0;
 	if (spec == 'd' || spec == 'i' || spec == 'u')
 		flags->hash = 0;
-	if (flags->hash)
-	{
-		if (ft_strchr("xX", spec) && *str != '0')
-			flags->width -= 2;
-		if (spec == 'o' && *str == '0')
-			if (flags->precision != 0)
-				flags->hash--;
-	}
-	if (flags->precision >= 0)
-		if (ft_strchr("uxX", spec))
-			flags->zero = 0;
 	if (spec == 'u')
 	{
 		flags->space = 0;
@@ -39,8 +26,6 @@ void	flags_correction(char *str, t_flags *flags, char spec)
 	if (spec == 'd' || spec == 'i')
 		if (flags->precision >= 0)
 			flags->zero = 0;
-	if (spec == 'p')
-		flags->width -= 2;
 }
 
 int	speci_correction(char specifier)
