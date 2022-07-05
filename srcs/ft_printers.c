@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 20:35:32 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/05 16:31:47 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:51:22 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static char	*di_width_printer(t_flags *flags, char *str, char *padd)
 			width = (char *)malloc(sizeof(char) * mem_alloc + 1);
 			if (!width)
 				return (NULL);
-			width[flags->width - len] = '\0';
+			width[mem_alloc] = '\0';
 			if (flags->zero && flags->precision == -1)
-				ft_memset((void *)width, '0', (mem_alloc));
+				ft_memset((void *)width, '0', (mem_alloc));				
 			else
 				ft_memset((void *)width, ' ', (mem_alloc));
 		}
@@ -90,7 +90,7 @@ static char	*precision(char *str, int precision)
 	sign = 0;
 	ret = NULL;
 	len = ft_strlen(str);
-	if (precision > len)
+	if (precision >= len)
 	{
 		ret = (char *)malloc(sizeof(char) * precision + 1);
 		if (!ret)
@@ -110,14 +110,19 @@ static char	*precision(char *str, int precision)
 			else
 				ret[precision--] = '0';
 		}
+		// printf("%s}\n", ret);
 		if (sign)
 		{
 			tmp = ret;
 			ret = ft_strjoin("-", ret);
-			// free(tmp);
+			free(tmp);
 		}
+		free(str);
+		
 		str = ret;
+		
 	}
+	
 	return (str);
 }
 
@@ -145,15 +150,21 @@ int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 
 	ret = 0;
 	flags_correction(flags, specifier);
+	// printf("{%s}\n", str);
 	str = precision(str, flags->precision);
+	// printf("{%s}\n", str);
 	padd = padding(flags, str, specifier);
+	
 	if (*str == '-')
 	{
 		tmp = str;
 		str = ft_strdup(&str[1]);
 		free(tmp);
 	}
+	
 	width = di_width_printer(flags, str, padd);
+	// printf("%s}\n", str);
+	// printf("%s}\n", width);
 	if (!flags->zero && padd)
 	{
 		tmp = str;
@@ -171,6 +182,7 @@ int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 		free(tmp);
 		free(width);
 	}
+	
 	if (flags->zero && padd)
 	{
 		tmp = str;

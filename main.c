@@ -13,10 +13,24 @@ int     main(void)
     // printf("[%i]\n", printf("/%#8.4o/\t/%#8.4o/\n", 17, 1234));
     // printf("[%i]\n", ft_printf("/%#8.4o/\t/%#8.4o/\n", 17, 1234));
     // printf("\n");
+    // printf("[%i]\n", printf("%-+12.10d\n", INT_MIN));
+    // printf("[%i]\n", ft_printf("%-+12.10d\n", INT_MIN));
+    // printf("\n");
 
-    printf("[%i]\n", printf("%-+12.11d\n", INT_MIN));
-    printf("[%i]\n", ft_printf("%-+12.11d\n", INT_MIN));
+    // printf("[%i]\n", printf("%-+12.11d\n", INT_MIN));
+    // printf("[%i]\n", ft_printf("%-+12.11d\n", INT_MIN));
+    // printf("\n");
+    // printf("[%i]\n", printf("%-+12.12d\n", INT_MIN));
+    // printf("[%i]\n", ft_printf("%-+12.12d\n", INT_MIN));
+    // printf("\n");
+    // printf("[%i]\n", printf("%-+12.13d\n", INT_MIN));
+    // printf("[%i]\n", ft_printf("%-+12.13d\n", INT_MIN));
+    // printf("\n");
+    printf("[%i]\n", printf("%-030.x\n", 0));
+    printf("[%i]\n", ft_printf("%-030.x\n", 0));
     printf("\n");
+
+    // printf("%-030.x\n", 0);
     // printf("[%i]\n", printf("%+20.5d", 156));
     // printf("[%i]\n", ft_printf("%+20.5d", 156));
     // printf("\n");
