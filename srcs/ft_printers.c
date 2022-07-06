@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 20:35:32 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/05 19:51:22 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/06 08:58:24 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*padding(t_flags *flags, char *str, char spec)
 	return(NULL);
 }
 
-static char	*di_width_printer(t_flags *flags, char *str, char *padd)
+static char	*di_width_printer(t_flags *flags, char *str, char *padd, char speci)
 {
 	int		len;
 	char	*width;
@@ -62,8 +62,10 @@ static char	*di_width_printer(t_flags *flags, char *str, char *padd)
 		len = ft_strlen(str);
 		if (padd)
 			len += ft_strlen(padd);
-		if (flags->precision == 0)
+		if (flags->precision == 0 && speci != 'f')
 			len--;
+		// if (speci == 'f')
+		// 	len++;
 		mem_alloc = flags->width - len;
 		if (mem_alloc > 0)
 		{
@@ -71,7 +73,7 @@ static char	*di_width_printer(t_flags *flags, char *str, char *padd)
 			if (!width)
 				return (NULL);
 			width[mem_alloc] = '\0';
-			if (flags->zero && flags->precision == -1)
+			if (flags->zero && (flags->precision == -1 || speci == 'f'))
 				ft_memset((void *)width, '0', (mem_alloc));				
 			else
 				ft_memset((void *)width, ' ', (mem_alloc));
@@ -126,20 +128,51 @@ static char	*precision(char *str, int precision)
 	return (str);
 }
 
-static int	str_printer(t_flags *flags, char *str, char speci)
+static int	str_printer(t_flags *flags, char *str, char *width, char speci)
 {
 	int	ret;
 
 	ret = 0;
 	while (*str != '\0')
 	{
-		if (flags->precision == 0 && *str == '0' && speci != 'f')
+		if (flags->precision == 0 && *str == '0' && (speci != 'f' && speci != 'o'))
+		{
+			if (width && (speci != 'd' && speci != 'i'))
+				ret += write(1, width, (int)ft_strlen(width));
 			break ;
+		}
 		ret += write(1, str, 1);
 		str++;
 	}
 	return (ret);
 }
+
+// static int	str_printer(t_flags *flags, char *str, char *width)
+// {
+// 	int	ret;
+// 	int str_len;
+// 	int width_len;
+
+	
+// 	ret = 0;
+// 	str_len = ft_strlen(str);
+// 	if(width)
+// 		width_len = ft_strlen(width);
+// 	if (!flags->minus)
+// 	{
+// 		if (width)
+// 			ret += write(1, width, width_len);
+// 		ret += write(1, str, str_len);
+// 	}
+// 	else
+// 	{
+// 		ret += write(1, str, str_len);
+// 		if (width)
+// 			ret += write(1, width, width_len);
+// 	}
+
+// 	return (ret);
+// }
 
 int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 {
@@ -152,6 +185,7 @@ int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 	flags_correction(flags, specifier);
 	// printf("{%s}\n", str);
 	str = precision(str, flags->precision);
+	
 	// printf("{%s}\n", str);
 	padd = padding(flags, str, specifier);
 	
@@ -162,15 +196,12 @@ int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 		free(tmp);
 	}
 	
-	width = di_width_printer(flags, str, padd);
-	// printf("%s}\n", str);
-	// printf("%s}\n", width);
+	width = di_width_printer(flags, str, padd, specifier);
 	if (!flags->zero && padd)
 	{
 		tmp = str;
 		str = ft_strjoin(padd, str);
-		free(tmp);
-		
+		free(tmp);	
 	}
 	if (width)
 	{
@@ -180,17 +211,18 @@ int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 		else
 			str = ft_strjoin(str, width);
 		free(tmp);
-		free(width);
 	}
-	
 	if (flags->zero && padd)
 	{
 		tmp = str;
 		str = ft_strjoin(padd, str);
 		free(tmp);
 	}
-	ret += str_printer(flags, str, specifier);
+	ret += str_printer(flags, str, width,specifier);
+	// ret += str_printer(flags, str, width);
+	// free(width)
 	free(str);
 	free(padd);
+	free(width);
 	return (ret);
 }

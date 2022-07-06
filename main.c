@@ -4,17 +4,20 @@
 
 int     main(void)
 {
-    // printf("[%i]\n", printf("%.10f\n", 0.0005));
-    // printf("[%i]\n", ft_printf("%.10f\n", 0.0005));
+    printf("[%i]\n", printf("%012.f", 9.4f));
+    printf("[%i]\n", ft_printf("%012.f", 9.4f));
+    printf("\n");
+    printf("[%i]\n", printf("%0-12.f", 9.5f));
+    printf("[%i]\n", ft_printf("%0-12.f", 9.5f));
+    printf("\n");
+    printf("[%i]\n", printf("% 32.f", 9.9f));
+    printf("[%i]\n", ft_printf("% 32.f", 9.9f));
+    printf("\n");
+    // printf("[%i]\n", printf("%0-12.f\n", 9.5f));
+    // printf("[%i]\n", ft_printf("%0-12.f\n", 9.5f));
     // printf("\n");
-    // printf("[%i]\n", printf("%-#30x\n", 0));
-    // printf("[%i]\n", ft_printf("%-#30x\n", 0));
-    // printf("\n");
-    // printf("[%i]\n", printf("/%#8.4o/\t/%#8.4o/\n", 17, 1234));
-    // printf("[%i]\n", ft_printf("/%#8.4o/\t/%#8.4o/\n", 17, 1234));
-    // printf("\n");
-    // printf("[%i]\n", printf("%-+12.10d\n", INT_MIN));
-    // printf("[%i]\n", ft_printf("%-+12.10d\n", INT_MIN));
+    // printf("[%i]\n", printf("% 32.f\n", 9.9f));
+    // printf("[%i]\n", ft_printf("% 32.f\n", 9.9f));
     // printf("\n");
 
     // printf("[%i]\n", printf("%-+12.11d\n", INT_MIN));
@@ -26,9 +29,9 @@ int     main(void)
     // printf("[%i]\n", printf("%-+12.13d\n", INT_MIN));
     // printf("[%i]\n", ft_printf("%-+12.13d\n", INT_MIN));
     // printf("\n");
-    printf("[%i]\n", printf("%-030.x\n", 0));
-    printf("[%i]\n", ft_printf("%-030.x\n", 0));
-    printf("\n");
+    // printf("[%i]\n", printf("%-030.x\n", 0));
+    // printf("[%i]\n", ft_printf("%-030.x\n", 0);
+    // printf("\n");
 
     // printf("%-030.x\n", 0);
     // printf("[%i]\n", printf("%+20.5d", 156));

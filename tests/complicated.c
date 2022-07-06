@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complicated.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atenhune <atenhune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 11:52:53 by atenhune          #+#    #+#             */
-/*   Updated: 2022/05/26 18:32:21 by altikka          ###   ########.fr       */
+/*   Updated: 2022/07/05 19:52:43 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(void)
 {
 	printf("%c %s %d\n", 97, "hei", 0);
 	printf("%c %s %d\n", 97, "hei", -2);
-	printf("%c %s %d %s\n", 97, "hei", INT_MAX, NULL);
+	printf("%c %s %d %s\n", 97, "hei", INT_MAX, (char *)NULL);
 	printf("%c %s %d %i\n", 97, "hei", INT_MAX, INT_MIN);
 	printf("%c %s %d %s %s %d\n", 97, "hei", INT_MAX, "1", "2", 0);
 	printf("%c %s %d %x\n", 97, "hei", INT_MAX, 123332);
