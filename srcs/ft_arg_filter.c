@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arg_filter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:26:57 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/04 11:39:26 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/06 13:03:38 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 static int	ft_address_convert(t_arg *arg, t_flags *flags)
 {
 	char	*hex;
+	char	*tmp;
 
 	hex = ft_ulltoa_base(va_arg(arg->arg, unsigned long long), 16);
+	tmp = hex;
+	hex = ft_strjoin("0x", hex);
+	free(tmp);	
 	return (ft_diouxf_printer(hex, flags, 'p'));
 }
 
@@ -25,6 +29,7 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags)
 	int		ret;
 
 	ret = 0;
+	flags_correction(flags, arg->specifier);
 	if (arg->specifier)
 	{
 		if (arg->specifier == 'c')

@@ -4,38 +4,24 @@
 
 int     main(void)
 {
-    printf("[%i]\n", printf("%012.f", 9.4f));
-    printf("[%i]\n", ft_printf("%012.f", 9.4f));
+    printf("[%i]\n", printf("%#.5x", 21));
+    printf("[%i]\n", ft_printf("%#.5x", 21));
     printf("\n");
-    printf("[%i]\n", printf("%0-12.f", 9.5f));
-    printf("[%i]\n", ft_printf("%0-12.f", 9.5f));
+    // printf("[%i]\n", printf("/%#8.6o/\t/%#8.5o/\n", 17, 1234));
+    // printf("[%i]\n", ft_printf("/%#8.6o/\t/%#8.5o/\n", 17, 1234));
+    // printf("\n");
+    printf("[%i]\n", printf("\t/%#8.2o/\t/%#8.2o/\t/%#8.2o/\n", 0, 17, 1234));
+    printf("[%i]\n", ft_printf("\t/%#8.2o/\t/%#8.2o/\t/%#8.2o/\n", 0, 17, 1234));
     printf("\n");
-    printf("[%i]\n", printf("% 32.f", 9.9f));
-    printf("[%i]\n", ft_printf("% 32.f", 9.9f));
+    printf("[%i]\n", printf("\t/%#8.4o/\t/%#8.4o/\t/%#8.4o/\n", 0, 17, 1234));
+    printf("[%i]\n", ft_printf("\t/%#8.4o/\t/%#8.4o/\t/%#8.4o/\n", 0, 17, 1234));
     printf("\n");
-    // printf("[%i]\n", printf("%0-12.f\n", 9.5f));
-    // printf("[%i]\n", ft_printf("%0-12.f\n", 9.5f));
-    // printf("\n");
-    // printf("[%i]\n", printf("% 32.f\n", 9.9f));
-    // printf("[%i]\n", ft_printf("% 32.f\n", 9.9f));
-    // printf("\n");
-
-    // printf("[%i]\n", printf("%-+12.11d\n", INT_MIN));
-    // printf("[%i]\n", ft_printf("%-+12.11d\n", INT_MIN));
-    // printf("\n");
-    // printf("[%i]\n", printf("%-+12.12d\n", INT_MIN));
-    // printf("[%i]\n", ft_printf("%-+12.12d\n", INT_MIN));
-    // printf("\n");
-    // printf("[%i]\n", printf("%-+12.13d\n", INT_MIN));
-    // printf("[%i]\n", ft_printf("%-+12.13d\n", INT_MIN));
-    // printf("\n");
-    // printf("[%i]\n", printf("%-030.x\n", 0));
-    // printf("[%i]\n", ft_printf("%-030.x\n", 0);
-    // printf("\n");
-
-    // printf("%-030.x\n", 0);
-    // printf("[%i]\n", printf("%+20.5d", 156));
-    // printf("[%i]\n", ft_printf("%+20.5d", 156));
+    printf("[%i]\n", printf("\t/%#8.5o/\t/%#8.5o/\t/%#8.5o/\n", 0, 17, 1234));
+    printf("[%i]\n", ft_printf("\t/%#8.5o/\t/%#8.5o/\t/%#8.5o/\n", 0, 17, 1234));
+    printf("\n");
+    
+    // printf("[%i]\n", printf("%.6f\n", -0.0 / 0.0));
+    // printf("[%i]\n", ft_printf("%.6f\n", -0.0 / 0.0));
     // printf("\n");
     return (0);
 }
