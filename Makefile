@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/28 11:34:58 by mbarutel          #+#    #+#              #
-#    Updated: 2022/07/04 11:18:10 by mbarutel         ###   ########.fr        #
+#    Created: 2022/07/07 13:19:06 by mbarutel          #+#    #+#              #
+#    Updated: 2022/07/07 13:19:08 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,8 @@ NAME		= libftprintf.a
 LIBFT		= libft
 INCLUDE		= incs
 SRC_DIR		= srcs/
-OBJ_DIR		= objs/
 CC			= gcc
-CFLAGS		= -g -Wall -Werror -Wextra -I
+CFLAGS		= -Wall -Werror -Wextra -I
 RM			= rm -f
 AR			= ar rcs
 
@@ -47,30 +46,22 @@ SRC_FILES    +=    ft_utils
 SRC_FILES    +=    ft_bonus_func
 
 SRC         =     $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ         =     $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+OBJ         =     $(addsuffix .o, $(SRC_FILES))
 
 ###
 
-OBJF        =    .cache_exists
-
 all:	$(NAME)
 
-$(NAME):	$(OBJ)
+$(NAME): $(SRC)
 	@make -C $(LIBFT)
-	@cp libft/libft.a .
+	@cp $(LIBFT)/libft.a .
 	@mv libft.a $(NAME)
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $(SRC)
 	@$(AR) $(NAME) $(OBJ)
 	@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
 
-$(OBJ_DIR)%.o:	$(SRC_DIR)%.c | $(OBJF)
-	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
-$(OBJF):
-	@mkdir -p $(OBJ_DIR)
-
 clean:
-	@$(RM) -rf $(OBJ_DIR)
+	@$(RM) -rf $(OBJ)
 	@make clean -C $(LIBFT)
 	@echo "$(BLUE)ft_printf object files cleaned!$(DEF_COLOR)"
 
@@ -86,4 +77,4 @@ re:	fclean all
 libft:
 	@make re -C $(LIBFT)
 
-.PHONY:	all clean fclean re norm
+.PHONY:	all clean fclean re
