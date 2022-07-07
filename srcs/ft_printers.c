@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 20:35:32 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/07 17:36:24 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/07 23:11:40 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,12 @@ static char	*padding(t_flags *flags, char *str, char spec, bool zero)
 		{
 			if (spec == 'o')
 			{
-				
-				if (flags->precision <= (int)ft_strlen(str))
+				// printf("This happens\n");
+				// if (flags->precision < (int)ft_strlen(str))
+				// {
+					// printf("This happens\n");
 					return (ft_strdup("0"));
+				// }
 			}
 			if (spec == 'x')
 				return (ft_strdup("0x"));
@@ -75,9 +78,7 @@ static char	*di_width_printer(t_flags *flags, char *str, char *padd, char speci)
 		if (padd)
 		{
 			len += ft_strlen(padd);
-
 		}
-			 
 		if (flags->precision == 0 && speci != 'f')
 			len--;
 		mem_alloc = flags->width - len;
@@ -99,7 +100,7 @@ static char	*di_width_printer(t_flags *flags, char *str, char *padd, char speci)
 	return (width);
 }
 
-static char	*precision(char *str, int precision)
+static char	*precision(char *str, int precision, int padd)
 {
 	int		len;
 	int		sign;
@@ -108,7 +109,7 @@ static char	*precision(char *str, int precision)
 
 	sign = 0;
 	ret = NULL;
-	len = ft_strlen(str);
+	len = ft_strlen(str) + padd;
 	if (precision >= len)
 	{
 		ret = (char *)malloc(sizeof(char) * precision + 1);
@@ -153,6 +154,8 @@ static int	str_printer(t_flags *flags, char *str, char *width, char speci)
 	{
 		if (flags->precision == 0 && *str == '0' && (speci != 'f'))
 		{
+			if (speci == 'p')
+				ret += write(1, str, (int)ft_strlen(str) - 1);
 			if (width && flags->minus)
 				ret += write(1, width, (int)ft_strlen(width));
 			break ;
@@ -173,6 +176,7 @@ int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 	bool	zero;
 	bool	nan;
 	bool	inf;
+	int padd_len;
 
 	ret = 0;
 	padd = NULL;
@@ -206,9 +210,21 @@ int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 	}
 	if (!nan)
 	{
+		
 		padd = padding(flags, str, specifier, zero);
+		padd_len = 0;
+		if (padd)
+		{
+			if (specifier == 'o')
+				padd_len = ft_strlen(padd);
+		}
+		// printf("%s}\n", padd);
 		if (!inf)
-			str = precision(str, flags->precision);
+		{
+			
+				str = precision(str, flags->precision, padd_len);
+		}
+		// printf("%s]\n", str);
 	}
 	if (*str == '-')
 	{
