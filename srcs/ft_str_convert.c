@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:35:48 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/05 15:27:13 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/08 13:13:37 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,20 @@ int	ft_str_convert(char *str, t_flags *flags)
 		ret += str_width(str, flags, ret);
 	if (!flags->minus)
 		ret += ft_printer(str, flags);
+	return (ret);
+}
+
+int	ft_printer(char *str, t_flags *flags)
+{
+	int	ret;
+
+	ret = 0;
+	while (*str != '\0')
+	{
+		if (ret == flags->precision)
+			break ;
+		ret += write(1, str, 1);
+		str++;
+	}
 	return (ret);
 }

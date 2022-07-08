@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+         #
+#    By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 13:19:06 by mbarutel          #+#    #+#              #
-#    Updated: 2022/07/07 22:42:23 by mbarutel         ###   ########.fr        #
+#    Updated: 2022/07/08 13:10:07 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC_FILES    +=    ft_printf
 SRC_FILES    +=    ft_str_convert
 SRC_FILES    +=    ft_utils
 SRC_FILES    +=    ft_bonus_func
+SRC_FILES    +=    ft_printer_utils
 
 SRC         =     $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ         =     $(addsuffix .o, $(SRC_FILES))

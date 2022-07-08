@@ -6,23 +6,11 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:26:57 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/07 14:09:03 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:45:07 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/ft_printf.h"
-
-static int	ft_address_convert(t_arg *arg, t_flags *flags)
-{
-	char	*hex;
-	char	*tmp;
-
-	hex = ft_ulltoa_base(va_arg(arg->arg, unsigned long long), 16);
-	tmp = hex;
-	hex = ft_strjoin("0x", hex);
-	free(tmp);
-	return (ft_diouxf_printer(hex, flags, 'p'));
-}
 
 int	ft_arg_filter(t_arg *arg, t_flags *flags)
 {
@@ -36,8 +24,6 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags)
 			ret += ft_char_convert(va_arg(arg->arg, signed int), flags);
 		if (arg->specifier == 's')
 			ret += ft_str_convert(va_arg(arg->arg, char *), flags);
-		if (arg->specifier == 'p')
-			ret += ft_address_convert(arg, flags);
 		if (arg->specifier == 'b')
 			ft_bin_print((size_t)va_arg(arg->arg, int), &ret);
 		if (arg->specifier == 'r')
@@ -46,7 +32,7 @@ int	ft_arg_filter(t_arg *arg, t_flags *flags)
 			print_date((size_t)va_arg(arg->arg, int), &ret);
 		if (arg->specifier == '%')
 			ret += ft_char_convert('%', flags);
-		if (ft_strchr("diouxXf", arg->specifier))
+		if (ft_strchr("diouxXfp", arg->specifier))
 			ret += ft_diouxf_convert(arg, flags);
 	}
 	return (ret);

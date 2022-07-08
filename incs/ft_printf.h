@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/07 14:08:20 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/08 15:17:00 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include <stdbool.h>
 
-typedef struct s_flags
+typedef struct flags
 {
 	int		mod;
 	int		hash;
@@ -30,18 +30,37 @@ typedef struct s_flags
 	int		precision;
 }				t_flags;
 
-typedef struct s_arg
+typedef struct arg
 {
 	va_list	arg;
 	char	specifier;
 }				t_arg;
 
-typedef struct s_colours
+typedef struct colours
 {
 	char	*code;
 	char	*name;
 }				t_colours;
 
+typedef struct attributes
+{
+	bool	nan;
+	bool	inf;
+	bool	zero;
+	size_t	padd_len;
+	char	*padd;
+	char	*width;
+}				t_attr;
+
+bool	precision_util(char *ret, int *precision, int *len, char *str);
+char	*strjoin_head(char *str, char *tail);
+char	*strjoin_tail(char *head, char *str);
+char	*str_correction(char *str, t_flags *flags, t_attr *attr, char speci);
+char	*di_width_printer(t_flags *flags, char *str, t_attr *attr, char speci);
+char	*precision(char *str, int precision, int padd);
+char	*padding(t_flags *flags, char *str, char spec, bool zero);
+void	attr_init(t_attr *attr);
+void	attr_parse(char *str, t_attr *attr, t_flags *flags, char spec);
 void	print_date(size_t date, int *ret);
 void	non_printa_print(char val, int *ret);
 void	ft_bin_print(size_t nbr, int *ret);

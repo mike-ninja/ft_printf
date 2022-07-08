@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:17:09 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/05 16:20:54 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/08 12:54:09 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static char	*option_a(t_arg *arg, t_flags *flags)
 
 static char	*option_b(t_arg *arg, t_flags *flags)
 {
+	if (arg->specifier == 'p')
+		return (ft_ulltoa_base(va_arg(arg->arg, unsigned long long), 16));
 	if (flags->mod == 1)
 		return (ft_itoa_base((unsigned short)va_arg(arg->arg, int), 8));
 	if (flags->mod == 2)
@@ -105,7 +107,7 @@ int	ft_diouxf_convert(t_arg *arg, t_flags *flags)
 	str = NULL;
 	if (arg->specifier == 'd' || arg->specifier == 'i' || arg->specifier == 'u')
 		str = option_a(arg, flags);
-	if (arg->specifier == 'o')
+	if (arg->specifier == 'o' || arg->specifier == 'p')
 		str = option_b(arg, flags);
 	if (arg->specifier == 'x' || arg->specifier == 'X')
 		str = option_c(arg, flags);
