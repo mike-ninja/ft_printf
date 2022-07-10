@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 13:19:06 by mbarutel          #+#    #+#              #
-#    Updated: 2022/07/08 13:10:07 by mbarutel         ###   ########.fr        #
+#    Updated: 2022/07/09 14:48:03 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT		= libft
 INCLUDE		= incs
 SRC_DIR		= srcs/
 CC			= gcc
-CFLAGS		= -g -Wall -Werror -Wextra -I
+CFLAGS		= -Wall -Werror -Wextra -I
 RM			= rm -f
 AR			= ar rcs
 

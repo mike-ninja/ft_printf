@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/08 15:17:00 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/09 14:47:53 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ typedef struct attributes
 }				t_attr;
 
 bool	precision_util(char *ret, int *precision, int *len, char *str);
-char	*strjoin_head(char *str, char *tail);
-char	*strjoin_tail(char *head, char *str);
 char	*str_correction(char *str, t_flags *flags, t_attr *attr, char speci);
 char	*di_width_printer(t_flags *flags, char *str, t_attr *attr, char speci);
 char	*precision(char *str, int precision, int padd);

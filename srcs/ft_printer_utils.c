@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printer_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:58:12 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/08 15:13:26 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/09 14:47:41 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,6 @@ char	*str_correction(char *str, t_flags *flags, t_attr *attr, char speci)
 	attr->width = di_width_printer(flags, str, attr, speci);
 	if (!flags->zero && attr->padd)
 		str = strjoin_tail(attr->padd, str);
-	return (str);
-}
-
-char	*strjoin_tail(char *head, char *str)
-{
-	char	*tmp;
-
-	tmp = str;
-	str = ft_strjoin(head, str);
-	free(tmp);
 	return (str);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:10:54 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/08 15:17:11 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/09 14:47:35 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,4 @@ char	*precision_calculator(char *format, t_flags *flags, t_arg *arg)
 		}
 	}
 	return (format);
-}
-
-char	*strjoin_head(char *str, char *tail)
-{
-	char	*tmp;
-
-	tmp = str;
-	str = ft_strjoin(str, tail);
-	free(tmp);
-	return (str);
 }
