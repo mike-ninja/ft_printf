@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 13:10:54 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/09 14:47:35 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:24:22 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	flags_correction(t_flags *flags, char spec)
 	if (spec == 'o')
 		if (flags->precision == 0 && flags->hash)
 			flags->precision = 1;
+	if (spec == 'x' || spec == 'X')
+		if (flags->precision == 0)
+			flags->zero = 0;
 }
 
 int	speci_correction(char specifier)

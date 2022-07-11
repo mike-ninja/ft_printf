@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printer_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 12:58:12 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/09 14:47:41 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:12:01 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	attr_init(t_attr *attr)
 	attr->padd_len = 0;
 	attr->padd = NULL;
 	attr->width = NULL;
+	attr->str = NULL;
 }
 
 void	attr_parse(char *str, t_attr *attr, t_flags *flags, char spec)

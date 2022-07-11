@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 20:35:32 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/08 15:16:18 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:24:36 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*di_width_printer(t_flags *flags, char *str, t_attr *attr, char speci)
 		len = ft_strlen(str);
 		if (attr->padd)
 			len += ft_strlen(attr->padd);
-		if (flags->precision == 0 && speci != 'f')
+		if (attr->zero && flags->precision == 0 && speci != 'f')
 			len--;
 		if ((flags->width - len) > 0)
 		{
@@ -63,48 +63,6 @@ char	*di_width_printer(t_flags *flags, char *str, t_attr *attr, char speci)
 	}
 	return (attr->width);
 }
-
-// char	*precision(char *str, int precision, int padd)
-// {
-// 	int		len;
-// 	int		sign;
-// 	char	*ret;
-// 	char	*tmp;
-
-// 	sign = 0;
-// 	ret = NULL;
-// 	len = ft_strlen(str) + padd;
-// 	if (precision >= len)
-// 	{
-// 		ret = (char *)malloc(sizeof(char) * precision + 1);
-// 		if (!ret)
-// 			return (NULL);
-// 		ret[precision--] = '\0';
-// 		while (precision >= 0)
-// 		{
-// 			if (len)
-// 			{
-// 				ret[precision--] = str[--len];
-// 				if (ret[precision + 1] == '-')
-// 				{
-// 					ret[precision + 1] = '0';
-// 					sign++;
-// 				}	
-// 			}		
-// 			else
-// 				ret[precision--] = '0';
-// 		}
-// 		if (sign)
-// 		{
-// 			tmp = ret;
-// 			ret = ft_strjoin("-", ret);
-// 			free(tmp);
-// 		}
-// 		free(str);
-// 		str = ret;
-// 	}
-// 	return (str);
-// }
 
 char	*precision(char *str, int precision, int padd)
 {
@@ -131,25 +89,25 @@ char	*precision(char *str, int precision, int padd)
 	return (str);
 }
 
-static int	str_printer(t_flags *flags, char *str, char *width, char speci)
+static int	str_printer(t_flags *flags, t_attr *attr, char speci)
 {
 	int		ret;
 	char	*tmp;
 
 	ret = 0;
-	tmp = str;
-	while (*str != '\0')
+	tmp = attr->str;
+	while (*attr->str != '\0')
 	{
-		if (flags->precision == 0 && *str == '0' && (speci != 'f'))
+		if (flags->precision == 0 && *attr->str == '0' && (speci != 'f'))
 		{
 			if (speci == 'p')
-				ret += write(1, str, (int)ft_strlen(str) - 1);
-			if (width && flags->minus)
-				ret += write(1, width, (int)ft_strlen(width));
+				ret += write(1, attr->str, (int)ft_strlen(attr->str) - 1);
+			if (attr->width && flags->minus)
+				ret += write(1, attr->width, (int)ft_strlen(attr->width));
 			break ;
 		}
-		ret += write(1, str, 1);
-		str++;
+		ret += write(1, attr->str, 1);
+		attr->str++;
 	}
 	free(tmp);
 	return (ret);
@@ -173,7 +131,11 @@ int	ft_diouxf_printer(char *str, t_flags *flags, char specifier)
 	}
 	if (flags->zero && attr->padd)
 		str = strjoin_tail(attr->padd, str);
-	ret += str_printer(flags, str, attr->width, specifier);
+	attr->str = str;
+	if (specifier == 'x' || specifier == 'X' || specifier == 'p')
+		if (!attr->zero && flags->precision == 0)
+			flags->precision = -1;
+	ret += str_printer(flags, attr, specifier);
 	free(attr->padd);
 	free(attr->width);
 	return (ret);
