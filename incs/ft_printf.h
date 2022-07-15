@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 14:22:25 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/11 11:11:15 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/07/15 10:43:35 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PRINTF_H
 
 # include "../libft/incs/libft.h"
-# include <stdio.h>
 # include <stdarg.h>
 # include <stdbool.h>
 
