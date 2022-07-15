@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbarutel <mbarutel@student.hive.fi>        +#+  +:+       +#+         #
+#    By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 13:19:06 by mbarutel          #+#    #+#              #
-#    Updated: 2022/07/09 14:48:03 by mbarutel         ###   ########.fr        #
+#    Updated: 2022/07/15 10:42:11 by mbarutel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,11 @@ AR			= ar rcs
 
 # Colors
 
-DEF_COLOR = \033[0;39m
-GRAY = \033[0;90m
-RED = \033[0;91m
-GREEN = \033[0;92m
-YELLOW = \033[0;93m
-BLUE = \033[0;94m
-MAGENTA = \033[0;95m
-CYAN = \033[0;96m
-WHITE = \033[0;97m
+DEF_COLOR = \033[1;39m 
+RED = \033[1;91m
+GREEN = \033[1;92m
+BLUE = \033[1;94m
+CYAN = \033[1;96m
 
 # Sources
 
@@ -74,8 +70,5 @@ fclean:	clean
 
 re:	fclean all
 	@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
-
-libft:
-	@make re -C $(LIBFT)
 
 .PHONY:	all clean fclean re
