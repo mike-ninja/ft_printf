@@ -6,7 +6,7 @@
 /*   By: mbarutel <mbarutel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:56:15 by mbarutel          #+#    #+#             */
-/*   Updated: 2022/07/07 14:09:44 by mbarutel         ###   ########.fr       */
+/*   Updated: 2022/08/19 10:31:39 by mbarutel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
 	Initialises both structs
 */
-// static void	ft_init_struct(t_flags *flags, t_modifier *modifier)
 static void	ft_init_struct(t_flags *flags)
 {
 	flags->mod = 0;
